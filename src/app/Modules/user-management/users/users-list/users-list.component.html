@@ -1,0 +1,94 @@
+<div id="Kt-portlet-margin-top">
+  <kt-portlet>
+    <kt-portlet-header [title]="'Users list'" [class]="'kt-portlet__head--lg'" id="list-header">
+      <ng-container  ktPortletTools>
+        <button (click)="createUser()" mat-raised-button color="primary" class="btn btn-primary">New user</button>
+      </ng-container>
+    </kt-portlet-header>
+    <kt-portlet-body [style.height]="gridHeight">
+      <div class="kt-form">
+        <div class="kt-form">
+          <div class="row align-items-center mb-4">
+            <div class="col-md-3 kt-margin-bottom-10-mobile">
+              <mat-form-field appearance="outline">
+                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search" maxlength="30" autocomplete="off" appearance="outline">
+                <mat-hint align="start"><strong>Search</strong> in all fields</mat-hint>
+              </mat-form-field>
+            </div>
+            <!--<div class="col-lg-6 col-md-6">
+          <button style="float:right" [disabled]="dataSource.data.length<=0" (click)="exportToExcel()" color="primary" type="button" class="btn btn-primary kt-login__btn-primary excelExportButton">
+            <span><i class="fa fa-file"> &nbsp;</i> Export</span>
+          </button>
+        </div>-->
+          </div>
+        </div>
+      </div>
+
+      <div class="mat-table__wrapper mat-elevation-z8" [style.height]="gridHeight">
+        <mat-table class="lmat-elevation-z8"
+                   #table
+                   [dataSource]="dataSource"
+                   matSort
+                   #sort1="matSort"
+                   matSortActive="id-1"
+                   matSortDirection="asc"
+                   matSortDisableClear>
+
+          <ng-container matColumnDef="EmployeeNo">
+            <mat-header-cell [style.min-width]="" *matHeaderCellDef mat-sort-header>User Id</mat-header-cell>
+            <mat-cell [style.min-width]="" *matCellDef="let user">{{user.UserId}}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="EmployeeName">
+            <mat-header-cell [style.min-width]="" *matHeaderCellDef mat-sort-header>PP Number/User Name</mat-header-cell>
+            <mat-cell [style.min-width]="" *matCellDef="let user"><span>{{user.UserName}}</span></mat-cell>
+          </ng-container>
+
+
+          <ng-container matColumnDef="PhoneNumber">
+            <mat-header-cell [style.min-width]="" *matHeaderCellDef mat-sort-header>Phone No</mat-header-cell>
+            <mat-cell [style.min-width]="" *matCellDef="let user"><span>{{user.PhoneNumber}}</span></mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="Email">
+            <mat-header-cell [style.min-width]="" *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
+            <mat-cell [style.min-width]="" *matCellDef="let user"><span>{{user.Email}}</span></mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="ZoneName">
+            <mat-header-cell [style.min-width]="" *matHeaderCellDef mat-sort-header>Zone Name</mat-header-cell>
+            <mat-cell [style.min-width]="" *matCellDef="let user"><span>{{user.ZoneName}}</span></mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="BranchName">
+            <mat-header-cell [style.min-width]="" *matHeaderCellDef mat-sort-header>Branch Name</mat-header-cell>
+            <mat-cell [style.min-width]="" *matCellDef="let user"><span>{{user.BranchName}}</span></mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="UserCircles">
+            <mat-header-cell [style.min-width]="" *matHeaderCellDef mat-sort-header>Circles</mat-header-cell>
+            <mat-cell [style.min-width]="" *matCellDef="let user"><span>{{user.UserCircles}}</span></mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="actions"  *ngIf="_currentActivity.U==true">
+            <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
+            <mat-cell *matCellDef="let user">
+              <button (click)="editUser(user)" mat-icon-button color="primary">
+                <mat-icon title="Edit">create</mat-icon>
+              </button>&nbsp;
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns;sticky:true;" class="table-header-background"></mat-header-row>
+
+          <mat-row *matRowDef="let row; columns: displayedColumns" (click)="rowClicked(row)"></mat-row>
+        </mat-table>
+        <div class="mat-table__message" *ngIf="!loading && dataSource.data.length==0">No records found</div><!-- Message for empty data  -->
+        <div class="mat-table__message" *ngIf="loading">Please wait....</div>
+      </div>
+      <div class="mat-table__bottom">
+        <mat-spinner [diameter]="20" *ngIf="loading"></mat-spinner>
+        <mat-paginator [length]="15" [pageSize]="15" [pageSizeOptions]="[15, 30, 50]"></mat-paginator>
+      </div>
+    </kt-portlet-body>
+  </kt-portlet>
+</div>

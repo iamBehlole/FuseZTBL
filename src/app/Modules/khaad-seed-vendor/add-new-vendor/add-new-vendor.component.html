@@ -1,0 +1,156 @@
+<div id="Kt-portlet-margin-top">
+    <div class="kt-portlet">
+      <!--[ngClass]="{ 'kt-portlet--body-progress' : viewLoading, 'kt-portlet--body-progress-overlay' : loadingAfterSubmit }"-->
+      <div class="kt-portlet__head kt-portlet__head__custom" id="list-header">
+        <div class="kt-portlet__head-label">
+          <h3 class="kt-portlet__head-title">Add New Vendor</h3>
+        </div>
+      </div>
+    </div>
+    
+
+    <form [formGroup]="vendorForm" class="kt-form kt-form--group-seperator-dashed">
+        
+        <div class="kt-form">
+            
+            <div class="kt-portlet__body">
+                
+              <div class="col-lg-12">
+
+                <div class="form-group kt-form__group row">
+
+                  <div class="col-lg-4 kt-margin-bottom-20-mobile">
+                    <mat-form-field class="mat-form-field-fluid" appearance="outline">
+                      <mat-label class="customMatLabel">Zone</mat-label>
+                      <mat-select [(ngModel)]="selected_z" formControlName="ZoneId" disabled="true">
+                        <mat-option [value]="SelectedZones.ZoneId">
+                          {{SelectedZones.ZoneName}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  
+                  <div class="col-lg-4 kt-margin-bottom-20-mobile">
+                    <mat-form-field class="mat-form-field-fluid" appearance="outline">
+                      <mat-label class="customMatLabel">Branch <strong class="matMandatory">*</strong></mat-label>
+                      <mat-select [(ngModel)]="selected_b" formControlName="BranchCode" disabled="true">
+                        <mat-option [value]="SelectedBranches.BranchCode">
+                          {{SelectedBranches.Name}}
+                        </mat-option>                                
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-lg-4 kt-margin-bottom-20-mobile">
+                    <mat-form-field class="mat-form-field-fluid" appearance="outline">
+                      <mat-label class="customMatLabel">Circle</mat-label>
+                      <mat-select formControlName="CircleId">
+                        <mat-option *ngFor="let circle of SelectedCircles" [value]="circle.Id">
+                          {{circle.CircleCode}}
+                        </mat-option>                                
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+
+                </div>
+
+                <div class="form-group kt-form__group row">
+
+                  <div class="col-lg-4 kt-margin-bottom-20-mobile">
+                    <mat-form-field class="mat-form-field-fluid" appearance="outline">
+
+                      <mat-label class="customMatLabel">Type <strong class="matMandatory">*</strong></mat-label>
+                      <mat-select formControlName="Type" [disabled]="viewOnly">
+                        <mat-option *ngFor="let lov of vendorLov" [value]="lov.LovId">
+                          {{lov.Name}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-lg-4 kt-margin-bottom-20-mobile">
+                    <mat-form-field class="mat-form-field-fluid" appearance="outline">
+                      <mat-label class="customMatLabel">Name <strong class="matMandatory">*</strong></mat-label>
+                      <input matInput placeholder="Enter Name" formControlName="Name" autocomplete="off" [readonly]="viewOnly" />
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-lg-4 kt-margin-bottom-20-mobile">
+                    <mat-form-field class="mat-form-field-fluid" appearance="outline">
+                      <mat-label class="customMatLabel">Business Description<strong class="matMandatory">*</strong></mat-label>
+                      <input matInput placeholder="Enter Business Description" formControlName="Description" autocomplete="off" [readonly]="viewOnly" />
+                    </mat-form-field>
+                  </div>
+
+                </div>
+
+
+                <div class="form-group kt-form__group row">
+
+
+                  <div class="col-lg-4 kt-margin-bottom-20-mobile">
+                    <mat-form-field class="mat-form-field-fluid" appearance="outline">
+                      <mat-label class="customMatLabel">Location<strong class="matMandatory">*</strong></mat-label>
+                      <input matInput formControlName="Location" appNumberOnly autocomplete="off" readonly="readonly" />
+                    </mat-form-field>
+                  </div>
+
+                  <div class="kt-margin-bottom-20-mobile">
+                    <input type="button" mat-raised-button color="primary" class=" mat-raised-button mat-button-base mat-primary searchLCBtn mt-2" *ngIf="!viewOnly" [value]="loc_text" (click)="Add()" />
+                    <!-- <button mat-raised-button color="primary" (click)="find()">Find</button> -->
+                  </div>
+
+                  <div class="col-lg-3 kt-margin-bottom-20-mobile" style="margin-left: 20px;">
+                    <mat-form-field class="mat-form-field-fluid" appearance="outline">
+                      <mat-label class="customMatLabel">Phone Number <strong class="matMandatory">*</strong></mat-label>
+                      <input matInput placeholder="Enter Vendor's Phone Number'" formControlName="PhoneNumber" maxlength="13" appNumberOnly autocomplete="off" [readonly]="viewOnly" />
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-lg-3 kt-margin-bottom-20-mobile">
+                    <mat-form-field class="mat-form-field-fluid" appearance="outline">
+                      <mat-label class="customMatLabel">Address <strong class="matMandatory">*</strong></mat-label>
+                      <input matInput placeholder="Enter Vendor Address" formControlName="Address" autocomplete="off" [readonly]="viewOnly" />
+                    </mat-form-field>
+                  </div>
+                </div>
+
+                <div class="form-group kt-form__group row">
+
+                  <div class="col-lg-4 kt-margin-bottom-20-mobile row">
+
+                    <div *ngFor="let url of images">
+                      <img style="width:150px;height: 150px; margin-left: auto;margin-right: auto;" class="img-thumbnail text-right" mat-card-md-image [src]="url">
+                    </div>
+                    <div style="align-items: center;">
+                      <input *ngIf="!viewOnly" style="margin-left: 10px;margin-right: auto; margin-top: 60px;" id="uploadprofile" type="file" name="myfile" (change)="onFileChange($event)" accept="image/jpg,image/jpeg" />
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+        </div>
+        
+
+    </form>
+    
+    
+    <div class="form-group kt-form__group row mt-2 justify-content-center" >
+      <button mat-raised-button color="primary" (click)="saveSubmit()" *ngIf="!viewOnly" >Save & Submit</button>
+      <button mat-raised-button color="primary" class="ml-2" (click)="deleteVendor()" *ngIf="viewOnly || isEdit" >Delete Vendor</button>
+    </div>
+
+</div>
+    
+<kt-spinner></kt-spinner>
+    
+    <!-- <ngx-spinner bdColor="rgba(51,51,51,0.8)"
+                 size="medium"
+                 color="#ecbd00"
+                 type="ball-scale-multiple">
+      <p style="font-size: 20px; color: white">Loading...</p>
+    </ngx-spinner> -->

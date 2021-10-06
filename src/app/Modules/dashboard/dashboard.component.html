@@ -1,0 +1,86 @@
+
+<div class="row" id="Kt-portlet-margin-top">
+  <div class="col-xl-12 col-xl-12 text-center">
+    <img src="./assets/media/bg/slider.png" class="img-responsive" alt="Alternate Text" />
+  </div>
+  <div class="col-xl-6">
+    <kt-portlet [class]="'kt-portlet--height-fluid'">
+      <kt-portlet-header [title]="'Loan Portfolio'">
+      </kt-portlet-header>
+      <kt-portlet-body>
+        <img src="./assets/media/bg/Group 1.png" class="img-responsive" alt="Alternate Text" />
+      </kt-portlet-body>
+    </kt-portlet>
+  </div>
+  <div class="col-xl-6">
+    <kt-portlet [class]="'kt-portlet--height-fluid'">
+      <kt-portlet-header [title]="'Performance Indicators'">
+        <ng-container ktPortletTools>
+        </ng-container>
+      </kt-portlet-header>
+      <kt-portlet-body>
+        <img src="./assets/media/bg/Group 2.png" class="img-responsive" alt="Alternate Text" />
+      </kt-portlet-body>
+    </kt-portlet>
+  </div>
+</div>
+
+<!--<div class="mat-table__wrapper mat-elevation-z8" [style.height]="gridHeight">
+  <mat-table class="lmat-elevation-z8"
+             #table
+             [dataSource]="dataSource"
+             matSort
+             #sort1="matSort"
+             matSortActive="id-1"
+             matSortDirection="asc"
+             matSortDisableClear>
+
+    <ng-container matColumnDef="EmployeeNo">
+      <mat-header-cell [style.min-width]="" *matHeaderCellDef mat-sort-header>User Id</mat-header-cell>
+      <mat-cell [style.min-width]="" *matCellDef="let user">{{user.UserId}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="EmployeeName">
+      <mat-header-cell [style.min-width]="" *matHeaderCellDef mat-sort-header>PP Number/User Name</mat-header-cell>
+      <mat-cell [style.min-width]="" *matCellDef="let user"><span>{{user.UserName}}</span></mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="PhoneNumber">
+      <mat-header-cell [style.min-width]="" *matHeaderCellDef mat-sort-header>Phone No</mat-header-cell>
+      <mat-cell [style.min-width]="" *matCellDef="let user"><span>{{user.PhoneNumber}}</span></mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Email">
+      <mat-header-cell [style.min-width]="" *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
+      <mat-cell [style.min-width]="" *matCellDef="let user"><span>{{user.Email}}</span></mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="ZoneName">
+      <mat-header-cell [style.min-width]="" *matHeaderCellDef mat-sort-header>Zone Name</mat-header-cell>
+      <mat-cell [style.min-width]="" *matCellDef="let user"><span>{{user.ZoneName}}</span></mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="BranchName">
+      <mat-header-cell [style.min-width]="" *matHeaderCellDef mat-sort-header>Branch Name</mat-header-cell>
+      <mat-cell [style.min-width]="" *matCellDef="let user"><span>{{user.BranchName}}</span></mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="UserCircles">
+      <mat-header-cell [style.min-width]="" *matHeaderCellDef mat-sort-header>Circles</mat-header-cell>
+      <mat-cell [style.min-width]="" *matCellDef="let user"><span>{{user.UserCircles}}</span></mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
+      <mat-cell *matCellDef="let user">
+        <button (click)="editUser(user)" mat-icon-button color="primary">
+          <mat-icon>create</mat-icon>
+        </button>&nbsp;
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns;sticky:true;" class="table-header-background"></mat-header-row>
+
+    <mat-row *matRowDef="let row; columns: displayedColumns" (click)="rowClicked(row)"></mat-row>
+  </mat-table>
+</div>-->
