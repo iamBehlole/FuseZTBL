@@ -24,6 +24,12 @@ import { AuthNoticeComponent } from './auth-notice/auth-notice.component';
 import { AuthEffects, AuthGuard, authReducer, AuthService } from '../../../core/auth';
 import { OtpComponent } from './otp/otp.component';
 import { UserUtilsService } from '../../../core/_base/crud/utils/user-utils.service';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatIconModule} from '@angular/material/icon';
+import {FuseDirectivesModule} from '../../../@fuse/directives/directives';
+import {FuseSharedModule} from '../../../@fuse/shared.module';
+import {MatInputModule} from '@angular/material/input';
+import {MatButtonModule} from '@angular/material/button';
 //import { ChangePasswordComponent } from '../user-management/users/_subs/change-password/change-password.component';
 
 
@@ -64,19 +70,25 @@ const routes: Routes = [
 
 
 @NgModule({
-	imports: [
-		CommonModule,
-		FormsModule,
-		ReactiveFormsModule,
-		MatButtonModule,
-		RouterModule.forChild(routes),
-		MatInputModule,
-		MatFormFieldModule,
-		MatCheckboxModule,
-		TranslateModule.forChild(),
-		StoreModule.forFeature('auth', authReducer),
-		EffectsModule.forFeature([AuthEffects])
-	],
+    imports: [
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatButtonModule,
+        RouterModule.forChild(routes),
+        MatInputModule,
+        MatFormFieldModule,
+        MatCheckboxModule,
+        TranslateModule.forChild(),
+        StoreModule.forFeature('auth', authReducer),
+        EffectsModule.forFeature([AuthEffects]),
+        MatFormFieldModule,
+        MatIconModule,
+        FuseDirectivesModule,
+        FuseSharedModule,
+        MatInputModule,
+        MatButtonModule
+    ],
 	providers: [
 		InterceptService,
 		{

@@ -1,55 +1,63 @@
+<div id="login" class="inner-scroll" fxLayout="row" fxLayoutAlign="start">
 
+    <div id="login-intro" fxFlex fxHide fxShow.gt-xs>
 
-<!--begin::Body-->
-<div class="kt-login__body">
-	<!--begin::Signin-->
-	<div class="kt-login__form">
+        <div class="logo" [@animate]="{value:'*',params:{scale:'0.2'}}">
+            <img src="assets/images/logos/fuse.svg">
+        </div>
 
-		<div class="kt-login__title">
-      <img src="./assets/media/logos/ZTBL-logo.png" alt="Alternate Text"/>
-		</div>
+        <div class="title" [@animate]="{value:'*',params:{delay:'50ms',y:'25px'}}">
+            Welcome to the ZTBL!
+        </div>
 
-		<kt-auth-notice></kt-auth-notice>
+        <div class="description" [@animate]="{value:'*',params:{delay:'100ms',y:'25px'}}">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ullamcorper nisl erat,
+            vel convallis elit fermentum pellentesque. Sed mollis velit facilisis facilisis viverra.
+        </div>
 
-		<!--begin::Form-->
-		<form class="kt-form" [formGroup]="loginForm" autocomplete="off">
-			<div class="form-group">
-				<mat-form-field appearance="outline">
-					<mat-label>User Name</mat-label>
-					<input matInput type="text" placeholder="User Name" appearance="outline" formControlName="DisplayName" autocomplete="off" />
-					<mat-error *ngIf="isControlHasError('UserName','required')">
-						<strong>{{ 'AUTH.VALIDATION.REQUIRED_FIELD' | translate }}</strong>
-					</mat-error>
-				</mat-form-field>
-			</div>
-			<div class="form-group" style="margin-top:25px;">
-				<mat-form-field appearance="outline">
-					<mat-label>Password</mat-label>
-					<input matInput type="password" placeholder="Password" formControlName="Password" autocomplete="off"/>
-					<mat-error *ngIf="isControlHasError('Password','required')">
-						<strong>{{ 'AUTH.VALIDATION.REQUIRED_FIELD' | translate }}</strong>
-					</mat-error>
-					<mat-error *ngIf="isControlHasError('Password','minlength')">
-						<strong>{{ 'AUTH.VALIDATION.MIN_LENGTH_FIELD' | translate }} 3</strong>
-					</mat-error>
-					<mat-error *ngIf="isControlHasError('Password','maxlength')">
-						<strong>{{ 'AUTH.VALIDATION.MAX_LENGTH_FIELD' | translate }} 100</strong>
-					</mat-error>
-				</mat-form-field>
-			</div>
-			<!--begin::Action-->
-			<div class="kt-login__actions" >
-				<!--<a href="javascript:;" routerLink="/auth/forgot-password" class="kt-link kt-login__link-forgot">
-					{{ 'AUTH.GENERAL.FORGOT_BUTTON' | translate }}
-				</a>-->
-				<button style="margin-top:20px;" (click)="submit()" [ngClass]="{'kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light': loading}" id="kt_login_signin_submit" class="btn btn-primary btn-block btn-elevate kt-login__btn-primary">{{ 'AUTH.LOGIN.BUTTON' | translate }}</button>
-			</div>
-			<!--end::Action-->
-		</form>
-		<!--end::Form-->
+    </div>
 
-		<!--begin::Divider-->
-	</div>
-	<!--end::Signin-->
+    <div id="login-form-wrapper" fusePerfectScrollbar style="background-color: white;"
+         [@animate]="{value:'*',params:{delay:'300ms',x:'100%'}}">
+
+        <div id="login-form">
+
+            <div class="logo" fxHide.gt-xs>
+                <img src="assets/images/logos/fuse.svg">
+            </div>
+
+            <div class="title">LOGIN TO YOUR ACCOUNT</div>
+
+            <form name="loginForm" [formGroup]="loginForm" novalidate (submit)="submit()">
+
+                <mat-form-field appearance="outline">
+                    <mat-label>User Name</mat-label>
+                    <input matInput formControlName="DisplayName">
+                    <mat-icon matSuffix class="secondary-text">mail</mat-icon>
+                    <mat-error *ngIf="loginForm.get('userName').hasError('required')">
+                        User Name is required
+                    </mat-error>
+                    <mat-error
+                        *ngIf="!loginForm.get('userName').hasError('required') &&
+                                loginForm.get('userName').hasError('userName')">
+                        Please enter a valid User Name
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Password</mat-label>
+                    <input matInput type="password" formControlName="Password">
+                    <mat-icon matSuffix class="secondary-text">vpn_key</mat-icon>
+                    <mat-error>
+                        Password is required
+                    </mat-error>
+                </mat-form-field>
+                <button mat-raised-button color="accent" class="submit-button" aria-label="LOGIN"
+                        [disabled]="loginForm.invalid">
+                    LOGIN
+                </button>
+
+            </form>
+        </div>
+    </div>
 </div>
-<!--end::Body-->

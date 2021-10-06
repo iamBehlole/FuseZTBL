@@ -4,7 +4,19 @@
 
 export const environment = {
     production: false,
-    hmr       : false
+    userEmailKey: 'userEmail',
+    userName: 'userName',
+    userInfoKey: 'loginResponse',
+    menuBar: 'menuBar',
+    userActivities: 'userActivities',
+    isMockEnabled: true, // You have to switch this, when your real back-end is done
+    authTokenKey: 'authce9d77b308c149d5992a80073637e4d5',
+//  apiUrl: 'https://localhost:44346',
+//    apiUrl: 'http://172.16.1.219/ZTBLApi',
+    apiUrl: 'http://172.16.1.228:8070/ZTBL.Api', //admins
+    //apiUrl: 'http://10.250.10.139/ZTBL.Apis', //users
+    //  apiUrl: 'http://10.1.103.102:8090/ZTBL.Api',
+    // apiUrl: 'http://172.16.1.228/ZTBLAPI',
 };
 
 /*
@@ -14,4 +26,4 @@ export const environment = {
  * This import should be commented out in production mode because it will have a negative impact
  * on performance if an error is thrown.
  */
-// import 'zone.js/plugins/zone-error';  // Included with Angular CLI.
+// import 'zone.js/dist/zone-error';  // Included with Angular CLI.
