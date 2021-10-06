@@ -3,16 +3,22 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {environment} from '../environments/environment.prod';
 import {LoginComponent} from './Authentication/login/login.component';
+import {AuthGuard} from './core/auth';
 import { AppComponent } from './app.component';
 
 let routeUrl = './Modules';
 
 const routes: Routes = [
   {
-    path: '',
-    component: AppComponent,
-    children: [
-      {
+    path: 'auth', loadChildren: () => import(`${routeUrl}/auth/auth.module`).then(m => m.AuthModule)
+  },
+  {
+      path: '',
+      component: AppComponent,
+      canActivate: [AuthGuard],
+      runGuardsAndResolvers: 'always',
+      children: [
+        {
         path: 'login',
         component: LoginComponent
       },
