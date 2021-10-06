@@ -1,0 +1,61 @@
+<div id="Kt-portlet-margin-top">
+  <kt-portlet>
+    <kt-portlet-header [title]="'DBR List'" [class]="'kt-portlet__head--lg'">
+      <ng-container ktPortletTools>
+      </ng-container>
+    </kt-portlet-header>
+    <!-- end::Header -->
+    <kt-portlet-body>
+      <div class="mat-table__wrapper mat-elevation-z8" >
+        <mat-table class="lmat-elevation-z8"
+                   #table
+                   [dataSource]="dataSource"
+                   matSort
+                   #sort1="matSort"
+                   matSortActive="id"
+                   matSortDirection="asc"
+                   matSortDisableClear>
+
+          <ng-container matColumnDef="BranchName">
+            <!-- ATTRIBUTE mat-sort-header  for sorting | https://material.angular.io/components/sort/overview -->
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Branch</mat-header-cell>
+            <mat-cell *matCellDef="let loan">{{loan.BranchName}}</mat-cell>
+          </ng-container>
+
+
+          <ng-container matColumnDef="AppDate">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Application Date</mat-header-cell>
+            <mat-cell *matCellDef="let loan">{{loan.AppDate}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="AppNumberManual">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>LA File/Booklet#</mat-header-cell>
+            <mat-cell *matCellDef="let loan">{{loan.AppNumberManual}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="LoanCaseNo">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>LCNO</mat-header-cell>
+            <mat-cell *matCellDef="let loan">{{loan.LoanCaseNo}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="Action">
+            <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
+            <mat-cell *matCellDef="let loan">
+              <button mat-icon-button color="primary">
+                <!--(click)="editLoan(loan)"-->
+                <mat-icon style="margin-left: 5px;" title="View Loan">accessibility_new</mat-icon>
+              </button>
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns;sticky:true;" class="table-header-background"></mat-header-row>
+
+          <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+        </mat-table>
+
+        <div class="mat-table__message" *ngIf="dataSource.data.length==0">No records found</div>
+        <!--<div class="mat-table__message">Please wait....</div>-->
+      </div>
+    </kt-portlet-body>
+  </kt-portlet>
+</div>

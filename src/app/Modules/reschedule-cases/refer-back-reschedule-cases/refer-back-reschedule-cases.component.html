@@ -1,0 +1,139 @@
+<div id="Kt-portlet-margin-top">
+  <div class="kt-portlet">
+    <!--[ngClass]="{ 'kt-portlet--body-progress' : viewLoading, 'kt-portlet--body-progress-overlay' : loadingAfterSubmit }"-->
+    <div class="kt-portlet__head kt-portlet__head__custom" id="list-header">
+      <div class="kt-portlet__head-label">
+        <h3 class="kt-portlet__head-title">List of Transactions</h3>
+      </div>
+    </div>
+    <div class="mat-table__wrapper mat-elevation-z8">
+      <!--[style.height]="gridHeight"-->
+      <!-- [dataSource]="dataSource | paginate: {itemsPerPage: itemsPerPage, currentPage: pageIndex, totalItems: totalItems}" -->
+      <mat-table
+        class="lmat-elevation-z8"
+        #table
+        [dataSource]="dataSource | paginate: {itemsPerPage: itemsPerPage, currentPage: pageIndex, totalItems: totalItems}"
+        matSort
+        #sort1="matSort"
+        matSortActive="id"
+        matSortDirection="asc"
+        matSortDisableClear
+      >
+        <ng-container matColumnDef="TransactionDate">
+          <mat-header-cell *matHeaderCellDef mat-sort-header
+            >Transaction Date</mat-header-cell
+          >
+          <mat-cell *matCellDef="let row">{{ row.transactionDate }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="LoanApp">
+          <mat-header-cell *matHeaderCellDef mat-sort-header
+            >LOAN APP #</mat-header-cell
+          >
+          <mat-cell *matCellDef="let row">{{ row.loanApp }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="GlDescription">
+          <mat-header-cell *matHeaderCellDef mat-sort-header
+            >Gl description</mat-header-cell
+          >
+          <mat-cell *matCellDef="let row">{{ row.glDescription }}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="Status">
+          <mat-header-cell *matHeaderCellDef mat-sort-header
+            >Status</mat-header-cell>
+          <mat-cell *matCellDef="let row">{{ row.status }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Scheme">
+          <mat-header-cell *matHeaderCellDef mat-sort-header
+            >Scheme</mat-header-cell
+          >
+          <mat-cell *matCellDef="let row">{{ row.scheme }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="OldDate">
+          <mat-header-cell *matHeaderCellDef mat-sort-header
+            >Old Due Date</mat-header-cell
+          >
+          <mat-cell *matCellDef="let row">{{ row.oldDate }}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="AcStatus">
+          <mat-header-cell *matHeaderCellDef mat-sort-header
+            >A/C Status</mat-header-cell
+          >
+          <mat-cell *matCellDef="let row">{{ row.acStatus }}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="View">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>View</mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            <button mat-icon-button color="primary">
+              <mat-icon style="margin-left: 5px" title="Edit row" (click)="editRefer(row)"
+                >edit</mat-icon
+              >
+            </button>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="Submit">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Submit</mat-header-cell>
+          <mat-cell *matCellDef="let row">
+              <mat-checkbox (click)="getRow(row)"></mat-checkbox>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row
+          *matHeaderRowDef="displayedColumns; sticky: true"
+          class="table-header-background"
+        ></mat-header-row>
+
+        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+      </mat-table>
+
+      <div *ngIf="matTableLenght" class="mat-select" style="padding:5px;">
+          Items per page:
+          <mat-select display="inline" [(value)]="itemsPerPage" (valueChange)="paginate(1,$event)" style="width: 50px; margin-left: 15px; display: inline-block; margin-right: 10px;">
+            <mat-option [value]="5">5</mat-option>
+            <mat-option [value]="10">10</mat-option>
+            <mat-option [value]="25">25</mat-option>
+            <mat-option [value]="50">50</mat-option>
+          </mat-select>
+          <button (click)="paginate(1)">First</button>
+          <pagination-controls display="inline" (pageChange)="paginate($event)" style="display: inline-block;"></pagination-controls>
+          <button (click)="paginate(Math.ceil(totalItems/itemsPerPage))">Last</button>
+          <p style="float:right;">Total <b>{{totalItems}}</b> items</p>
+  
+      </div>
+
+      <!-- <div class="mat-table__message" *ngIf="!loading && !matTableLenght">No records found</div>
+        <div class="mat-table__message" *ngIf="loading">Please wait....</div> -->
+    </div>
+
+    <!-- <div class="form-group kt-form__group row">
+        <div class="col-lg-12 kt-margin-bottom-20-mobile mat-table">
+  
+          <h4>No Record found.</h4>
+        </div>
+      </div> -->
+  </div>
+
+  <div class="kt-portlet__foot kt-portlet__foot--fit kt-portlet__no-border">
+    <div class="kt-form__actions kt-form__actions--solid">
+      <div class="row text-center">
+        <div *ngIf="matTableLenght" class="col-lg-12 d-flex justify-content-center mt-2">
+          <!-- <button mat-raised-button color="primary">Submit</button>&nbsp;&nbsp; -->
+          <button mat-raised-button color="primary" (click)="SubmitData()" >Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<kt-spinner></kt-spinner>
+
+<!-- <ngx-spinner bdColor="rgba(51,51,51,0.8)"
+                 size="medium"
+                 color="#ecbd00"
+                 type="ball-scale-multiple">
+      <p style="font-size: 20px; color: white">Loading...</p>
+    </ngx-spinner> -->

@@ -1,0 +1,242 @@
+<style>
+
+  .kt-form-margin {
+    margin-bottom: 15px;
+    margin-top: 15px;
+  }
+
+</style>
+
+<div id="Kt-portlet-margin-top">
+  <kt-portlet>
+    <!-- PORTLET LOADING | Binded to TABLE Datasource -->
+    <!-- See prop => '~/core/_crud/models/data-sources/_base.datasource.ts' (loading$) -->
+    <kt-portlet-header [title]="'Utilization List'" [class]="'kt-portlet__head--lg'">
+      <ng-container ktPortletTools>
+        <!-- Buttons (Material Angular) | See off.documenations 'https://material.angular.io/components/button/overview' -->
+        <!-- mat-raised-button | Rectangular contained button w/ elevation  -->
+      </ng-container>
+    </kt-portlet-header>
+    <!-- end::Header -->
+
+    <kt-portlet-body>
+      <div class="kt-form kt-form-margin" [formGroup]="loanutilizationSearch">
+        
+        <div class="row align-items-center mb-4">
+     
+        <div class="col-md-2 kt-margin-bottom-10-mobile" *ngIf="!isUserAdmin && isMCO && !isBM">
+          <mat-form-field class="mat-form-field-fluid" appearance="outline">
+            <mat-label>Zone</mat-label>
+            <input matInput formControlName="Zone" readonly="readonly" maxlength="30" autocomplete="off">
+          </mat-form-field>
+        </div>
+     
+            <div class="col-md-2 kt-margin-bottom-10-mobile" *ngIf="isUserAdmin">
+              <mat-form-field class="mat-form-field-fluid map-fields" appearance="outline" *ngIf="!BMUser">
+                <mat-label>Zone</mat-label>
+                <mat-select (selectionChange)="GetBranches($event)" formControlName="ZoneId">
+                  <mat-option>
+                    <ngx-mat-select-search placeholderLabel="Search Zone..." (focusout)="validateZoneOnFocusOut()" (keyup)="searchZone($event.target.value)" noEntriesFoundLabel="No Zone Found">
+                    </ngx-mat-select-search>
+                  </mat-option>
+                  <mat-option>
+                    Select
+                  </mat-option>
+                  <mat-option *ngFor="let zone of SelectedZones" [value]="zone.ZoneId">
+                    {{zone.ZoneName }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+        
+          <div class="col-md-2 kt-margin-bottom-10-mobile" *ngIf="!isUserAdmin && !isZoneUser">
+            <mat-form-field class="mat-form-field-fluid" appearance="outline">
+              <mat-label>Branch</mat-label>
+              <input matInput formControlName="Branch" readonly="readonly" maxlength="30" autocomplete="off">
+              <!--  <mat-error *ngIf="hasError('loanutilizationName', 'required')">loanutilizationName <strong>required</strong></mat-error>-->
+            </mat-form-field>
+          </div>
+          <div class="col-md-2 kt-margin-bottom-10-mobile" *ngIf="isUserAdmin || isZoneUser">
+            <mat-form-field class="mat-form-field-fluid map-fields" appearance="outline" *ngIf="!BMUser">
+              <mat-label>Branch</mat-label>
+              <mat-select (selectionChange)="SetBranches($event)" formControlName="BranchId">
+                <mat-option>
+                  <ngx-mat-select-search placeholderLabel="Search Branch..." (focusout)="validateBranchOnFocusOut()" noEntriesFoundLabel="No Branch Found" (keyup)="searchBranch($event.target.value)">
+                  </ngx-mat-select-search>
+                </mat-option>
+                <mat-option>
+                  Select
+                </mat-option>
+                <mat-option *ngFor="let branch of SelectedBranches" [value]="branch.BranchId">
+                  {{branch.Name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <!-- <div class="col-md-2 kt-margin-bottom-10-mobile">
+            <mat-form-field class="mat-form-field-fluid" appearance="outline">
+              <mat-label class="customMatLabel">Circle No</mat-label>
+              <input matInput formControlName="CircleNo" autocomplete="off" readonly="readonly"/>
+            </mat-form-field>
+        </div> -->
+
+        <div *ngIf="circle && isBM" class="col-md-2 kt-margin-bottom-10-mobile">
+          <mat-form-field class="mat-form-field-fluid" appearance="outline">
+            <mat-label>Circle No</mat-label>
+            <mat-select formControlName="CircleId">
+              <mat-option value="">
+                Select
+              </mat-option>
+              <mat-option *ngFor="let obj of circle" [value]="obj.Id">
+                {{obj.CircleCode}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+          <div class="col-md-2 kt-margin-bottom-10-mobile">
+            <mat-form-field class="mat-form-field-fluid" appearance="outline">
+              <mat-label>LoanCaseNo</mat-label>
+              <input matInput  appNumberOnly formControlName="LoanCaseNo" placeholder="Enter LoanCaseNo" maxlength="100" autocomplete="off" >
+            </mat-form-field>
+          </div>
+
+          <div *ngIf="loanutilizationStatusLov" class="col-md-2 kt-margin-bottom-10-mobile">
+            <mat-form-field class="mat-form-field-fluid" appearance="outline">
+              <mat-label>Select loanutilization Status</mat-label>
+              <mat-select formControlName="Status">
+                <mat-option value="">
+                  Select
+                </mat-option>
+                <mat-option *ngFor="let obj of loanutilizationStatusLov.LOVs" [value]="obj.Value">
+                  {{obj.Name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+
+          <!-- <div *ngIf="CustomerStatusLov"  class="col-md-2 kt-margin-bottom-10-mobile">
+
+            <mat-form-field class="mat-form-field-fluid" appearance="outline">
+              <mat-label>Customer Status</mat-label>
+              <mat-select formControlName="Status">
+                <mat-option>
+                  Select
+                </mat-option>
+                <mat-option *ngFor="let obj of CustomerStatusLov.LOVs" [value]="obj.Value">
+                  {{obj.Name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div> -->
+
+          <div class="col-lg-2 col-md-3">
+            <button (click)="searchloanutilization()" color="primary" type="button" class="btn btn-secondary mt-19 kt-login__btn-primary btn-block">
+              <span><i class="fa fa-search"> &nbsp;</i> Search</span>
+            </button>
+          </div>
+        </div>
+        <div class="row align-items-center mb-4">
+          <div class="col-lg-10"></div>
+          
+        </div>
+      </div>
+
+      
+      <div class="mat-table__wrapper mat-elevation-z8" [style.height]="gridHeight">
+        <mat-table class="lmat-elevation-z8"
+                   #table
+                   [dataSource]="dataSource"
+                   matSort
+                   #sort1="matSort"
+                   matSortActive="id"
+                   matSortDirection="asc"
+                   matSortDisableClear>
+
+          <ng-container matColumnDef="LoanCaseNo">
+            <!-- ATTRIBUTE mat-sort-header  for sorting | https://material.angular.io/components/sort/overview -->
+            <mat-header-cell *matHeaderCellDef mat-sort-header>LoanCaseNo</mat-header-cell>
+            <mat-cell *matCellDef="let loanutilization">{{loanutilization.LoanCaseNo}}</mat-cell>
+          </ng-container>
+
+          <!-- <ng-container matColumnDef="GlCode">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>GlCode</mat-header-cell>
+            <mat-cell *matCellDef="let loanutilization">{{loanutilization.GlCode}}</mat-cell>
+          </ng-container> -->
+
+          <ng-container matColumnDef="Status">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+            <mat-cell *matCellDef="let loanutilization">{{loanutilization.StatusName}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="Remarks">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Remarks</mat-header-cell>
+            <mat-cell *matCellDef="let loanutilization">{{loanutilization.Remarks}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="Lng">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Lng</mat-header-cell>
+            <mat-cell *matCellDef="let loanutilization">{{loanutilization.Lng}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="Lat">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Lat</mat-header-cell>
+            <mat-cell *matCellDef="let loanutilization">{{loanutilization.Lat}}</mat-cell>
+          </ng-container>
+
+          
+          <!-- <ng-container matColumnDef="loanutilizationStatus">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+            <mat-cell *matCellDef="let loanutilization">{{getStatus(loanutilization.loanutilizationStatus)}}</mat-cell>
+          </ng-container> -->
+
+          <ng-container matColumnDef="Actions">
+            <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
+            <mat-cell *matCellDef="let loanutilization">
+              <!-- <button  *ngIf="CheckEditStatus(loanutilization)" mat-icon-button color="primary"
+                      (click)="editloanutilization(loanutilization)">
+                <mat-icon style="margin-left: 5px;" title="Edit loanutilization">edit</mat-icon>
+              </button> -->
+
+              <button mat-icon-button color="primary" *ngIf="CheckEditStatus(loanutilization)"
+              (click)="editloanutilization(loanutilization)">
+        <mat-icon style="margin-left: 5px;" title="Edit land">edit</mat-icon>
+      </button>
+  
+      
+      <button mat-icon-button color="primary" *ngIf="CheckViewStatus(loanutilization)"
+              (click)="viewloanutilization(loanutilization)">
+        <mat-icon title="View land">visibility</mat-icon>
+      </button>
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns;sticky:true;" class="table-header-background"></mat-header-row>
+
+          <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+        </mat-table>
+
+        <div class="mat-table__message" *ngIf="!loading && dataSource.data.length==0">No records found</div>
+        <div class="mat-table__message" *ngIf="loading">Please wait....</div>
+      </div>
+
+      <div class="mat-table__bottom">
+        <mat-spinner [diameter]="20" *ngIf="loading"></mat-spinner>
+        <mat-paginator [length]="15" [pageSize]="15" [pageSizeOptions]="[15,30, 50, 100]" [showFirstLastButtons]="true"></mat-paginator>
+
+        <!--<mat-spinner [diameter]="20" *ngIf="dataSource.loading$ | async"></mat-spinner>
+        <mat-paginator [pageSize]="10" [pageSizeOptions]="[3, 5, 10]" [length]="dataSource.paginatorTotal$ | async" [showFirstLastButtons]="true"></mat-paginator>-->
+      </div>
+    </kt-portlet-body>
+    <!-- end::Body -->
+  </kt-portlet>
+
+</div>
+
+<ngx-spinner bdColor="rgba(51,51,51,0.8)"
+             size="medium"
+             color="#ecbd00"
+             type="ball-scale-multiple">
+  <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>  

@@ -1,0 +1,200 @@
+<div id="Kt-portlet-margin-top">
+  <div class="kt-portlet">
+    <!--[ngClass]="{ 'kt-portlet--body-progress' : viewLoading, 'kt-portlet--body-progress-overlay' : loadingAfterSubmit }"-->
+    <div class="kt-portlet__head kt-portlet__head__custom" id="list-header">
+      <div class="kt-portlet__head-label">
+        <h3 class="kt-portlet__head-title">List of Transactions</h3>
+      </div>
+    </div>
+    
+    <form [formGroup]="referbackForm" class="kt-form kt-form--group-seperator-dashed">
+      <div class="kt-form">
+        <div class="kt-portlet__body">
+          <div class="kt-portlet__body-progress">
+            <mat-spinner [diameter]="20"></mat-spinner>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="form-group kt-form__group row">
+                <div class="col-lg-3 kt-margin-bottom-20-mobile">
+                  <mat-form-field class="mat-form-field-fluid" appearance="outline">
+                    <mat-label class="customMatLabel">Zone <strong class="matMandatory">*</strong></mat-label>
+                    <input matInput placeholder="Enter Zone" formControlName="ZoneId" readonly="readonly" maxlength="30" autocomplete="off" />
+                  </mat-form-field>
+                </div>
+
+                <div class="col-lg-3 kt-margin-bottom-20-mobile">
+                  <mat-form-field class="mat-form-field-fluid" appearance="outline">
+                    <mat-label class="customMatLabel">Organization Unit</mat-label>
+                    <input matInput placeholder="Organization Unit" formControlName="OrganizationUnit" maxlength="50" autocomplete="off" readonly="readonly"/>
+                    <mat-error *ngIf="hasError('OrganizationUnit', 'required')">Organization Unit <strong>required</strong></mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-lg-3 kt-margin-bottom-20-mobile">
+                  <mat-form-field class="mat-form-field-fluid" appearance="outline">
+                    <mat-label class="customMatLabel">Transaction Date (ddMMyyyy) <strong class="matMandatory">*</strong></mat-label>
+                    <input matInput [matDatepicker]="picker2" formControlName="TransactionDate" maxlength="8" autocomplete="off" [max]="maxDate" appNumberOnly />
+                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                    <mat-datepicker #picker2></mat-datepicker>
+
+                    <mat-error *ngIf="hasError('TransactionDate', 'required')">Transaction Date <strong>required</strong></mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-lg-3 kt-margin-bottom-20-mobile">
+                  <mat-form-field class="mat-form-field-fluid" appearance="outline">
+                    <mat-label>Select Nature</mat-label>
+                    <mat-select formControlName="Nature">
+                      <mat-option *ngFor="let nature of Nature" [value]="nature.Id">
+                        {{nature.Name}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-lg-3 kt-margin-bottom-20-mobile">
+                  <mat-form-field class="mat-form-field-fluid" appearance="outline">
+                    <mat-label class="customMatLabel">Voucher # <strong class="matMandatory">*</strong></mat-label>
+                    <input matInput placeholder="Voucher No" formControlName="VoucherNo" maxlength="30" autocomplete="off" appNumberOnly />
+                    <mat-error *ngIf="hasError('VoucherNo', 'required')">Voucher No <strong>required</strong></mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-lg-3 kt-margin-bottom-20-mobile">
+                  <mat-form-field class="mat-form-field-fluid" appearance="outline">
+                    <mat-label>Select Status</mat-label>
+                    <mat-select formControlName="Status" [disabled] = "true">
+                      <mat-option *ngFor="let status of JvStatuses" [value]="status.Value">
+                        {{status.Name}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-lg-3 " style="margin-top:5px;">
+                  <button class="btn btn-secondary mt-19 kt-login__btn-primary btn-block" color="primary" type="button" (click)="find()"><span><i class="fa fa-search"> &nbsp;</i> Find</span></button>
+                </div>
+              </div>
+
+              <div class="mat-table__wrapper mat-elevation-z8">
+                <!--[style.height]="gridHeight"-->
+                <mat-table class="lmat-elevation-z8"
+                           #table
+                           [dataSource]="dataSource | paginate: {itemsPerPage: itemsPerPage, currentPage: pageIndex, totalItems: totalItems}"
+                           matSort
+                           #sort1="matSort"
+                           matSortActive="id"
+                           matSortDirection="asc"
+                           matSortDisableClear>
+                  <ng-container matColumnDef="Branch">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Branch</mat-header-cell>
+                    <mat-cell *matCellDef="let jv">{{jv.BranchName}}</mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="VoucherNO">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Voucher#</mat-header-cell>
+                    <mat-cell *matCellDef="let jv">{{jv.ManualVoucherNo}}</mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="TransactionDate">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Transaction Date</mat-header-cell>
+                    <mat-cell *matCellDef="let jv">{{jv.WorkingDateTransDate}}</mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="Category">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Category</mat-header-cell>
+                    <mat-cell *matCellDef="let jv">{{jv.NatureDesc}}</mat-cell>
+                  </ng-container>
+          
+                  <ng-container matColumnDef="TransactionMaster">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Transaction Master</mat-header-cell>
+                    <mat-cell *matCellDef="let jv">{{jv.TrDesc}}</mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="Debit">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Debit</mat-header-cell>
+                    <mat-cell *matCellDef="let jv">{{jv.DrAmount}}</mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="Credit">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Credit</mat-header-cell>
+                    <mat-cell *matCellDef="let jv">{{jv.CrAmount}}</mat-cell>
+                  </ng-container>
+          
+                  <ng-container matColumnDef="Status">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+                    <mat-cell *matCellDef="let jv">{{jv.StatusName}}</mat-cell>
+                  </ng-container>
+          
+          
+                  <ng-container matColumnDef="View">
+                    <mat-header-cell *matHeaderCellDef>View</mat-header-cell>
+                    <mat-cell *matCellDef="let jv">            
+                      <button mat-icon-button color="primary" *ngIf="CheckViewStatus(jv)"
+                              (click)="viewJv(jv)">
+                        <mat-icon style="margin-left: 2px;" title="View jv">visibility</mat-icon>
+                      </button>
+                    </mat-cell>
+                  </ng-container>
+          
+                  <ng-container matColumnDef="Edit">
+                    <mat-header-cell *matHeaderCellDef>Edit</mat-header-cell>
+                    <mat-cell *matCellDef="let jv">
+                      <button mat-icon-button color="primary" *ngIf="CheckEditStatus(jv)"
+                              (click)="editJv(jv)">
+                        <mat-icon style="margin-left: 2px;" title="View jv">edit</mat-icon>
+                      </button>
+                    </mat-cell>
+                  </ng-container>
+          
+                  <mat-header-row *matHeaderRowDef="displayedColumns;sticky:true;" class="table-header-background"></mat-header-row>
+          
+                  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+          
+                </mat-table>
+                <div *ngIf="matTableLenght" class="mat-select" style="padding:5px;">
+                  <!-- This mat select is customized, not a part of Ngx Paginator, used for selected items per page -->
+                  Items per page:
+                  <mat-select display="inline" [(value)]="itemsPerPage" (valueChange)="paginate(1,$event)" style="width: 50px; margin-left: 15px; display: inline-block; margin-right: 10px;">
+                    <mat-option [value]="5">5</mat-option>
+                    <mat-option [value]="10">10</mat-option>
+                    <mat-option [value]="25">25</mat-option>
+                    <mat-option [value]="50">50</mat-option>
+                  </mat-select>
+                  <button (click)="paginate(1)">First</button>
+                  <pagination-controls display="inline" (pageChange)="paginate($event)" style="display: inline-block;"></pagination-controls>
+                  <button (click)="paginate(Math.ceil(totalItems/itemsPerPage))">Last</button>
+                  <p style="float:right;">Total <b>{{totalItems}}</b> items</p>
+          
+                </div>
+          
+                <div class="mat-table__message" *ngIf="!loading && !matTableLenght">No records found</div>
+                <div class="mat-table__message" *ngIf="loading">Please wait....</div>
+              </div>
+          
+              <div class="form-group kt-form__group row">
+                <!--*ngIf="dataFetched && RecoveryLoanTransaction.length==0 && !submitted"-->
+                <!-- <div class="col-lg-12 kt-margin-bottom-20-mobile mat-table">
+          
+                  <h4>No Record found.</h4>
+                </div> -->
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <div class="form-group kt-form__group row">
+      <!--*ngIf="dataFetched && RecoveryLoanTransaction.length==0 && !submitted"-->
+      <!-- <div class="col-lg-12 kt-margin-bottom-20-mobile mat-table">
+
+        <h4>No Record found.</h4>
+      </div> -->
+    </div>
+  </div>
+  
+  </div>
+  
+  <kt-spinner></kt-spinner>
+  
+  <ngx-spinner bdColor="rgba(51,51,51,0.8)"
+               size="medium"
+               color="#ecbd00"
+               type="ball-scale-multiple">
+    <p style="font-size: 20px; color: white">Loading...</p>
+  </ngx-spinner>
