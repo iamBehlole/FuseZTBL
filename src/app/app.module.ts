@@ -16,7 +16,10 @@ import { fuseConfig } from 'app/fuse-config';
 
 import { AppComponent } from 'app/app.component';
 import { LayoutModule } from 'app/layout/layout.module';
-import { SampleModule } from 'app/main/sample/sample.module';
+import { SampleModule } from 'app/Modules/sample/sample.module';
+import { LoginComponent } from './Authentication/login/login.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 const appRoutes: Routes = [
     {
@@ -27,13 +30,14 @@ const appRoutes: Routes = [
 
 @NgModule({
     declarations: [
-        AppComponent
+        AppComponent,
+        LoginComponent
     ],
-    imports     : [
+    imports: [
         BrowserModule,
         BrowserAnimationsModule,
         HttpClientModule,
-        RouterModule.forRoot(appRoutes, { relativeLinkResolution: 'legacy' }),
+        RouterModule.forRoot(appRoutes, {relativeLinkResolution: 'legacy'}),
 
         TranslateModule.forRoot(),
 
@@ -53,7 +57,9 @@ const appRoutes: Routes = [
 
         // App modules
         LayoutModule,
-        SampleModule
+        SampleModule,
+        MatFormFieldModule,
+        MatCheckboxModule
     ],
     bootstrap   : [
         AppComponent
