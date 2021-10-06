@@ -2,6 +2,7 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {fuseAnimations} from '../../../@fuse/animations';
 import {FuseConfigService} from '../../../@fuse/services/config.service';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
     selector: 'app-login',
@@ -22,7 +23,8 @@ export class LoginComponent implements OnInit {
      */
     constructor(
         private _fuseConfigService: FuseConfigService,
-        private _formBuilder: FormBuilder
+        private _formBuilder: FormBuilder,
+        private toasterService: ToastrService
     ) {
         this._fuseConfigService.config = {
             layout: {
@@ -41,6 +43,7 @@ export class LoginComponent implements OnInit {
             }
         };
     }
+
     ngOnInit(): void {
         this.loginForm = this._formBuilder.group({
             userName: ['', [Validators.required]],
@@ -48,4 +51,9 @@ export class LoginComponent implements OnInit {
         });
     }
 
+    login() {
+        if (this.loginForm.valid) {
+            this.toasterService.success('Logged in!');
+        }
+    }
 }

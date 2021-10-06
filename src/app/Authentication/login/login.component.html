@@ -28,7 +28,7 @@
 
             <div class="title">LOGIN TO YOUR ACCOUNT</div>
 
-            <form name="loginForm" [formGroup]="loginForm" novalidate>
+            <form name="loginForm" [formGroup]="loginForm" novalidate (submit)="login()">
 
                 <mat-form-field appearance="outline">
                     <mat-label>User Name</mat-label>

@@ -23,6 +23,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {AppRoutingModule} from './app-routing.module';
 import {MatInputModule} from '@angular/material/input';
+import {ToastrModule} from 'ngx-toastr';
 
 const appRoutes: Routes = [
     {
@@ -41,11 +42,7 @@ const appRoutes: Routes = [
         BrowserAnimationsModule,
         HttpClientModule,
         AppRoutingModule,
-<<<<<<< HEAD
-        RouterModule.forRoot(appRoutes, { relativeLinkResolution: 'legacy' }),
-=======
-
->>>>>>> 434f7c37cdd006fdfcf39613a554f181a1b9d597
+        RouterModule.forRoot(appRoutes, {relativeLinkResolution: 'legacy'}),
         TranslateModule.forRoot(),
 
         // Material moment date module
@@ -67,7 +64,9 @@ const appRoutes: Routes = [
         SampleModule,
         MatFormFieldModule,
         MatInputModule,
-        MatCheckboxModule
+        MatCheckboxModule,
+
+        ToastrModule.forRoot(),
     ],
     bootstrap: [
         AppComponent
