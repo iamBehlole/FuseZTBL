@@ -41,7 +41,11 @@ const appRoutes: Routes = [
         BrowserAnimationsModule,
         HttpClientModule,
         AppRoutingModule,
+<<<<<<< HEAD
         RouterModule.forRoot(appRoutes, { relativeLinkResolution: 'legacy' }),
+=======
+
+>>>>>>> 434f7c37cdd006fdfcf39613a554f181a1b9d597
         TranslateModule.forRoot(),
 
         // Material moment date module
