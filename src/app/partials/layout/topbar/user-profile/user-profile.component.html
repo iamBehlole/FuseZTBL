@@ -1,0 +1,30 @@
+<div ngbDropdown placement="bottom-right" class="kt-header__topbar-item kt-header__topbar-item--user">
+  <div ngbDropdownToggle class="kt-header__topbar-wrapper">
+    <div class="kt-header__topbar-user" [ngClass]="{'kt-header__topbar-icon': icon}">
+      <span class="kt-header__topbar-welcome kt-hidden-mobile" *ngIf="greeting">Hi,</span>
+      <span class="kt-header__topbar-username kt-hidden-mobile" *ngIf="greeting">{{userName}}</span>
+      <i *ngIf="icon" class="flaticon2-user-outline-symbol"></i>
+      <img *ngIf="avatar" alt="Pic" src="./assets/media/users/default.jpg">
+      <!--<img src="../../../../../../assets/media/users/default.jpg" />-->
+      <span *ngIf="badge" class="kt-badge kt-badge--username kt-badge--unified-success kt-badge--lg kt-badge--rounded kt-badge--bold">{{userName|firstLetter}}</span>
+    </div>
+  </div>
+  <div ngbDropdownMenu class="dropdown-menu dropdown-menu-xl">
+  
+    <div class="kt-notification">
+      <div class="row">
+        <div class="col-md-12 ml-4" *ngIf="displayNameShow">
+          <h5>User Name: &nbsp;{{DisplayName}}</h5>
+          <h5>Branch Name: &nbsp;{{BranchName}}</h5>
+        </div>
+        <div class="col-md-12 ml-4" *ngIf="userNameShow">
+          <h5>User Name: &nbsp;{{userName}}</h5>
+          <h5>Branch Name: &nbsp;{{BranchName}}</h5>
+        </div>
+      </div>
+      <div class="kt-notification__custom">
+        <button href="javascript:;" (click)="logout()" class="btn btn-outline-brand btn-upper btn-sm btn-bold btn-block">Sign Out</button>
+      </div>
+    </div>
+  </div>
+</div>
