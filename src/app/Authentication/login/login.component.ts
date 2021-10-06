@@ -24,7 +24,6 @@ export class LoginComponent implements OnInit {
         private _fuseConfigService: FuseConfigService,
         private _formBuilder: FormBuilder
     ) {
-        // Configure the layout
         this._fuseConfigService.config = {
             layout: {
                 navbar: {
@@ -42,17 +41,9 @@ export class LoginComponent implements OnInit {
             }
         };
     }
-
-    // -----------------------------------------------------------------------------------------------------
-    // @ Lifecycle hooks
-    // -----------------------------------------------------------------------------------------------------
-
-    /**
-     * On init
-     */
     ngOnInit(): void {
         this.loginForm = this._formBuilder.group({
-            email: ['', [Validators.required, Validators.email]],
+            userName: ['', [Validators.required]],
             password: ['', Validators.required]
         });
     }
