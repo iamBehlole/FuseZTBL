@@ -9,6 +9,9 @@ let routeUrl = './Modules';
 
 const routes: Routes = [
   {
+    path: 'auth', loadChildren: () => import(`${routeUrl}/auth/auth.module`).then(m => m.AuthModule)
+  },
+  {
     path: '',
     component: AppComponent,
     children: [
@@ -81,8 +84,16 @@ const routes: Routes = [
         loadChildren: () => import(`${routeUrl}/report-management/report-management.module`).then(m => m.ReportManagementModule)
       },
       {
-        path: 'report-management',
-        loadChildren: () => import(`${routeUrl}/report-management/report-management.module`).then(m => m.ReportManagementModule)
+        path: 'tour-diary',
+        loadChildren: () => import(`${routeUrl}/tour-diary/tour-diary.module`).then(m => m.TourDiaryModule)
+      },
+      {
+        path: 'tour-plan',
+        loadChildren: () => import(`${routeUrl}/tour-plan/tour-plan.module`).then(m => m.TourPlanModule)
+      },
+      {
+        path: 'village-wise-bench-marking',
+        loadChildren: () => import(`${routeUrl}/village-wise-bench-marking/village-wise-bench-marking.module`).then(m => m.VillageWiseBenchMarkingModule)
       },
     ]
   }
