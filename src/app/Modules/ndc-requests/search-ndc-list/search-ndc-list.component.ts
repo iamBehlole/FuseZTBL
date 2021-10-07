@@ -1,8 +1,11 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {MatDialog, MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {NdcRequestsService} from '../services/ndc-requests.service';
 import {finalize} from 'rxjs/operators';
-import {LayoutUtilsService} from '../../../../core/_base/crud';
+import {LayoutUtilsService} from '../../../core/_base/crud';
+import {MatTableDataSource} from "@angular/material/table";
+import {MatPaginator} from "@angular/material/paginator";
+import {MatSort} from "@angular/material/sort";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'kt-search-ndc-list',
