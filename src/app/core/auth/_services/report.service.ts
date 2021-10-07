@@ -21,8 +21,6 @@ export class ReportService {
 
 
   getAllAPILogs(reportFilter: ReportFilters): Observable<BaseResponseModel> {
-
-    debugger;
     this.request = new BaseRequestModel();
     this.request.ReportFilters = reportFilter;
     var req = JSON.stringify(this.request);
@@ -35,24 +33,16 @@ export class ReportService {
 
 
   getAPIRequestResponse(reportFilter: ReportFilters): Observable<BaseResponseModel> {
-
-    debugger;
     this.request = new BaseRequestModel();
     this.request.ReportFilters = reportFilter;
     var req = JSON.stringify(this.request);
-
     return this.http.post(`${environment.apiUrl}/Report/GetAPIRequestResponse`, req,
       { headers: this.httpUtils.getHTTPHeaders() }).pipe(
         map((res: BaseResponseModel) => res)
       );
   }
 
-
-
-
   getAllErrorLogs(reportFilter: ReportFilters): Observable<BaseResponseModel> {
-
-    debugger;
     this.request = new BaseRequestModel();
     this.request.ReportFilters = reportFilter;
     var req = JSON.stringify(this.request);
@@ -64,12 +54,9 @@ export class ReportService {
   }
   
   GetMcoRecoveryCounts(reportFilter: ReportFilters): Observable<BaseResponseModel> {
-
-    debugger;
     this.request = new BaseRequestModel();
     this.request.ReportFilters = reportFilter;
     var req = JSON.stringify(this.request);
-
     return this.http.post(`${environment.apiUrl}/Report/GetMcoRecoveryCounts`, this.request,
       { headers: this.httpUtils.getHTTPHeaders() }).pipe(
         map((res: BaseResponseModel) => res)
@@ -83,12 +70,9 @@ export class ReportService {
 
 
   getAllUsersNotifications(reportFilter: ReportFilters): Observable<BaseResponseModel> {
-
-    debugger;
     this.request = new BaseRequestModel();
     this.request.ReportFilters = reportFilter;
     var req = JSON.stringify(this.request);
-
     return this.http.post(`${environment.apiUrl}/Report/GetUsersNotifications`, req,
       { headers: this.httpUtils.getHTTPHeaders() }).pipe(
         map((res: BaseResponseModel) => res)
@@ -96,12 +80,9 @@ export class ReportService {
   }
 
   getUserHistory(reportFilter: ReportFilters): Observable<BaseResponseModel> {
-
-    debugger;
     this.request = new BaseRequestModel();
     this.request.ReportFilters = reportFilter;
     var req = JSON.stringify(this.request);
-
     return this.http.post(`${environment.apiUrl}/Report/GetUserHistory`, req,
       { headers: this.httpUtils.getHTTPHeaders() }).pipe(
         map((res: BaseResponseModel) => res)
@@ -110,12 +91,9 @@ export class ReportService {
 
 
   getErrorLogDetails(reportFilter: ReportFilters): Observable<BaseResponseModel> {
-
-    debugger;
     this.request = new BaseRequestModel();
     this.request.ReportFilters = reportFilter;
     var req = JSON.stringify(this.request);
-
     return this.http.post(`${environment.apiUrl}/Report/GetErrorLogDetails`, req,
       { headers: this.httpUtils.getHTTPHeaders() }).pipe(
         map((res: BaseResponseModel) => res)
@@ -123,7 +101,6 @@ export class ReportService {
   }
 
   getDashboardNotification(): Observable<BaseResponseModel> {
-   
     return this.http.post(`${environment.apiUrl}/Report/GetTopNotificationWithUnreadCount`,
       { headers: this.httpUtils.getHTTPHeaders() }).pipe(
         map((res: BaseResponseModel) => res)
@@ -132,17 +109,8 @@ export class ReportService {
 
 
   getEcibQeue(){
-
     this.request = new BaseRequestModel();
-    
     var req = JSON.stringify(this.request);
-
-    //return this.http.post(`${environment.apiUrl}/Report/GetEcibQeueAll`, req,
-    //  { headers: this.httpUtils.getHTTPHeaders() }).pipe(
-    //    map((res: BaseResponseModel) => res)
-    //  );
-
-
     var hello= this.http.post(`${environment.apiUrl}/Report/GetEcibQeueAll`, req,
       { headers: this.httpUtils.getHTTPHeaders() }).pipe(
         map((res: BaseResponseModel) => res)

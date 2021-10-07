@@ -42,10 +42,7 @@ export class LandService {
     this.request.Zone = userInfo.Zone;
     this.request.LandInfo = landInfo;
     this.request.Activity = this.activity;
-
     var req = JSON.stringify(this.request);
-
-    debugger;
     return this.http.post(`${environment.apiUrl}/Land/SaveCustomerLandInfo`, req,
       { headers: this.httpUtils.getHTTPHeaders() }).pipe(
         map((res: BaseResponseModel) => res)
@@ -54,9 +51,7 @@ export class LandService {
 
   saveCustomerLandInfoDetail(landInfoDetails: any, TrainId: any): Observable<BaseResponseModel> {
 
-    debugger;
     this.request = new BaseRequestModel();
-
     this.activity.ActivityID = 1;
     var userInfo = this.userUtilsService.getUserDetails();
     this.request.User = userInfo.User;
@@ -67,7 +62,6 @@ export class LandService {
     this.request.TranId = TrainId;
     var req = JSON.stringify(this.request);
 
-    debugger;
     return this.http.post(`${environment.apiUrl}/Land/SaveCustomerLandInfoDetail`, req,
       { headers: this.httpUtils.getHTTPHeaders() }).pipe(
         map((res: BaseResponseModel) => res)
@@ -78,7 +72,6 @@ export class LandService {
 
     var req = JSON.stringify(request);
 
-    debugger;
     return this.http.post(`${environment.apiUrl}/Land/SaveChargeCreation`, req,
       { headers: this.httpUtils.getHTTPHeaders() }).pipe(
         map((res: BaseResponseModel) => res)
@@ -94,7 +87,6 @@ export class LandService {
 
     var req = JSON.stringify(this.request);
 
-    debugger;
     return this.http.post(`${environment.apiUrl}/Land/SaveChargeCreationDetail`, req,
       { headers: this.httpUtils.getHTTPHeaders() }).pipe(
         map((res: BaseResponseModel) => res)
@@ -103,8 +95,6 @@ export class LandService {
 
   SubmitLandInfo(request: BaseRequestModel): Observable<BaseResponseModel> {
     var req = JSON.stringify(request);
-
-    debugger;
     return this.http.post(`${environment.apiUrl}/Land/SubmitLandInfo`, req,
       { headers: this.httpUtils.getHTTPHeaders() }).pipe(
         map((res: BaseResponseModel) => res)
@@ -112,9 +102,7 @@ export class LandService {
   }
 
   searchLand(customerLandRelation: CustomerLandRelation, isUserAdmin: boolean, isZoneUser: boolean): Observable<BaseResponseModel> {
-    debugger;
     this.request = new BaseRequestModel();
-
     var userInfo = this.userUtilsService.getUserDetails();
     if (isUserAdmin || isZoneUser) {
       if (customerLandRelation.BranchId != undefined)
@@ -144,9 +132,7 @@ export class LandService {
 
   getCustomerAllLandInfo(landInfo: LandInfo): Observable<BaseResponseModel> {
 
-    debugger;
     this.request = new BaseRequestModel();
-
     var userInfo = this.userUtilsService.getUserDetails();
     userInfo.Branch.BranchId = landInfo.BranchId
     //this.request.User = userInfo.User;
@@ -155,7 +141,6 @@ export class LandService {
     this.request.LandInfo = landInfo;
     var req = JSON.stringify(this.request);
 
-    debugger;
     return this.http.post(`${environment.apiUrl}/Land/GetLandInfoAll`, req,
       { headers: this.httpUtils.getHTTPHeaders() }).pipe(
         map((res: BaseResponseModel) => res)
@@ -163,9 +148,7 @@ export class LandService {
   }
   getLandHistoryDetail(landInfo: LandInfo, historyLandInfoId:string): Observable<BaseResponseModel> {
 
-    debugger;
     this.request = new BaseRequestModel();
-
     var userInfo = this.userUtilsService.getUserDetails();
     userInfo.Branch.BranchId = landInfo.BranchId
     //this.request.User = userInfo.User;
@@ -174,8 +157,6 @@ export class LandService {
     landInfo.Id = parseInt(historyLandInfoId);
     this.request.LandInfo = landInfo;
     var req = JSON.stringify(this.request);
-
-    debugger;
     return this.http.post(`${environment.apiUrl}/Land/GetLandHistoryDetail`, req,
       { headers: this.httpUtils.getHTTPHeaders() }).pipe(
         map((res: BaseResponseModel) => res)
@@ -184,9 +165,7 @@ export class LandService {
 
   getPosition(): Promise<any> {
     return new Promise((resolve, reject) => {
-
       navigator.geolocation.getCurrentPosition(resp => {
-
         resolve({ lng: resp.coords.longitude, lat: resp.coords.latitude });
       },
         err => {
@@ -198,9 +177,6 @@ export class LandService {
 
 
   landDocumentsUpload(Image, Video, uploadDocuments: UploadDocuments): Observable<BaseResponseModel> {
-
-    debugger;
-
     const formData = new FormData();
     formData.append('file', Image);
     formData.append('videofile', Video);
@@ -228,8 +204,6 @@ export class LandService {
     this.request.Activity = this.activity;
 
     var req = JSON.stringify(this.request);
-
-    debugger;
     return this.http.post(`${environment.apiUrl}/Land/DeleteLandDataUpload`, req,
       { headers: this.httpUtils.getHTTPHeaders() }).pipe(
         map((res: BaseResponseModel) => res)
@@ -243,8 +217,6 @@ export class LandService {
     this.request = new BaseRequestModel();
     this.request.ChargeCreation = request;
     var req = JSON.stringify(this.request);
-
-    debugger;
     return this.http.post(`${environment.apiUrl}/Land/DeleteChargeCreationDetail`, req,
       { headers: this.httpUtils.getHTTPHeaders() }).pipe(
         map((res: BaseResponseModel) => res)
@@ -263,8 +235,6 @@ export class LandService {
     this.request.Branch = userInfo.Branch;
     this.request.User = userInfo.User;
     var req = JSON.stringify(this.request);
-
-    debugger;
     return this.http.post(`${environment.apiUrl}/Land/GetLandHistory`, req,
       { headers: this.httpUtils.getHTTPHeaders() }).pipe(
         map((res: BaseResponseModel) => res)
@@ -280,14 +250,7 @@ export class LandService {
 
 
   deleteCustomerWithLand(landCustId) {
-    
     var userInfo = this.userUtilsService.getUserDetails();
-
-    //this.request.CustomerLandRelation = new CustomerLandRelation()
-    //this.request.Zone = userInfo.Zone;
-    //this.request.Branch = userInfo.Branch;
-    //this.request.User = userInfo.User;
-
     var request = {
       CustomerLandRelation :{
         LandCustID: landCustId
@@ -299,8 +262,6 @@ export class LandService {
     }
 
     var req = JSON.stringify(request);
-
-    debugger;
     return this.http.post(`${environment.apiUrl}/Land/DeleteCustomerWithLand`, req,
       { headers: this.httpUtils.getHTTPHeaders() }).pipe(
         map((res: BaseResponseModel) => res)

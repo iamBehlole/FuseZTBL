@@ -24,8 +24,6 @@ export class DocumentTypeService {
     this.request = new BaseRequestModel();
     this.request.DocumentType = documentType;
     var req = JSON.stringify(this.request);
-
-    debugger;
     return this.http.post(`${environment.apiUrl}/Document/AddDocumentType`, req,
       { headers: this.httpUtils.getHTTPHeaders() }).pipe(
         map((res: BaseResponseModel) => res)
@@ -35,24 +33,17 @@ export class DocumentTypeService {
   UpdateDocumentType(documentType: DocumentTypeModel): Observable<BaseResponseModel> {
     this.request = new BaseRequestModel();
     this.request.DocumentType = documentType;
-
     var req = JSON.stringify(this.request);
-
-    debugger;
     return this.http.post(`${environment.apiUrl}/Document/UpdateDocumentType`, req,
       { headers: this.httpUtils.getHTTPHeaders() }).pipe(
         map((res: BaseResponseModel) => res)
       );
   }
 
-
   DeleteDocumentType(documentType: DocumentTypeModel): Observable<BaseResponseModel> {
     this.request = new BaseRequestModel();
     this.request.DocumentType = documentType;
-
     var req = JSON.stringify(this.request);
-
-    debugger;
     return this.http.post(`${environment.apiUrl}/Document/DeleteDocumentType`, req,
       { headers: this.httpUtils.getHTTPHeaders() }).pipe(
         map((res: BaseResponseModel) => res)
@@ -60,17 +51,9 @@ export class DocumentTypeService {
   }
 
   GetDocumentTypes(): Observable<BaseResponseModel> {
-
-    debugger;
     return this.http.post(`${environment.apiUrl}/Document/GetDocumentTypes`,
       { headers: this.httpUtils.getHTTPHeaders() }).pipe(
         map((res: BaseResponseModel) => res)
       );
   }
-
-
-
-
-
-
 }

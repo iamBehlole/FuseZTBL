@@ -1,20 +1,12 @@
 // Angular
 import { Injectable } from '@angular/core';
-import { MatSnackBar, MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar/snack-bar';
+
 // Partials for CRUD
-import {
-  ActionNotificationComponent,
-  DeleteEntityDialogComponent,
-  FetchEntityDialogComponent,
-  UpdateStatusDialogComponent,
-  AlertDialogWarnComponent,
-  AlertDialogConfirmationComponent,
-  AlertDialogCaptureComponent
-  
-} from '../../../../views/partials/content/crud';
-import { AlertDialogComponent } from '../../../../views/partials/content/crud/alert-dialog/alert-dialog.component';
-import { AlertDialogSuccessComponent } from '../../../../views/partials/content/crud/alert-dialog-success/alert-dialog-success.component';
-import { AlertMessageComponent } from '../../../../views/partials/content/crud/alert-message/alert-message.component';
+
+
+import { ActionNotificationComponent, DeleteEntityDialogComponent, AlertDialogWarnComponent, AlertDialogConfirmationComponent, AlertDialogCaptureComponent, FetchEntityDialogComponent, UpdateStatusDialogComponent, AlertDialogSuccessComponent, AlertMessageComponent, AlertDialogComponent } from 'app/partials/content/crud';
 export enum MessageType {
   Create,
   Read,

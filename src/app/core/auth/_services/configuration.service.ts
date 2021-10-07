@@ -23,12 +23,10 @@ export class ConfigurationService {
 
 
   AddConfiguration(configuration: Configuration): Observable<BaseResponseModel> {
-    debugger;
+    
     this.request = new BaseRequestModel();
     this.request.Configuration = configuration;
     var req = JSON.stringify(this.request);
-
-    debugger;
     return this.http.post(`${environment.apiUrl}/Configuration/AddConfiguration`, req,
       {headers: this.httpUtils.getHTTPHeaders()}).pipe(
       map((res: BaseResponseModel) => res)
@@ -38,10 +36,7 @@ export class ConfigurationService {
   UpdateConfiguration(configuration: Configuration): Observable<BaseResponseModel> {
     this.request = new BaseRequestModel();
     this.request.Configuration = configuration;
-
     var req = JSON.stringify(this.request);
-
-    debugger;
     return this.http.post(`${environment.apiUrl}/Configuration/UpdateConfiguration`, req,
       {headers: this.httpUtils.getHTTPHeaders()}).pipe(
       map((res: BaseResponseModel) => res)
@@ -58,9 +53,7 @@ export class ConfigurationService {
       map((res: BaseResponseModel) => res)
     );
   }
-
   sam;
-
   GetConfigurations(): Observable<BaseResponseModel> {
     this.request = new BaseRequestModel();
     this.request.Configuration = {
@@ -68,10 +61,7 @@ export class ConfigurationService {
     };
 
     this.request.User = this.utilService.getUserDetails().User;
-
     var req = JSON.stringify(this.request);
-    console.log(req);
-
     return this.http.post(`${environment.apiUrl}/Configuration/GetConfigurations`, req).pipe(
       map((res: BaseResponseModel) => res)
     );

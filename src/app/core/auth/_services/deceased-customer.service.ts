@@ -91,7 +91,6 @@ export class DeceasedCustomerService {
 //   }
 
   SearchDeceasedCustomer(customer: Customer, isUserAdmin: boolean, isZoneUser: boolean): Observable<BaseResponseModel>{
-    debugger
     this.request = new BaseRequestModel();
     var deceasedInfo = new Customer();
     deceasedInfo = {
@@ -119,10 +118,6 @@ export class DeceasedCustomerService {
     this.request.Activity = this.activity;
     var req = JSON.stringify(this.request);
 
-    console.log(req);
-    console.log(`${environment.apiUrl}/Customer/SearchDeceasedCustomer`);
-    
-    debugger
     return this.http.post(`${environment.apiUrl}/Customer/SearchDeceasedCustomer`, req,
     { headers: this.httpUtils.getHTTPHeaders() }).pipe(
       map((res: BaseResponseModel) => res)
@@ -150,7 +145,6 @@ export class DeceasedCustomerService {
     this.activity.ActivityID = 1;
     this.request.Activity = this.activity;
     var req = JSON.stringify(this.request);
-    debugger
     return this.http.post(`${environment.apiUrl}/Customer/GetPendingDeceasedCustomerByCnic`, req,
     { headers: this.httpUtils.getHTTPHeaders() }).pipe(
       map((res: BaseResponseModel) => res)
@@ -172,72 +166,29 @@ export class DeceasedCustomerService {
 
     console.log(userInfo);
 
-    debugger
-
     formData.append('CustomerCnic', form.Cnic);
-
     formData.append('PPNo', userInfo.User.UserName);
-
     formData.append('UserID', userInfo.User.UserId);
-
     formData.append('BranchID', userInfo.User.BranchId);
-   
     formData.append('NadraNo', form.NadraNo);
-
     formData.append('IsNadraCertificateVerified', form.IsNadraCertificateVerified);
-
-    // if(form.IsReferredBack == "Y"){
-    //   formData.append('IsReferredBack', true);
-    // }
     formData.append('IsReferredBack', form.IsReferredBack? "1": "0");
-  
     let dod = this.datePipe.transform(form.DateofDeath, "ddMMyyyy"); //converstion date to string
     formData.append('DateOfDeath', dod);
-
     formData.append('Remarks', form.MakerRemarks);
-
     if(form.LegalHeirPay=="N"){
       formData.delete('OtherSourceOfIncome');
     } else{
       formData.append('OtherSourceOfIncome', form.DetailSourceIncome);
     }   
-    
     formData.append('LegalHeirPay', form.LegalHeirPay);
-
     formData.append('File',file);
-
     formData.append('DeceasedID', form.DeceasedID);
-
-    debugger
-    console.log("CustomerCnic", formData.get('CustomerCnic'));
-    console.log("PPNo",formData.get('PPNo'));
-    console.log("UserID",formData.get('UserID'));
-    console.log("BranchID",formData.get('BranchID'));
-    console.log("NadraNo",formData.get('NadraNo'));
-    console.log("IsReferredBack",formData.get('IsReferredBack'));
-    console.log("IsNadraCertificateVerified ",formData.get('IsNadraCertificateVerified'));
-    console.log("DateOfDeath",formData.get('DateOfDeath'));
-    console.log("Remarks",formData.get('Remarks'));
-    console.log("OtherSourceOfIncome",formData.get('OtherSourceOfIncome'));
-    console.log("LegalHeirPay",formData.get('LegalHeirPay'));
-    console.log("File Data",formData.get('File'));
-    console.log("DeceasedID",formData.get('DeceasedID'));
-    // console.log("DeceasedId",formData.get('DeceasedId'));
-
-
-
-    debugger
     if(formData.append){
-
       return this.http.post<any>(`${environment.apiUrl}/Customer/MarkAsDeceasedCustomer`, formData,
     ).pipe(
       map((res: BaseResponseModel) => res)
     );
-  // return this.http.post(`${environment.apiUrl}/Customer/MarkAsDeceasedCustomer`, formData,
-  //   { headers: this.httpUtils.getHTTPHeaders() }).pipe(
-  //     map((res: BaseResponseModel) => res)
-  //   );
-
     }
     }
 
@@ -256,7 +207,6 @@ export class DeceasedCustomerService {
     this.activity.ActivityID = 1;
     this.request.Activity = this.activity;
     var req = JSON.stringify(this.request);
-    debugger
     return this.http.post(`${environment.apiUrl}/Customer/GetListOfRejectedDeceasedPerson`, req,
     { headers: this.httpUtils.getHTTPHeaders() }).pipe(
       map((res: BaseResponseModel) => res)
@@ -264,9 +214,6 @@ export class DeceasedCustomerService {
   }
 
   SubmitCustomerNADRA(){
-
-
-    
     this.request = new BaseRequestModel();
     this.request.TranId = 0;
     var userInfo = this.userUtilsService.getUserDetails();
@@ -276,7 +223,6 @@ export class DeceasedCustomerService {
     this.activity.ActivityID = 1;
     this.request.Activity = this.activity;
     var req = JSON.stringify(this.request);
-
     return this.http.post(`${environment.apiUrl}/Customer/SubmitCustomerNADRA`, req,
     { headers: this.httpUtils.getHTTPHeaders() }).pipe(
       map((res: BaseResponseModel) => res)

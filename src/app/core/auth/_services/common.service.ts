@@ -8,17 +8,11 @@ import { formatDate } from '@angular/common';
 export class CommonService {
 
   constructor() { }
-
-
   isMatchSequentialInput(Input) {
-
-
     if (regExps.sequential.test(Input)) {
       return true;
     }
-
     else {
-
       if (regExps.sequentialsecond.test(Input)) 
         return true;
       else
@@ -29,7 +23,6 @@ export class CommonService {
 
 
   stringToDateOld(date) {
-    debugger;
     if (date != undefined && date != null && date != '') {
       const day = date.substr(0, 2);
       const month = date.substr(2, 2);
@@ -59,7 +52,6 @@ export class CommonService {
   }
 
   dateToString(date) {
-    debugger;
     if (date != undefined && date != null && date != '') {
       const format = 'DDMMyyyy';
       const locale = 'en-US';
