@@ -88,10 +88,11 @@ import {MatListModule} from '@angular/material/list';
 import {MatChipsModule} from '@angular/material/chips';
 import {PerfectScrollbarModule} from 'ngx-perfect-scrollbar';
 import {InlineSVGModule} from 'ng-inline-svg';
+import { TimeAgoPipe } from 'time-ago-pipe';
 import {NgbDropdownModule, NgbNavModule, NgbTooltipModule} from '@ng-bootstrap/ng-bootstrap';
 
-import {TimeAgoPipe} from 'time-ago-pipe';
 
+// @ts-ignore
 @NgModule({
     declarations: [
         ScrollTopComponent,
