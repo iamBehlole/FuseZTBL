@@ -26,7 +26,7 @@ import {MatDialog} from '@angular/material/dialog';
 export class UserProfile2Component implements OnInit {
     // Public properties
     user$: Observable<User>;
-
+    userName: any;
     @Input() avatar = true;
     @Input() greeting = true;
     @Input() badge: boolean;

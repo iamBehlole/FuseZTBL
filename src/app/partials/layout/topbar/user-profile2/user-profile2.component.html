@@ -1,59 +1,62 @@
-
-
 <div ngbDropdown placement="bottom-right" class="kt-header__topbar-item kt-header__topbar-item--user">
-  <div ngbDropdownToggle class="kt-header__topbar-wrapper">
-    <div class="kt-header__topbar-user" [ngClass]="{'kt-header__topbar-icon': icon}">
-      <span class="kt-header__topbar-welcome kt-hidden-mobile" *ngIf="greeting">Hi,</span>
-      <span class="kt-header__topbar-username kt-hidden-mobile" *ngIf="greeting">{{userName}}</span>
-      <i *ngIf="icon" class="flaticon2-bell-4" style="padding:2px;"></i> <span class="badge" *ngIf="!ShowNotification">{{notificationCount}}</span>
-      <!--<img *ngIf="avatar" alt="Pic" src="./assets/media/users/default.jpg">-->
-      <span *ngIf="badge" class="kt-badge kt-badge--username kt-badge--unified-success kt-badge--lg kt-badge--rounded kt-badge--bold">45454</span>
+    <div ngbDropdownToggle class="kt-header__topbar-wrapper">
+        <div class="kt-header__topbar-user" [ngClass]="{'kt-header__topbar-icon': icon}">
+            <span class="kt-header__topbar-welcome kt-hidden-mobile" *ngIf="greeting">Hi,</span>
+            <span class="kt-header__topbar-username kt-hidden-mobile" *ngIf="greeting">{{userName}}</span>
+            <i *ngIf="icon" class="flaticon2-bell-4" style="padding:2px;"></i> <span class="badge"
+                                                                                     *ngIf="!ShowNotification">{{notificationCount}}</span>
+            <!--<img *ngIf="avatar" alt="Pic" src="./assets/media/users/default.jpg">-->
+            <span *ngIf="badge"
+                  class="kt-badge kt-badge--username kt-badge--unified-success kt-badge--lg kt-badge--rounded kt-badge--bold">45454</span>
+        </div>
     </div>
-  </div>
-  <div ngbDropdownMenu class="dropdown-menu  dropdown-menu-right dropdown-menu-anim dropdown-menu-top-unround dropdown-menu-xl">
-    <div class="kt-notification">
-      <div class="mat-table__wrapper mat-elevation-z8 dropdown-menu-fit notification-style">
-        <mat-table class="lmat-elevation-z8" style="min-width:auto;"
-                   #table
-                   [dataSource]="dataSource"
-                   matSort
-                   #sort1="matSort"
-                   matSortActive="id"
-                   matSortDirection="asc"
-                   matSortDisableClear>
+    <div ngbDropdownMenu
+         class="dropdown-menu  dropdown-menu-right dropdown-menu-anim dropdown-menu-top-unround dropdown-menu-xl">
+        <div class="kt-notification">
+            <div class="mat-table__wrapper mat-elevation-z8 dropdown-menu-fit notification-style">
+                <mat-table class="lmat-elevation-z8" style="min-width:auto;"
+                           #table
+                           [dataSource]="dataSource"
+                           matSort
+                           #sort1="matSort"
+                           matSortActive="id"
+                           matSortDirection="asc"
+                           matSortDisableClear>
 
 
-          <ng-container matColumnDef="CreatedBy">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>outside the fence</mat-header-cell>
+                    <ng-container matColumnDef="CreatedBy">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>outside the fence</mat-header-cell>
 
-            <mat-cell *matCellDef="let notification">
-              <div *ngIf="notification.isRead==1" style="color: #0f298f;">
-                <b>
-                  <a (click)="viewNotificationLocationDetails(notification)" style="cursor:pointer;">
-                    User {{notification.CreatedBy}} outside the fence <span class="pull-right mr-3">{{ notification.CreateDateTime |timeAgo}}</span>
-                  </a>
-                </b>
-              </div>
-              <div *ngIf="notification.isRead==0">
-                <a (click)="viewNotificationLocationDetails(notification)" style="cursor:pointer;">
-                  User {{notification.CreatedBy}} outside the fence <span class="pull-right mr-3">{{ notification.CreateDateTime |timeAgo}}</span>
-                </a>
-              </div>
-            </mat-cell>
+                        <mat-cell *matCellDef="let notification">
+                            <div *ngIf="notification.isRead==1" style="color: #0f298f;">
+                                <b>
+                                    <a (click)="viewNotificationLocationDetails(notification)" style="cursor:pointer;">
+                                        User {{notification.CreatedBy}} outside the fence <span
+                                        class="pull-right mr-3">{{ notification.CreateDateTime |timeAgo}}</span>
+                                    </a>
+                                </b>
+                            </div>
+                            <div *ngIf="notification.isRead==0">
+                                <a (click)="viewNotificationLocationDetails(notification)" style="cursor:pointer;">
+                                    User {{notification.CreatedBy}} outside the fence <span
+                                    class="pull-right mr-3">{{ notification.CreateDateTime |timeAgo}}</span>
+                                </a>
+                            </div>
+                        </mat-cell>
 
-          </ng-container>
-          <div class="mat-table__message" *ngIf="dataSource.data.length==0">No new notifications.</div>
+                    </ng-container>
+                    <div class="mat-table__message" *ngIf="dataSource.data.length==0">No new notifications.</div>
 
-          <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
-        </mat-table>
-      </div>
-      <div>
-        <button class="btn btn-primary btn-block"
-                (click)="viewAll()">
-          View All
-        </button>
-      </div>
+                    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+                </mat-table>
+            </div>
+            <div>
+                <button class="btn btn-primary btn-block"
+                        (click)="viewAll()">
+                    View All
+                </button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
