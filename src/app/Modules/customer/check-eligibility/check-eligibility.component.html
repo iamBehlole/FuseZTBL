@@ -1,5 +1,5 @@
 
-<div class="kt-portlet" [ngClass]="{ 'kt-portlet--body-progress' : viewLoading, 'kt-portlet--body-progress-overlay' : loadingAfterSubmit }">
+<div class="kt-portlet" [class]="{ 'kt-portlet--body-progress' : viewLoading, 'kt-portlet--body-progress-overlay' : loadingAfterSubmit }">
   <div class="kt-portlet__head kt-portlet__head__custom" id="list-header">
     <div class="kt-portlet__head-label">
       <h3 class="kt-portlet__head-title">{{getTitle()}}</h3>
@@ -30,7 +30,7 @@
               </mat-form-field>
             </div>
             <div class="col-lg-4 kt-margin-bottom-20-mobile">
-              <button color="primary" type="button" (click)="getCustomerInfo()" class="btn btn-secondary mt-1" [ngClass]="{'kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light': loading}">
+              <button color="primary" type="button" (click)="getCustomerInfo()" class="btn btn-secondary mt-1" [class]="{'kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light': loading}">
                 <span><i class="fa fa-check"> &nbsp;</i> Check Eligibility</span>
               </button>
             </div>
@@ -41,7 +41,7 @@
             </div>
             <div class="col-lg-4 kt-margin-bottom-20-mobile">
               <h5 style="color:blue;">NDC</h5>
-              <h6 [ngClass]="{'text-red': IsNdcDefaulter == true, 'text-green': IsNdcDefaulter == false}">{{CustomerNdc.Message}}</h6>
+              <h6 [class]="{'text-red': IsNdcDefaulter == true, 'text-green': IsNdcDefaulter == false}">{{CustomerNdc.Message}}</h6>
             </div>
             <div class="col-lg-4 kt-margin-bottom-20-mobile">
               <a *ngIf="NDCLinkView" href="{{Customer.NDCPDFLink}}" target="_blank" mat-icon-button color="primary"><mat-icon title="view">pageview</mat-icon></a>
@@ -59,7 +59,7 @@
                 <tbody>
                   <tr>
                     <td class="text-blue">BMVS/NIVS:</td>
-                    <td [ngClass]="{'text-red': BMVS_NIVS == 'Not Found'}">{{BMVS_NIVS}}</td>
+                    <td [class]="{'text-red': BMVS_NIVS == 'Not Found'}">{{BMVS_NIVS}}</td>
                   </tr>
                   <tr>
                     <td class="text-blue">NDC:</td>
@@ -234,7 +234,7 @@
             </div>
             <div class="col-lg-4 kt-margin-bottom-20-mobile">
               <h5>ECIB</h5>
-              <h6 [ngClass]="{'text-red': IsEcibDefaulter == true, 'text-green': IsEcibDefaulter == false}">{{CustomerECIB.Message}}</h6>
+              <h6 [class]="{'text-red': IsEcibDefaulter == true, 'text-green': IsEcibDefaulter == false}">{{CustomerECIB.Message}}</h6>
             </div>
             <div class="col-lg-4 kt-margin-bottom-20-mobile">
               <a *ngIf="EcibLinkView"  href="{{Customer.ECIBPDFLink}}" target="_blank" mat-icon-button color="primary"><mat-icon title="view">pageview</mat-icon></a>
@@ -252,7 +252,7 @@
                 <tbody>
                   <tr>
                     <td class="text-blue">BMVS/NIVS:</td>
-                    <td [ngClass]="{'text-red': BMVS_NIVS == 'Not Found'}">{{BMVS_NIVS}}</td>
+                    <td [class]="{'text-red': BMVS_NIVS == 'Not Found'}">{{BMVS_NIVS}}</td>
                   </tr>
                   <tr>
                     <td class="text-blue">NDC:</td>
@@ -280,19 +280,19 @@
           <div class="kt-form__actions kt-form__actions--solid">
             <div class="row text-right">
               <div class="col-lg-12">
-                <button (click)="SubmitNdc()" *ngIf="NdcSubmit" color="primary" type="button" class="btn btn-primary mt-19 kt-login__btn-primary" [ngClass]="{'kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light': loading}" style="width:30%;">
+                <button (click)="SubmitNdc()" *ngIf="NdcSubmit" color="primary" type="button" class="btn btn-primary mt-19 kt-login__btn-primary" [class]="{'kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light': loading}" style="width:30%;">
                   <span><i class="fas fa-arrow-right"> &nbsp;</i> Next</span>
                 </button>
-                <button (click)="saveBiomatricdata()" *ngIf="BioMetricCapture" color="primary" type="button" class="btn btn-primary mt-19 kt-login__btn-primary" [ngClass]="{'kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light': loading}" style="width:30%;">
+                <button (click)="saveBiomatricdata()" *ngIf="BioMetricCapture" color="primary" type="button" class="btn btn-primary mt-19 kt-login__btn-primary" [class]="{'kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light': loading}" style="width:30%;">
                   <span><i class="fas fa-arrow-right"> &nbsp;</i>Save & Next</span>
                 </button>
-                <button (click)="submitCWR()" [disabled]="submitCwrLoading" *ngIf="BiometricCredentials" color="primary" type="button" class="btn btn-primary mt-19 kt-login__btn-primary" [ngClass]="{'kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light': loading}" style="width:30%;">
+                <button (click)="submitCWR()" [disabled]="submitCwrLoading" *ngIf="BiometricCredentials" color="primary" type="button" class="btn btn-primary mt-19 kt-login__btn-primary" [class]="{'kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light': loading}" style="width:30%;">
                   <span><i class="fas fa-arrow-right"> &nbsp;</i>Next</span>
                 </button>
-                <button type="button" [disabled]="refreshEcibLoading" (click)="refreshEcib()" *ngIf="ECIBPerform" color="primary" class="btn btn-primary mt-19 kt-login__btn-primary" [ngClass]="{'kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light': loading}" style="width:30%;">
+                <button type="button" [disabled]="refreshEcibLoading" (click)="refreshEcib()" *ngIf="ECIBPerform" color="primary" class="btn btn-primary mt-19 kt-login__btn-primary" [class]="{'kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light': loading}" style="width:30%;">
                   Refresh
                 </button>
-                <button (click)="NextOpenCreateCustomer()" *ngIf="ECIBPerformSuccess" color="primary" type="button" class="btn btn-primary mt-19 kt-login__btn-primary" [ngClass]="{'kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light': loading}" style="width:30%;">
+                <button (click)="NextOpenCreateCustomer()" *ngIf="ECIBPerformSuccess" color="primary" type="button" class="btn btn-primary mt-19 kt-login__btn-primary" [class]="{'kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light': loading}" style="width:30%;">
                   <span><i class="fas fa-arrow-right"> &nbsp;</i>Next</span>
                 </button>
               </div>

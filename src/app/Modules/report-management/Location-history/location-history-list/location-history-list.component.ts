@@ -2,25 +2,22 @@
 import { Component, OnInit, ElementRef, ViewChild, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 // Material
 import { SelectionModel } from '@angular/cdk/collections';
-import { MatPaginator, MatSort, MatSnackBar, MatDialog, MatTableDataSource } from '@angular/material';
 // RXJS
 import { finalize } from 'rxjs/operators';
 // NGRX
 import { Store } from '@ngrx/store';
+import { MatTableDataSource } from '@angular/material/table';
+import { ReportFilters } from 'app/core/auth/_models/report-filters.model';
+import { MatPaginator } from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AppState} from '../../../../core/reducers';
+import {MatDialog} from '@angular/material/dialog/dialog';
+import {MatSnackBar} from '@angular/material/snack-bar/snack-bar';
+import {LayoutUtilsService} from '../../../../core/_base/crud';
+import {ReportService} from '../../../../core/auth/_services/report.service';
 // Services
-import { LayoutUtilsService, MessageType } from '../../../../../core/_base/crud';
 // Models
-import { RoleDeleted } from '../../../../../core/auth';
-import { AppState } from '../../../../../core/reducers';
-import { QueryParamsModel } from '../../../../../core/_base/crud';
-import { ActivityDataSource } from '../../../../../core/auth/_data-sources/activity.datasource';
-import { BaseComponentPage } from '../../../base-component.component';
-import { CashrequestModule } from '../../../../../core/auth/_models/cashrequest.module';
-import { ReportService } from '../../../../../core/auth/_services/report.service';
-import { ReportFilters } from '../../../../../core/auth/_models/report-filters.model';
-import { ApilogDetailComponent } from '../../apilog-detail/apilog-detail.component';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'kt-location-history-list',

@@ -1,4 +1,5 @@
 // Components
+
 export { ContextMenuComponent } from './context-menu/context-menu.component';
 export { ContextMenu2Component } from './context-menu2/context-menu2.component';
 export { QuickPanelComponent } from './quick-panel/quick-panel.component';
@@ -24,7 +25,7 @@ export { SearchDropdownComponent } from './topbar/search-dropdown/search-dropdow
 export { UserProfileComponent } from './topbar/user-profile/user-profile.component';
 export { UserProfile2Component } from './topbar/user-profile2/user-profile2.component';
 export { UserProfile3Component } from './topbar/user-profile3/user-profile3.component';
-export { NotificationDetailsComponent } from '../../pages/report-management/Notification-history/notification-details/notification-details.component'
-
 // Models
 export { ISearchResult } from './search-result/search-result.component';
+export {NotificationDetailsComponent} from '../../Modules/report-management/Notification-history/notification-details/notification-details.component';
+

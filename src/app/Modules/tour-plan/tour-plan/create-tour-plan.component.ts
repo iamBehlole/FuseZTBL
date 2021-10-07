@@ -43,27 +43,27 @@ export class CreateTourPlanComponent implements OnInit {
     isAdd = true;
     isUpdate = false;
 
-    constructor(
-        private fb: FormBuilder,
-        private layoutUtilsService: LayoutUtilsService,
-        private spinner: NgxSpinnerService,
-        private userUtilsService: UserUtilsService,
-        private datePipe: DatePipe,
-        public dialog: MatDialog,
-        private router: Router,
-        private _circleService: CircleService,
-        private tourPlanService: TourPlanService,
+  constructor(
+    private fb: FormBuilder,
+    private layoutUtilsService: LayoutUtilsService,  
+    private spinner: NgxSpinnerService,
+    private userUtilsService: UserUtilsService,
+    private datePipe: DatePipe,
+    public dialog: MatDialog,
+    private router: Router,
+    private _circleService: CircleService,
+    private tourPlanService:TourPlanService,
     ) {
-        this.loggedInUser = userUtilsService.getUserDetails();
-    }
+      this.loggedInUser = userUtilsService.getUserDetails();
+     }
 
     ngOnInit() {
         this.createForm();
         this.setValues();
 
-    }
+  }
 
-    setValues() {
+  setValues(){
 
         let circleId = [], circleCode = [], name, ppno, circleName, circleNo, date, branch, zone;
         console.log(this.loggedInUser);
@@ -73,35 +73,35 @@ export class CreateTourPlanComponent implements OnInit {
         ppno = this.loggedInUser.User.UserName;
         this.circle = this.loggedInUser.UserCircleMappings;
 
-        this.TourForm.controls['ZoneName'].setValue(zone);
-        this.TourForm.controls['BranchName'].setValue(branch);
-        this.TourForm.controls['McoName'].setValue(name);
-        this.TourForm.controls['PPNO'].setValue(ppno);
-        this.TourForm.controls['CircleName'].setValue(circleName);
-        this.TourForm.controls['CircleId'].setValue(circleNo);
+    this.TourForm.controls['ZoneName'].setValue(zone);
+    this.TourForm.controls['BranchName'].setValue(branch);
+    this.TourForm.controls['McoName'].setValue(name);
+    this.TourForm.controls['PPNO'].setValue(ppno);
+    this.TourForm.controls['CircleName'].setValue(circleName);
+    this.TourForm.controls['CircleId'].setValue(circleNo);
+    
+  }
 
-    }
-
-    createForm() {
-        this.TourForm = this.fb.group({
-            ZoneName: [],
-            BranchName: [],
-            McoName: [],
-            PPNO: [],
-            TourPlanId: [],
-            CircleId: [],
-            CircleName: [],
-            ZoneId: [this.loggedInUser.User.ZoneId],
-            UserId: [this.loggedInUser.User.UserId],
-            BranchId: [this.loggedInUser.User.BranchId],
-            VisitedDate: [this.TourPlan.VisitedDate],
-            Purpose: [this.TourPlan.Purpose],
-            Remarks: [this.TourPlan.Remarks],
-            Status: [this.TourPlan.Status],
-        });
-
-    }
-
+  createForm(){
+    this.TourForm = this.fb.group({
+      ZoneName:[],
+     BranchName:[],
+     McoName:[],
+     PPNO:[],
+     TourPlanId:[],
+     CircleId:[],
+     CircleName:[],
+     ZoneId:[this.loggedInUser.User.ZoneId],
+     UserId:[this.loggedInUser.User.UserId],
+     BranchId:[this.loggedInUser.User.BranchId],
+     VisitedDate:[this.TourPlan.VisitedDate],
+     Purpose:[this.TourPlan.Purpose],
+     Remarks:[this.TourPlan.Remarks],
+     Status:[this.TourPlan.Status],
+    })
+    
+  }
+  
 
     setVisitedDate() {
         let VisitedDate = this.TourForm.controls.VisitedDate.value;

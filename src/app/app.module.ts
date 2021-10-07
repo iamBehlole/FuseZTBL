@@ -1,6 +1,6 @@
 // Angular
 import {BrowserModule, HAMMER_GESTURE_CONFIG} from '@angular/platform-browser';
-import {APP_INITIALIZER, NgModule} from '@angular/core';
+import {APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import {TranslateModule} from '@ngx-translate/core';
 import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -49,7 +49,7 @@ import {HttpUtilsService, LayoutUtilsService, TypesUtilsService} from './core/_b
 import {LayoutConfig} from './core/_config/layout.config';
 // Highlight JS
 
-import {DatePipe} from '@angular/common';
+import {CommonModule, DatePipe} from '@angular/common';
 import {TokenInterceptor} from './core/_httpInterceptor/httpconfig.interceptor';
 import {PartialsModule} from './partials/partials.module';
 import {AuthModule} from './Modules/auth/auth.module';
@@ -80,6 +80,7 @@ export function initializeLayoutConfig(appConfig: LayoutConfigService) {
     imports: [
         BrowserAnimationsModule,
         BrowserModule,
+        CommonModule,
         AppRoutingModule,
         HttpClientModule,
         environment.isMockEnabled ? HttpClientInMemoryWebApiModule.forRoot(FakeApiService, {
@@ -134,7 +135,8 @@ export function initializeLayoutConfig(appConfig: LayoutConfigService) {
         TypesUtilsService,
         LayoutUtilsService,
     ],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule {
 }

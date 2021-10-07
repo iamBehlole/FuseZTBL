@@ -13,38 +13,37 @@ import {DateFormats} from '../../../core/auth/_models/lov.class';
 
 
 @Component({
-    selector: 'kt-tour-diary-zm',
-    templateUrl: './tour-diary-zm.component.html',
-    styleUrls: ['./tour-diary-zm.component.scss'],
-    providers: [
-        DatePipe,
-        {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
-        {provide: MAT_DATE_FORMATS, useValue: DateFormats}
+  selector: 'kt-tour-diary-zm',
+  templateUrl: './tour-diary-zm.component.html',
+  styleUrls: ['./tour-diary-zm.component.scss'],
+  providers: [
+    DatePipe,
+    { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
+    { provide: MAT_DATE_FORMATS, useValue: DateFormats }
 
-    ],
+  ],
 })
 export class TourDiaryZmComponent implements OnInit {
 
-    gridForm: FormGroup;
-    loggedInUser: any;
-    maxDate: Date;
+  gridForm : FormGroup;
+  loggedInUser: any;
+  maxDate: Date;
 
-    sign;
+  sign;
 
-    constructor(
-        private fb: FormBuilder,
-        private layoutUtilsService: LayoutUtilsService,
-        private spinner: NgxSpinnerService,
-        private userUtilsService: UserUtilsService,
-        public dialog: MatDialog,
-        private router: Router,
+  constructor(
+    private fb: FormBuilder,
+    private layoutUtilsService: LayoutUtilsService,  
+    private spinner: NgxSpinnerService,
+    private userUtilsService: UserUtilsService,
+    public dialog: MatDialog,
+    private router: Router,
     ) {
-        this.loggedInUser = userUtilsService.getUserDetails();
-    }
-
-    ngOnInit() {
-        this.createForm();
-    }
+      this.loggedInUser = userUtilsService.getUserDetails();
+     }
+  ngOnInit() {
+    this.createForm()
+  }
 
     isEnableReceipt(isTrCodeChange: boolean) {
         let Date = this.gridForm.controls.Date.value;
@@ -82,29 +81,26 @@ export class TourDiaryZmComponent implements OnInit {
                 this.gridForm.controls.Date.setValue(branchWorkingDate);
             } catch (e) {
 
-            }
-        }
-
+      }
     }
 
-    createForm() {
-        this.gridForm = this.fb.group({
-            NameOfOfficer: [''],
-            PPNO: [''],
-            Month: [''],
-            Zone: [''],
-            Name: [''],
-            Designation: [''],
-            Date: ['']
-        });
-    }
+  }
 
-    submit() {
-        const signatureDialogRef = this.dialog.open(SignatureDialogDiaryComponent, {
-            width: '500px',
-            disableClose: true
-        });
-    }
+  createForm(){
+    this.gridForm = this.fb.group({
+      NameOfOfficer : [''],
+      PPNO : [''],
+      Month: [''],
+      Zone:[''],
+      Name:[''],
+      Designation:[''],
+      Date:['']
+    })
+  }
+
+  submit(){
+    const signatureDialogRef = this.dialog.open(SignatureDialogDiaryComponent, { width: "500px", disableClose: true });
+  }
 
 }
 

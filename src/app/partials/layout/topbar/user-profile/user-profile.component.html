@@ -1,6 +1,6 @@
 <div ngbDropdown placement="bottom-right" class="kt-header__topbar-item kt-header__topbar-item--user">
   <div ngbDropdownToggle class="kt-header__topbar-wrapper">
-    <div class="kt-header__topbar-user" [ngClass]="{'kt-header__topbar-icon': icon}">
+    <div class="kt-header__topbar-user" [class]="{'kt-header__topbar-icon': icon}">
       <span class="kt-header__topbar-welcome kt-hidden-mobile" *ngIf="greeting">Hi,</span>
       <span class="kt-header__topbar-username kt-hidden-mobile" *ngIf="greeting">{{userName}}</span>
       <i *ngIf="icon" class="flaticon2-user-outline-symbol"></i>

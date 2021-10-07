@@ -5,7 +5,7 @@
 </style>
 
 <div id="Kt-portlet-margin-top">
-  <div class="kt-portlet" [ngClass]="{ 'kt-portlet--body-progress' : viewLoading, 'kt-portlet--body-progress-overlay' : loadingAfterSubmit }">
+  <div class="kt-portlet" [class]="{ 'kt-portlet--body-progress' : viewLoading, 'kt-portlet--body-progress-overlay' : loadingAfterSubmit }">
     <div class="kt-portlet__head kt-portlet__head__custom" id="list-header">
       <div class="kt-portlet__head-label">
         <h3 class="kt-portlet__head-title">{{getTitle()}}</h3>
@@ -232,7 +232,7 @@
 
             <div class="form-group kt-form__group row">
               <div class="col-lg-10 kt-margin-bottom-20-mobile">
-                <button mat-raised-button color="primary" type="button" (click)="saveCustomerLandInfo()" *ngIf="SaveCustomer && !isFormReadonly" [ngClass]="{'kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light': loading}">Save</button>
+                <button mat-raised-button color="primary" type="button" (click)="saveCustomerLandInfo()" *ngIf="SaveCustomer && !isFormReadonly" [class]="{'kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light': loading}">Save</button>
                 <button mat-raised-button color="primary" type="button" class="ml-2" (click)="clearSaveCustomerLandInfo()" *ngIf="!isFormReadonly">Clear</button>
               </div>
             </div>
@@ -484,14 +484,14 @@
 
             <div class="form-group kt-form__group row">
               <div class="col-lg-8 kt-margin-bottom-20-mobile">
-                <button mat-raised-button type="button" color="primary" (click)="saveCustomerLandInfoDetails()" [ngClass]="{'kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light': loading}" *ngIf="ShowTable && !isFormReadonly">Save</button>
+                <button mat-raised-button type="button" color="primary" (click)="saveCustomerLandInfoDetails()" [class]="{'kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light': loading}" *ngIf="ShowTable && !isFormReadonly">Save</button>
                 <button mat-raised-button type="button" color="primary" (click)="landChargeCreation()" class="ml-2" *ngIf="AllowchargeCreation ">
                   Land Charge Creation
                 </button>
                 <button mat-raised-button color="primary" (click)="landUploadFiles()" type="button" *ngIf="AllowDocumentUpload && !hasHistoryLandInfoId" class="ml-2">
                   Upload Documents
                 </button>
-                <button mat-raised-button color="primary" class="ml-2" type="button" (click)="submitCustomerLandInfo()" [ngClass]="{'kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light': loading}" *ngIf="AllowSubmit && !isFormReadonly">Submit</button>
+                <button mat-raised-button color="primary" class="ml-2" type="button" (click)="submitCustomerLandInfo()" [class]="{'kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light': loading}" *ngIf="AllowSubmit && !isFormReadonly">Submit</button>
               </div>
             </div>
           </div>

@@ -1,6 +1,6 @@
 // Angular
 import {RouterModule} from '@angular/router';
-import {NgModule} from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
@@ -37,7 +37,8 @@ import {
     UserProfile2Component,
     UserProfile3Component,
     UserProfileComponent,
-    NotificationDetailsComponent,
+    NotificationDetailsComponent
+
 } from './layout';
 // General
 import {NoticeComponent} from './content/general/notice/notice.component';
@@ -141,8 +142,7 @@ import {TimeAgoPipe} from 'time-ago-pipe';
         CapsOnlyDirective,
         AlertMessageComponent,
         AlphaNumSpecialDirective,
-        NumberAndDecimalDirective
-
+        NumberAndDecimalDirective,
     ],
     exports: [
         WidgetModule,
@@ -239,6 +239,7 @@ import {TimeAgoPipe} from 'time-ago-pipe';
         MatCardModule,
         MatChipsModule,
     ],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class PartialsModule {
 }
