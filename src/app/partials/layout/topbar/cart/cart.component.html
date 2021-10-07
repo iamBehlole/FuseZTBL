@@ -2,19 +2,19 @@
 <div ngbDropdown placement="bottom" autoClose="outside" class="kt-header__topbar-item">
 	<div ngbDropdownToggle class="kt-header__topbar-wrapper">
 		<span class="kt-header__topbar-icon"
-			[ngClass]="{'kt-header__topbar-icon--brand':  iconType === 'brand'}">
-			<i *ngIf="!useSVG" [ngClass]="icon"></i>
+			[class]="{'kt-header__topbar-icon--brand':  iconType === 'brand'}">
+			<i *ngIf="!useSVG" [class]="icon"></i>
 			<span *ngIf="useSVG"
 				class="kt-svg-icon"
 				[inlineSVG]="icon"
-				[ngClass]="{'kt-svg-icon--brand':  iconType === 'brand'}"></span>
+				[class]="{'kt-svg-icon--brand':  iconType === 'brand'}"></span>
 		</span>
 	</div>
 	<div ngbDropdownMenu class="dropdown-menu dropdown-menu-fit dropdown-menu-right dropdown-menu-anim dropdown-menu-top-unround dropdown-menu-xl">
 		<form>
 			<!-- begin:: Mycart -->
 			<div class="kt-mycart">
-				<div class="kt-mycart__head kt-head" [ngStyle]="{'background-image': 'url('+bgImage+')'}">
+				<div class="kt-mycart__head kt-head" [style]="{'background-image': 'url('+bgImage+')'}">
 					<div class="kt-mycart__info">
 						<span class="kt-mycart__icon"><i class="flaticon2-shopping-cart-1 kt-font-success"></i></span>
 						<h3 class="kt-mycart__title">My Cart</h3>
@@ -24,7 +24,7 @@
 					</div>
 				</div>
 
-				<div [perfectScrollbar]="{wheelPropagation: false}" [ngStyle]="{'max-height': '28vh', 'position': 'relative'}" class="kt-mycart__body">
+				<div [perfectScrollbar]="{wheelPropagation: false}" [style]="{'max-height': '28vh', 'position': 'relative'}" class="kt-mycart__body">
 					<div class="kt-mycart__item">
 						<div class="kt-mycart__container">
 							<div class="kt-mycart__info">

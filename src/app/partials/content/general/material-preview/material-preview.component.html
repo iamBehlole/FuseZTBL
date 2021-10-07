@@ -1,4 +1,4 @@
-<kt-portlet [ngClass]="'kt-portlet--ngviewer'" *ngIf="viewItem">
+<kt-portlet [class]="'kt-portlet--ngviewer'" *ngIf="viewItem">
 	<kt-portlet-header [title]="viewItem.beforeCodeTitle">
 		<ng-container ktPortletTools>
 			<!-- <ul class="kt-portlet__nav">
@@ -24,11 +24,11 @@
 	<kt-portlet-body>
 		<div class="kt-portlet__preview" *ngIf="viewItem.beforeCodeDescription">
 			<div class="kt-alert kt-alert--icon kt-alert--air kt-alert--square alert alert-dismissible kt-margin-bottom-30"
-				[ngClass]="classes" role="alert">
+				[class]="classes" role="alert">
 				<div class="kt-alert__text" [innerHTML]="viewItem.beforeCodeDescription | safe: 'html'"></div>
 			</div>
 		</div>
-		<div *ngIf="hasExampleSource()" class="kt-portlet__preview kt-portlet__code" [ngClass]="{'kt-portlet__code--show' : viewItem.isCodeVisible}">
+		<div *ngIf="hasExampleSource()" class="kt-portlet__preview kt-portlet__code" [class]="{'kt-portlet__code--show' : viewItem.isCodeVisible}">
 			<mat-tab-group *ngIf="viewItem.isCodeVisible">
 				<mat-tab label="HTML" *ngIf="viewItem.htmlCode">
 					<a href="javascript:;"

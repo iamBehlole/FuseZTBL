@@ -1,6 +1,6 @@
 <!-- begin:: Content Head -->
-<div class="kt-subheader kt-grid__item" [ngClass]="{'kt-container--clear': clear}" [hidden]="subheaderService.disabled$ | async" id="kt_subheader">
-	<div class="kt-container" [ngClass]="{'kt-container--fluid': fluid}">
+<div class="kt-subheader kt-grid__item" [class]="{'kt-container--clear': clear}" [hidden]="subheaderService.disabled$ | async" id="kt_subheader">
+	<div class="kt-container" [class]="{'kt-container--fluid': fluid}">
 		<h3 *ngIf="title" class="kt-subheader__title">{{title}}</h3>
 		<h4 *ngIf="desc" class="kt-subheader__desc">{{desc}}</h4>
 		<div class="kt-subheader__breadcrumbs" *ngIf="breadcrumbs.length > 0">

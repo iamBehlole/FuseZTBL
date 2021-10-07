@@ -1,15 +1,15 @@
 <!--begin: Quick actions -->
 <div ngbDropdown placement="bottom" autoClose="outside" class="kt-header__topbar-item">
 	<div ngbDropdownToggle class="kt-header__topbar-wrapper">
-		<span class="kt-header__topbar-icon" [ngClass]="{ 'kt-header__topbar-icon--warning': iconType === 'warning' }">
-			<i *ngIf="!useSVG" [ngClass]="icon"></i>
-			<span *ngIf="useSVG" class="kt-svg-icon" [inlineSVG]="icon" [ngClass]="{ 'kt-svg-icon--warning': iconType === 'warning' }"></span>
+		<span class="kt-header__topbar-icon" [class]="{ 'kt-header__topbar-icon--warning': iconType === 'warning' }">
+			<i *ngIf="!useSVG" [class]="icon"></i>
+			<span *ngIf="useSVG" class="kt-svg-icon" [inlineSVG]="icon" [class]="{ 'kt-svg-icon--warning': iconType === 'warning' }"></span>
 		</span>
 	</div>
 	<div ngbDropdownMenu class="dropdown-menu dropdown-menu-fit dropdown-menu-right dropdown-menu-anim dropdown-menu-top-unround dropdown-menu-xl">
 		<form>
 			<!--begin: Head -->
-			<div class="kt-head kt-head--skin-{{skin}}" [ngStyle]="{'background-image': 'url('+bgImage+')'}">
+			<div class="kt-head kt-head--skin-{{skin}}" [style]="{'background-image': 'url('+bgImage+')'}">
 				<h3 class="kt-head__title">
 					User Quick Actions
 					<span class="kt-space-15"></span>

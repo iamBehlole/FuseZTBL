@@ -23,7 +23,7 @@ import {KtDialogService, StickyDirective} from '../../../../core/_base/layout';
   template: ` <div class="kt-portlet__head-label" [hidden]="noTitle">
       <span class="kt-portlet__head-icon" #refIcon [hidden]="hideIcon">
         <ng-content *ngIf="!icon" select="[ktPortletIcon]"></ng-content>
-        <i *ngIf="icon" [ngClass]="icon"></i>
+        <i *ngIf="icon" [class]="icon"></i>
       </span>
       <ng-content *ngIf="!title" select="[ktPortletTitle]"></ng-content>
       <h3 *ngIf="title" class="kt-portlet__head-title" [innerHTML]="title"></h3>

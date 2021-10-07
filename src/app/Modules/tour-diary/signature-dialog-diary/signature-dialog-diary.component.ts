@@ -1,17 +1,15 @@
-import { Component, OnInit, Inject, ViewChild } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
-import { RecoveryService } from '../../../../core/auth/_services/recovery.service';
-import { finalize } from 'rxjs/operators';
-import { NgxSpinnerService } from 'ngx-spinner';
-import { BaseResponseModel } from '../../../../core/_base/crud/models/_base.response.model';
-import { LayoutUtilsService } from '../../../../core/_base/crud';
-import { SignaturePad } from 'angular2-signaturepad';
-import { Router } from '@angular/router';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {RecoveryService} from '../../../core/auth/_services/recovery.service';
+import {NgxSpinnerService} from 'ngx-spinner';
+import {LayoutUtilsService} from '../../../core/_base/crud';
+import {SignaturePad} from 'angular2-signaturepad';
+import {Router} from '@angular/router';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 
 @Component({
-  selector: 'kt-signature-dialog-diary',
-  templateUrl: './signature-dialog-diary.component.html',
-  styleUrls: ['./signature-dialog-diary.component.scss']
+    selector: 'kt-signature-dialog-diary',
+    templateUrl: './signature-dialog-diary.component.html',
+    styleUrls: ['./signature-dialog-diary.component.scss']
 //   providers: [
 //     { provide: MAT_DIALOG_DATA, useValue: {} },
 //     { provide: MatDialogRef, useValue: {} }
@@ -23,17 +21,17 @@ export class SignatureDialogDiaryComponent implements OnInit {
   submitted = false;
   imageFile: any;
   isSignatureAdded = false;
+    // tslint:disable-next-line:ban-types
   public signaturePadOptions: Object = { // passed through to szimek/signature_pad constructor
     'minWidth': 5,
     'canvasWidth': 500,
     'canvasHeight': 300,
-    'backgroundColor': "rgb(255,255,255)"
+      'backgroundColor': 'rgb(255,255,255)'
   };
 
 
   constructor(
     public dialogRef: MatDialogRef<SignatureDialogDiaryComponent>,
-    //@Inject(MAT_DIALOG_DATA) public data: any,
     private _recoveryService: RecoveryService,
     private spinner: NgxSpinnerService,
     private layoutUtilsService: LayoutUtilsService,
@@ -53,9 +51,8 @@ export class SignatureDialogDiaryComponent implements OnInit {
   drawComplete() {
     this.isSignatureAdded = true;
     // will be notified of szimek/signature_pad's onEnd event
-    var base64 = this.signaturePad.toDataURL('image/jpeg');
-    this.imageFile = base64.replace("data:image/jpeg;base64,", "");
-    debugger;
+      const base64 = this.signaturePad.toDataURL('image/jpeg');
+    this.imageFile = base64.replace('data:image/jpeg;base64,', '');
   }
 
   drawStart() {
@@ -65,13 +62,12 @@ export class SignatureDialogDiaryComponent implements OnInit {
   saveSignature(){}
 
   close(bySystem: Boolean): void {
-    debugger
     this.dialogRef.close(bySystem);
   }
 
   clearSignature(): void {
     this.signaturePad.clear();
-    this.imageFile = "";
+    this.imageFile = '';
     this.isSignatureAdded = false;
   }
 

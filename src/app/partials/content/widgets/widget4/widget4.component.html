@@ -10,7 +10,7 @@
 			<img [attr.src]="item.pic" alt="">
 		</div>
 		<span class="kt-widget4__icon" *ngIf="item.icon">
-			<i [ngClass]="item.icon"></i>
+			<i [class]="item.icon"></i>
 		</span>
 
 		<a href="javascript:;" [attr.href]="item.url" class="kt-widget4__title" *ngIf="item.title && !item.desc">{{item.title}}</a>

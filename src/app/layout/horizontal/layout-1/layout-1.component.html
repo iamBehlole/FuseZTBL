@@ -84,7 +84,7 @@
 <!-- TOOLBAR -->
 <ng-template #toolbar>
     <toolbar *ngIf="!fuseConfig.layout.toolbar.hidden"
-             [ngClass]="fuseConfig.layout.toolbar.customBackgroundColor === true ? fuseConfig.layout.toolbar.position + ' ' + fuseConfig.layout.toolbar.background : fuseConfig.layout.toolbar.position">
+             [class]="fuseConfig.layout.toolbar.customBackgroundColor === true ? fuseConfig.layout.toolbar.position + ' ' + fuseConfig.layout.toolbar.background : fuseConfig.layout.toolbar.position">
     </toolbar>
 </ng-template>
 <!-- / TOOLBAR -->
@@ -92,7 +92,7 @@
 <!-- FOOTER -->
 <ng-template #footer>
     <footer *ngIf="!fuseConfig.layout.footer.hidden"
-            [ngClass]="fuseConfig.layout.footer.customBackgroundColor === true ? fuseConfig.layout.footer.position + ' ' + fuseConfig.layout.footer.background : fuseConfig.layout.footer.position">
+            [class]="fuseConfig.layout.footer.customBackgroundColor === true ? fuseConfig.layout.footer.position + ' ' + fuseConfig.layout.footer.background : fuseConfig.layout.footer.position">
     </footer>
 </ng-template>
 <!-- / FOOTER -->

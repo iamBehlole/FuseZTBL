@@ -1,5 +1,5 @@
 <!-- begin::Offcanvas Toolbar Quick Actions -->
-<div ktOffcanvas [options]="offcanvasOptions" id="kt_quick_panel" class="kt-quick-panel" [ngStyle]="{'overflow': 'hidden'}">
+<div ktOffcanvas [options]="offcanvasOptions" id="kt_quick_panel" class="kt-quick-panel" [style]="{'overflow': 'hidden'}">
 	<a href="javascript:;" class="kt-quick-panel__close" id="kt_quick_panel_close_btn"><i class="flaticon2-delete"></i></a>
 
 	<div class="kt-quick-panel__nav">
@@ -20,7 +20,7 @@
 		<ngb-tabset #tab="ngbTabset">
 			<ngb-tab id="tab-id-1">
 				<ng-template ngbTabContent>
-					<div [perfectScrollbar]="{wheelPropagation: false}" [ngStyle]="{'max-height': '85vh', 'position': 'relative'}" class="kt-notification">
+					<div [perfectScrollbar]="{wheelPropagation: false}" [style]="{'max-height': '85vh', 'position': 'relative'}" class="kt-notification">
 						<a href="javascript:;" class="kt-notification__item">
 							<div class="kt-notification__item-icon">
 								<i class="flaticon2-line-chart kt-font-success"></i>
@@ -182,7 +182,7 @@
 			</ngb-tab>
 			<ngb-tab id="tab-id-2">
 				<ng-template ngbTabContent>
-					<div perfectScrollbar [ngStyle]="{'max-height': '85vh', 'position': 'relative'}" class="kt-notification-v2">
+					<div perfectScrollbar [style]="{'max-height': '85vh', 'position': 'relative'}" class="kt-notification-v2">
 						<a href="javascript:;" class="kt-notification-v2__item">
 							<div class="kt-notification-v2__item-icon">
 								<i class="flaticon-bell kt-font-brand"></i>
