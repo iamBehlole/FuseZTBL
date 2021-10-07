@@ -1,290 +1,286 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { MatDialogRef, MatSnackBar, MAT_DATE_FORMATS, DateAdapter, MAT_DATE_LOCALE, MatSelectChange } from '@angular/material';
-import { MomentDateAdapter } from '@angular/material-moment-adapter';
-import { finalize } from 'rxjs/operators';
-import { LayoutUtilsService, MessageType } from '../../../../core/_base/crud';
-import { UserUtilsService } from '../../../../core/_base/crud/utils/user-utils.service';
-import { BaseResponseModel } from '../../../../core/_base/crud/models/_base.response.model';
-import { Lov, LovConfigurationKey, LovData, MaskEnum, regExps, errorMessages, DateFormats } from '../../../../core/auth/_models/lov.class';
-import { NgxSpinnerService } from 'ngx-spinner';
-import { LoanService } from '../../../../core/auth/_services/loan.service';
-import { DatePipe } from '@angular/common';
-import { CommonService } from '../../../../core/auth/_services/common.service';
-import { LovService } from '../../../../core/auth/_services/lov.service';
-import { Loan, LoanApplicationLegalHeirs } from '../../../../core/auth/_models/loan-application-header.model';
+import {ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
+import {MomentDateAdapter} from '@angular/material-moment-adapter';
+import {finalize} from 'rxjs/operators';
+import {NgxSpinnerService} from 'ngx-spinner';
+import {DatePipe} from '@angular/common';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+import {DateFormats, Lov, LovConfigurationKey, MaskEnum} from '../../../core/auth/_models/lov.class';
+import {Loan, LoanApplicationLegalHeirs} from '../../../core/auth/_models/loan-application-header.model';
+import {LovService} from '../../../core/auth/_services/lov.service';
+import {LayoutUtilsService} from '../../../core/_base/crud';
+import {UserUtilsService} from '../../../core/_base/crud/utils/user-utils.service';
+import {CommonService} from '../../../core/auth/_services/common.service';
+import {LoanService} from '../../../core/auth/_services/loan.service';
+import {MatSelectChange} from '@angular/material/select';
 
 @Component({
-  selector: 'kt-cl-legal-heirs',
-  templateUrl: './cl-legal-heirs.component.html',
-  styleUrls: ['./cl-legal-heirs.component.scss'],
-  providers: [
-    DatePipe,
-    { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
-    { provide: MAT_DATE_FORMATS, useValue: DateFormats }
+    selector: 'kt-cl-legal-heirs',
+    templateUrl: './cl-legal-heirs.component.html',
+    styleUrls: ['./cl-legal-heirs.component.scss'],
+    providers: [
+        DatePipe,
+        {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
+        {provide: MAT_DATE_FORMATS, useValue: DateFormats}
 
-  ]
+    ]
 })
 export class ClLegalHeirsComponent implements OnInit {
-  @Input() loanDetail: Loan;
-  legalHeirsForm: FormGroup;
-  public legalHeirs = new LoanApplicationLegalHeirs();
-  legalHeirsArray: LoanApplicationLegalHeirs[] = [];
-  public RelationshipLov: any;
-  public LovCall = new Lov();
-  public GenderLov: any;
-  public SelectedCustomersList: any = [];
-  currentSelectedRelationship: string;
+    @Input() loanDetail: Loan;
+    legalHeirsForm: FormGroup;
+    public legalHeirs = new LoanApplicationLegalHeirs();
+    legalHeirsArray: LoanApplicationLegalHeirs[] = [];
+    public RelationshipLov: any;
+    public LovCall = new Lov();
+    public GenderLov: any;
+    public SelectedCustomersList: any = [];
+    currentSelectedRelationship: string;
 
-  public maskEnums = MaskEnum;
-  today = new Date();
-  containers = [];
+    public maskEnums = MaskEnum;
+    today = new Date();
+    containers = [];
 
-  constructor(
-    private formBuilder: FormBuilder,
-    private _cdf: ChangeDetectorRef,
-    private layoutUtilsService: LayoutUtilsService,
-    private userUtilsService: UserUtilsService,
-    private _loanService: LoanService,
-    private datePipe: DatePipe,
-    private _common: CommonService,
-    private cdRef: ChangeDetectorRef,
-    private _lovService: LovService,
-    private spinner: NgxSpinnerService
+    constructor(
+        private formBuilder: FormBuilder,
+        private _cdf: ChangeDetectorRef,
+        private layoutUtilsService: LayoutUtilsService,
+        private userUtilsService: UserUtilsService,
+        private _loanService: LoanService,
+        private datePipe: DatePipe,
+        private _common: CommonService,
+        private cdRef: ChangeDetectorRef,
+        private _lovService: LovService,
+        private spinner: NgxSpinnerService
+    ) {
 
-  ) {
-    
-  }
+    }
 
-  ngOnInit() {
-    this.spinner.show();
-    this.createForm();
-    this.LoadLovs();
-    this.spinner.hide();
-    
-  }
+    ngOnInit() {
+        this.spinner.show();
+        this.createForm();
+        this.LoadLovs();
+        this.spinner.hide();
 
-  add() {
-    this.containers.push(this.containers.length);
-  }
+    }
 
-  createForm() {
-    this.legalHeirsForm = this.formBuilder.group({
-      CustomerID: [this.legalHeirs.CustomerID, [Validators.required]],
-      LegalHeirsName: [this.legalHeirs.LegalHeirsName, [Validators.required]],
-      Cnic: [this.legalHeirs.Cnic, [Validators.required]],
-      RelationID: [this.legalHeirs.RelationID, [Validators.required]],
-      Dob: [this.legalHeirs.Dob, [Validators.required]],
-      PhoneCell: [this.legalHeirs.PhoneCell, [Validators.required]],
-      PhoneOff: [this.legalHeirs.PhoneOff],
-      Gender: [this.legalHeirs.Gender, [Validators.required]],
-      Customer: [this.legalHeirs.CustomerName]
-    });
-  }
+    add() {
+        this.containers.push(this.containers.length);
+    }
 
-  loadCustomers(CustomersLoanAppList) {
-    debugger
-    this.loanDetail.CustomersLoanList = CustomersLoanAppList
-    if (this.loanDetail != null) {
-      if (this.loanDetail.CustomersLoanList.length > 0) {
+    createForm() {
+        this.legalHeirsForm = this.formBuilder.group({
+            CustomerID: [this.legalHeirs.CustomerID, [Validators.required]],
+            LegalHeirsName: [this.legalHeirs.LegalHeirsName, [Validators.required]],
+            Cnic: [this.legalHeirs.Cnic, [Validators.required]],
+            RelationID: [this.legalHeirs.RelationID, [Validators.required]],
+            Dob: [this.legalHeirs.Dob, [Validators.required]],
+            PhoneCell: [this.legalHeirs.PhoneCell, [Validators.required]],
+            PhoneOff: [this.legalHeirs.PhoneOff],
+            Gender: [this.legalHeirs.Gender, [Validators.required]],
+            Customer: [this.legalHeirs.CustomerName]
+        });
+    }
+
+    loadCustomers(CustomersLoanAppList) {
         debugger
-        this.SelectedCustomersList = this.loanDetail.CustomersLoanList;
-      }
+        this.loanDetail.CustomersLoanList = CustomersLoanAppList;
+        if (this.loanDetail != null) {
+            if (this.loanDetail.CustomersLoanList.length > 0) {
+                debugger
+                this.SelectedCustomersList = this.loanDetail.CustomersLoanList;
+            }
+        }
     }
-  }
 
-  async LoadLovs() {
+    async LoadLovs() {
 
-    var tempArray = await this._lovService.CallLovAPI(this.LovCall = { TagName: LovConfigurationKey.Relationship })
-    this.RelationshipLov = tempArray.LOVs;
-    this.GenderLov = await this._lovService.CallLovAPI(this.LovCall = { TagName: LovConfigurationKey.Gender });
-    this.GenderLov = this._lovService.SortLovs(this.GenderLov.LOVs);
-  }
-
-
-
-  loadAppLegalHeirsDataOnUpdate(appLegalHeirsData, appCustomersLoanAppList) {
-    
-    this.legalHeirs = appLegalHeirsData
-    console.log("in app Legal Heirs console")
-    console.log(appLegalHeirsData, "this is legalhier")
-
-    var tempCustomerArray: LegalHiersGrid[] = [];
-    console.log(this.RelationshipLov)
-
-    for (var i = 0; i < appLegalHeirsData.length; i++) {
-      debugger
-      var grid = new LegalHiersGrid();
-      grid.UserID = appLegalHeirsData[i].ID;
-      grid.ID = appLegalHeirsData[i].ID;
-      grid.CustomerName = appLegalHeirsData[i].CustomerName;
-      grid.CustomerID = appLegalHeirsData[i].CustomerID;
-      grid.LegalHeirsName = appLegalHeirsData[i].LegalHeirsName;
-      grid.Cnic = appLegalHeirsData[i].Cnic;
-      grid.PhoneCell = appLegalHeirsData[i].PhoneCell;
-      grid.Dob = appLegalHeirsData[i].Dob;
-      var devProdFlag = this.RelationshipLov.filter(x => x.Id == appLegalHeirsData[i].RelationID)
-      if (devProdFlag.length > 0) {
-        grid.Relation = devProdFlag[0].Description;
-      }
-
-      tempCustomerArray.push(grid);
-
-    }
-    debugger
-    this.legalHeirsArray = tempCustomerArray;
-
-}
-
-  setRelationshipValue(event: MatSelectChange) {
-    this.currentSelectedRelationship = event.source.triggerValue;
-  }
-
-  onClearLegalHeirsForm() {
-    this.legalHeirsForm.controls["CustomerID"].setValue("");
-    this.legalHeirsForm.controls["Cnic"].setValue("");
-    this.legalHeirsForm.controls["LegalHeirsName"].setValue("");
-    this.legalHeirsForm.controls["Dob"].setValue("");
-    this.legalHeirsForm.controls["RelationID"].setValue("");
-    this.legalHeirsForm.controls["PhoneOff"].setValue("");
-    this.legalHeirsForm.controls["PhoneCell"].setValue("");
-    this.legalHeirsForm.controls["Gender"].setValue("");
-    const controls = this.legalHeirsForm.controls;
-    Object.keys(controls).forEach(controlName =>
-      controls[controlName].markAsUntouched()
-    );
-  }
-
-  onSaveLegalHeirsForm() {
-
-    //if (this.loanDetail == null || this.loanDetail == undefined) {
-    //  this.layoutUtilsService.alertMessage("", "Application Header Info Not Found");
-    //  return;
-    //}
-    debugger
-    if (this.legalHeirsForm.invalid) {
-      const controls = this.legalHeirsForm.controls;
-      Object.keys(controls).forEach(controlName =>
-        controls[controlName].markAsTouched()
-      );
-
-      return;
+        var tempArray = await this._lovService.CallLovAPI(this.LovCall = {TagName: LovConfigurationKey.Relationship});
+        this.RelationshipLov = tempArray.LOVs;
+        this.GenderLov = await this._lovService.CallLovAPI(this.LovCall = {TagName: LovConfigurationKey.Gender});
+        this.GenderLov = this._lovService.SortLovs(this.GenderLov.LOVs);
     }
 
 
-    //this.legalHeirs = Object.assign(this.legalHeirs, this.legalHeirsForm.getRawValue());
-    this.legalHeirs.UserID = "0";
-    //this.legalHeirs.LoanAppID = 0;
-    this.legalHeirs.DobTxt = this.datePipe.transform(this.legalHeirs.Dob, "dd-MM-yyyy");
-    this.legalHeirs.Dob = this.datePipe.transform(this.legalHeirs.Dob, "ddMMyyyy");
-    this.legalHeirsForm.controls["Dob"].setValue(this.datePipe.transform(this.legalHeirsForm.value.Dob, "ddMMyyyy"))
-    console.log(this.legalHeirs)
+    loadAppLegalHeirsDataOnUpdate(appLegalHeirsData, appCustomersLoanAppList) {
 
+        this.legalHeirs = appLegalHeirsData;
+        console.log('in app Legal Heirs console');
+        console.log(appLegalHeirsData, 'this is legalhier');
 
-    this.legalHeirs = Object.assign(this.legalHeirsForm.value, this.legalHeirsForm.getRawValue());
-    var arr = this.loanDetail.ApplicationHeader.LoanAppID;
+        var tempCustomerArray: LegalHiersGrid[] = [];
+        console.log(this.RelationshipLov);
 
-    this.spinner.show();
-    this._loanService.saveLoanApplicationLegalHeirs(this.legalHeirs, this.loanDetail.TranId, arr)
-      .pipe(
-        finalize(() => {
-          this.spinner.hide();
-        })
-    ).subscribe(baseResponse => {
-    
-        if (baseResponse.Success) {
-          debugger
-          this.legalHeirs = this.legalHeirsForm.value;
+        for (var i = 0; i < appLegalHeirsData.length; i++) {
+            debugger
+            var grid = new LegalHiersGrid();
+            grid.UserID = appLegalHeirsData[i].ID;
+            grid.ID = appLegalHeirsData[i].ID;
+            grid.CustomerName = appLegalHeirsData[i].CustomerName;
+            grid.CustomerID = appLegalHeirsData[i].CustomerID;
+            grid.LegalHeirsName = appLegalHeirsData[i].LegalHeirsName;
+            grid.Cnic = appLegalHeirsData[i].Cnic;
+            grid.PhoneCell = appLegalHeirsData[i].PhoneCell;
+            grid.Dob = appLegalHeirsData[i].Dob;
+            var devProdFlag = this.RelationshipLov.filter(x => x.Id == appLegalHeirsData[i].RelationID);
+            if (devProdFlag.length > 0) {
+                grid.Relation = devProdFlag[0].Description;
+            }
 
-          var legalHeirsGrid = new LoanApplicationLegalHeirs();
+            tempCustomerArray.push(grid);
 
-          legalHeirsGrid.CustomerID = this.legalHeirs.CustomerID;
-          legalHeirsGrid.CustomerName = this.legalHeirs.CustomerName;
-          legalHeirsGrid.LegalHeirsName = this.legalHeirs.LegalHeirsName;
-          legalHeirsGrid.Cnic = this.legalHeirs.Cnic;
-          legalHeirsGrid.RelationID = this.legalHeirs.RelationID;
-          legalHeirsGrid.Dob = this.legalHeirs.Dob;
-          legalHeirsGrid.DobTxt = this.legalHeirs.DobTxt;
-          legalHeirsGrid.PhoneCell = this.legalHeirs.PhoneCell;
-          legalHeirsGrid.PhoneOff = this.legalHeirs.PhoneOff;
-          legalHeirsGrid.Gender = this.legalHeirs.Gender;
-          legalHeirsGrid.Relation = this.currentSelectedRelationship;
-          debugger
-          this.legalHeirsArray.push(legalHeirsGrid);
-
-          this.layoutUtilsService.alertElementSuccess("", baseResponse.Message, baseResponse.Code);
         }
-        else {
-          this.layoutUtilsService.alertElementSuccess("", baseResponse.Message, baseResponse.Code);
+        debugger
+        this.legalHeirsArray = tempCustomerArray;
+
+    }
+
+    setRelationshipValue(event: MatSelectChange) {
+        this.currentSelectedRelationship = event.source.triggerValue;
+    }
+
+    onClearLegalHeirsForm() {
+        this.legalHeirsForm.controls['CustomerID'].setValue('');
+        this.legalHeirsForm.controls['Cnic'].setValue('');
+        this.legalHeirsForm.controls['LegalHeirsName'].setValue('');
+        this.legalHeirsForm.controls['Dob'].setValue('');
+        this.legalHeirsForm.controls['RelationID'].setValue('');
+        this.legalHeirsForm.controls['PhoneOff'].setValue('');
+        this.legalHeirsForm.controls['PhoneCell'].setValue('');
+        this.legalHeirsForm.controls['Gender'].setValue('');
+        const controls = this.legalHeirsForm.controls;
+        Object.keys(controls).forEach(controlName =>
+            controls[controlName].markAsUntouched()
+        );
+    }
+
+    onSaveLegalHeirsForm() {
+
+        //if (this.loanDetail == null || this.loanDetail == undefined) {
+        //  this.layoutUtilsService.alertMessage("", "Application Header Info Not Found");
+        //  return;
+        //}
+        debugger
+        if (this.legalHeirsForm.invalid) {
+            const controls = this.legalHeirsForm.controls;
+            Object.keys(controls).forEach(controlName =>
+                controls[controlName].markAsTouched()
+            );
+
+            return;
         }
-      });
-  }
-
-  onDeleteLegalHeirs(legalHeir) {
-    
-    console.log(legalHeir)
-
-    debugger
-    const _title = 'Confirmation';
-    const _description = 'Do you really want to continue?';
-    const _waitDesciption = '';
-    const _deleteMessage = ``;
-    this.legalHeirs.LoanAppID = this.loanDetail.ApplicationHeader.LoanAppID;
-
-    const dialogRef = this.layoutUtilsService.AlertElementConfirmation(_title, _description, _waitDesciption);
 
 
-    dialogRef.afterClosed().subscribe(res => {
-      debugger
-      if (!res) {
-        return;
-      }
+        //this.legalHeirs = Object.assign(this.legalHeirs, this.legalHeirsForm.getRawValue());
+        this.legalHeirs.UserID = '0';
+        //this.legalHeirs.LoanAppID = 0;
+        this.legalHeirs.DobTxt = this.datePipe.transform(this.legalHeirs.Dob, 'dd-MM-yyyy');
+        this.legalHeirs.Dob = this.datePipe.transform(this.legalHeirs.Dob, 'ddMMyyyy');
+        this.legalHeirsForm.controls['Dob'].setValue(this.datePipe.transform(this.legalHeirsForm.value.Dob, 'ddMMyyyy'));
+        console.log(this.legalHeirs);
 
-      if (this.legalHeirsArray.length == 0) {
-        return false;
-      } else {
-        if (legalHeir == null || legalHeir == undefined || legalHeir == "") {
-          this.cdRef.detectChanges();
-          return true;
-        }
-        else {
-          this.spinner.show();
-          this._loanService.deleteLegalHeirs(legalHeir, this.legalHeirs.LoanAppID)
+
+        this.legalHeirs = Object.assign(this.legalHeirsForm.value, this.legalHeirsForm.getRawValue());
+        var arr = this.loanDetail.ApplicationHeader.LoanAppID;
+
+        this.spinner.show();
+        this._loanService.saveLoanApplicationLegalHeirs(this.legalHeirs, this.loanDetail.TranId, arr)
             .pipe(
-              finalize(() => {
-                this.spinner.hide();
+                finalize(() => {
+                    this.spinner.hide();
+                })
+            ).subscribe(baseResponse => {
 
-              })
-            )
-            .subscribe(baseResponse => {
-              const dialogRef = this.layoutUtilsService.alertElementSuccess("", baseResponse.Message, baseResponse.Code);
-            })
-        }
+            if (baseResponse.Success) {
+                debugger
+                this.legalHeirs = this.legalHeirsForm.value;
+
+                var legalHeirsGrid = new LoanApplicationLegalHeirs();
+
+                legalHeirsGrid.CustomerID = this.legalHeirs.CustomerID;
+                legalHeirsGrid.CustomerName = this.legalHeirs.CustomerName;
+                legalHeirsGrid.LegalHeirsName = this.legalHeirs.LegalHeirsName;
+                legalHeirsGrid.Cnic = this.legalHeirs.Cnic;
+                legalHeirsGrid.RelationID = this.legalHeirs.RelationID;
+                legalHeirsGrid.Dob = this.legalHeirs.Dob;
+                legalHeirsGrid.DobTxt = this.legalHeirs.DobTxt;
+                legalHeirsGrid.PhoneCell = this.legalHeirs.PhoneCell;
+                legalHeirsGrid.PhoneOff = this.legalHeirs.PhoneOff;
+                legalHeirsGrid.Gender = this.legalHeirs.Gender;
+                legalHeirsGrid.Relation = this.currentSelectedRelationship;
+                debugger
+                this.legalHeirsArray.push(legalHeirsGrid);
+
+                this.layoutUtilsService.alertElementSuccess('', baseResponse.Message, baseResponse.Code);
+            } else {
+                this.layoutUtilsService.alertElementSuccess('', baseResponse.Message, baseResponse.Code);
+            }
+        });
+    }
+
+    onDeleteLegalHeirs(legalHeir) {
+
+        console.log(legalHeir);
+
+        debugger
+        const _title = 'Confirmation';
+        const _description = 'Do you really want to continue?';
+        const _waitDesciption = '';
+        const _deleteMessage = ``;
+        this.legalHeirs.LoanAppID = this.loanDetail.ApplicationHeader.LoanAppID;
+
+        const dialogRef = this.layoutUtilsService.AlertElementConfirmation(_title, _description, _waitDesciption);
 
 
-      }
+        dialogRef.afterClosed().subscribe(res => {
+            debugger
+            if (!res) {
+                return;
+            }
+
+            if (this.legalHeirsArray.length == 0) {
+                return false;
+            } else {
+                if (legalHeir == null || legalHeir == undefined || legalHeir == '') {
+                    this.cdRef.detectChanges();
+                    return true;
+                } else {
+                    this.spinner.show();
+                    this._loanService.deleteLegalHeirs(legalHeir, this.legalHeirs.LoanAppID)
+                        .pipe(
+                            finalize(() => {
+                                this.spinner.hide();
+
+                            })
+                        )
+                        .subscribe(baseResponse => {
+                            const dialogRef = this.layoutUtilsService.alertElementSuccess('', baseResponse.Message, baseResponse.Code);
+                        });
+                }
 
 
-    })
-  }
+            }
+
+
+        });
+    }
 
 }
 
 
 export class LegalHiersGrid {
-  UserID: string;
-  LegalHeirsName: string;
-  PhoneRes: string;
-  PhoneOff: string;
-  PhoneCell: string;
-  Cnic: string;
-  Dob: string;
-  DobTxt: string;
-  Gender: string;
-  RelationID: number;
-  Relation: string;
-  LoanAppID: number;
-  CustomerID: string;
-  CustomerName: string;
-  ID:string
+    UserID: string;
+    LegalHeirsName: string;
+    PhoneRes: string;
+    PhoneOff: string;
+    PhoneCell: string;
+    Cnic: string;
+    Dob: string;
+    DobTxt: string;
+    Gender: string;
+    RelationID: number;
+    Relation: string;
+    LoanAppID: number;
+    CustomerID: string;
+    CustomerName: string;
+    ID: string;
 }
