@@ -113,9 +113,8 @@
             }
         },
         "typedef": [
-            true,
-            "call-signature",
-            "property-declaration"
+            false,
+            "call-signature"
         ],
         "trailing-comma": false,
         "no-conflicting-lifecycle": true,

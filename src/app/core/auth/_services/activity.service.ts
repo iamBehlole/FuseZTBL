@@ -24,7 +24,7 @@ export class ActivityService {
     this.request = new BaseRequestModel();
     this.request.Activity = activity;
 
-    var req = JSON.stringify(this.request);
+    const req = JSON.stringify(this.request);
     return this.http.post(`${environment.apiUrl}/Activity/UpdateActivity`, req,
       {headers: this.httpUtils.getHTTPHeaders()}).pipe(
       map((res: BaseResponseModel) => res)
@@ -35,9 +35,8 @@ export class ActivityService {
     this.request = new BaseRequestModel();
     this.request.Activity = activity;
 
-    var req = JSON.stringify(this.request);
+    const req = JSON.stringify(this.request);
 
-    debugger;
     return this.http.post(`${environment.apiUrl}/Activity/AddActivity`, req,
       {headers: this.httpUtils.getHTTPHeaders()}).pipe(
       map((res: BaseResponseModel) => res)
@@ -47,6 +46,7 @@ export class ActivityService {
   deleteActivity(activity: Activity): Observable<BaseResponseModel> {
     this.request = new BaseRequestModel();
     this.request.Branch = {
+
       'BranchId': '102',
       'BranchCode': '20238',
       'Name': 'NOORPUR TOWN',
@@ -64,7 +64,7 @@ export class ActivityService {
     }, this.request.Circle = {
       CircleIds: '53444,53443,53442,53441'
     };
-    var req = JSON.stringify(this.request);
+    const req = JSON.stringify(this.request);
     this.request.User = this.activityUtilsService.getUserDetails().User;
     this.request.Zone = {
       Id: 0,
@@ -73,7 +73,7 @@ export class ActivityService {
     };
     this.request.Activity = activity;
 
-    var req = JSON.stringify(this.request);
+    const req = JSON.stringify(this.request);
     return this.http.post(`${environment.apiUrl}/Activity/DeletePage`, req,
       {headers: this.httpUtils.getHTTPHeaders()}).pipe(
       map((res: BaseResponseModel) => res)
@@ -85,7 +85,7 @@ export class ActivityService {
 
     this.request = new BaseRequestModel();
     this.request.Activity = activity;
-    var req = JSON.stringify(this.request);
+    const req = JSON.stringify(this.request);
 
     return this.http.post(`${environment.apiUrl}/Activity/GetActivities`, req,
       {headers: this.httpUtils.getHTTPHeaders()}).pipe(
