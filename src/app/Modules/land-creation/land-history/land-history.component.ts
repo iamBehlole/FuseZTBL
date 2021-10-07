@@ -1,16 +1,17 @@
 import { Component, OnInit, Inject, ChangeDetectorRef } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar, MatTableDataSource } from '@angular/material';
 import { Store } from '@ngrx/store';
-import { AppState } from '../../../../core/reducers';
-import { LayoutUtilsService } from '../../../../core/_base/crud';
-import { KtDialogService } from '../../../../core/_base/layout';
-import { LandService } from '../../../../core/auth/_services/land.service';
-import { UserUtilsService } from '../../../../core/_base/crud/utils/user-utils.service';
 import { finalize } from 'rxjs/operators';
-import { LandInfo } from '../../../../core/auth/_models/land-info.model';
-import { ActivatedRoute, Router } from '@angular/router';
-import { CircleService } from '../../../../core/auth/_services/circle.service';
-import { Zone } from '../../../../core/auth/_models/zone.model';
+import {ActivatedRoute, Router} from '@angular/router';
+import {LayoutUtilsService} from '../../../core/_base/crud';
+import {KtDialogService} from '../../../core/_base/layout';
+import {LandInfo} from '../../../core/auth/_models/land-info.model';
+import {Zone} from '../../../core/auth/_models/zone.model';
+import {LandService} from '../../../core/auth/_services/land.service';
+import {UserUtilsService} from '../../../core/_base/crud/utils/user-utils.service';
+import {AppState} from '../../../core/reducers';
+import {MatTableDataSource} from '@angular/material/table';
+import {CircleService} from '../../../core/auth/_services/circle.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'kt-land-history',

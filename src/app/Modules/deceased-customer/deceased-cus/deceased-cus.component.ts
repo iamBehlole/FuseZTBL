@@ -1,23 +1,23 @@
 import { Component, OnInit, ViewChild,ChangeDetectorRef } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { DateAdapter, MatSort,MatTableDataSource, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from "@angular/material";
 import { ActivatedRoute, Router } from "@angular/router";
-import { UserUtilsService } from "../../../../core/_base/crud/utils/user-utils.service";
-import { LayoutUtilsService } from "../../../../core/_base/crud";
 import { NgxSpinnerService } from "ngx-spinner";
 import { finalize } from "rxjs/operators";
-import { DeceasedCustomerService } from "../../../../core/auth/_services/deceased-customer.service";
-import { BaseResponseModel } from "../../../../core/_base/crud/models/_base.response.model";
-import { MatDialog, MatDialogModule, MatDialogConfig } from '@angular/material'
 import { ViewFileComponent } from "../view-file/view-file.component";
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
-import { Customer,Documents,MarkDeceasedCustomer } from "../../../../core/auth/_models/deceased-customer.model";
+import {MatDialogRef, MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
 import { DatePipe } from "@angular/common";
-
-import { CommonService } from '../../../../core/auth/_services/common.service';
-
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
-import { MaskEnum, Lov, errorMessages, regExps, LovConfigurationKey, DateFormats } from '../../../../core/auth/_models/lov.class';
+import {MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+import { DateFormats } from "app/core/auth/_models/lov.class";
+import {DateAdapter} from 'angular-calendar';
+import {Customer, MarkDeceasedCustomer} from '../../../core/auth/_models/deceased-customer.model';
+import {MatTableDataSource} from '@angular/material/table';
+import {Documents} from '../../../core/auth/_models/set-target.model';
+import {BaseResponseModel} from '../../../core/_base/crud/models/_base.response.model';
+import {UserUtilsService} from '../../../core/_base/crud/utils/user-utils.service';
+import {LayoutUtilsService} from '../../../core/_base/crud';
+import {DeceasedCustomerService} from '../../../core/auth/_services/deceased-customer.service';
+import {CommonService} from '../../../core/auth/_services/common.service';
 
 @Component({
   selector: "kt-deceased-cus",

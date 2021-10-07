@@ -1,39 +1,44 @@
 import { Component, OnInit, Inject, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar, MatTableDataSource, MatPaginator, MatSort, DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material';
-
 
 // RxJS
 import { Observable, of, Subscription, from } from 'rxjs';
 // Lodash
 import { each, find, some } from 'lodash';
 // NGRX
-import { Update } from '@ngrx/entity';
 import { Store, select } from '@ngrx/store';
 // State
-import { AppState } from '../../../../core/reducers';
 // Services and Models
 
 import { delay, finalize } from 'rxjs/operators';
 
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { LayoutUtilsService, MessageType } from '../../../../core/_base/crud';
-import { KtDialogService } from '../../../../core/_base/layout';
-import { DocumentTypeService } from '../../../../core/auth/_services/document-type.service';
-import { DocumentTypeModel } from '../../../../core/auth/_models/document-type.model';
-import { BaseResponseModel } from '../../../../core/_base/crud/models/_base.response.model';
-import { Profile } from '../../../../core/auth/_models/profile.model';
-import { Activity } from '../../../../core/auth/_models/activity.model';
-import { UserUtilsService } from '../../../../core/_base/crud/utils/user-utils.service';
-import { CustomerService } from '../../../../core/auth/_services/customer.service';
-import { CreateCustomer } from '../../../../core/auth/_models/customer.model';
-import { BaseRequestModel } from '../../../../core/_base/crud/models/_base.request.model';
 import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpResponse } from '@angular/common/http';
-import { MaskEnum, Lov, errorMessages, regExps, LovConfigurationKey, DateFormats } from '../../../../core/auth/_models/lov.class';
 import { RouterStateSnapshot, Router, ActivatedRoute } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
-import { CommonService } from '../../../../core/auth/_services/common.service';
-import { LovService } from '../../../../core/auth/_services/lov.service';
+import {MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+import {
+    DateFormats,
+    errorMessages,
+    Lov,
+    LovConfigurationKey,
+    MaskEnum,
+    regExps
+} from '../../../core/auth/_models/lov.class';
+import {DateAdapter} from 'angular-calendar';
+import {Activity} from '../../../core/auth/_models/activity.model';
+import {CreateCustomer} from '../../../core/auth/_models/customer.model';
+import {BaseRequestModel} from '../../../core/_base/crud/models/_base.request.model';
+import {DocumentTypeService} from '../../../core/auth/_services/document-type.service';
+import {AppState} from '../../../core/reducers';
+import {CustomerService} from '../../../core/auth/_services/customer.service';
+import {UserUtilsService} from '../../../core/_base/crud/utils/user-utils.service';
+import {LayoutUtilsService} from '../../../core/_base/crud';
+import {KtDialogService} from '../../../core/_base/layout';
+import {LovService} from '../../../core/auth/_services/lov.service';
+import {CommonService} from '../../../core/auth/_services/common.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {BaseResponseModel} from '../../../core/_base/crud/models/_base.response.model';
 
 
 @Component({

@@ -1,11 +1,10 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { MatDialogRef } from '@angular/material';
-import { CircleService } from '../../../../../core/auth/_services/circle.service';
+import { Branch } from 'app/core/auth/_models/branch.model';
+import { Zone } from 'app/core/auth/_models/zone.model';
 import { finalize } from 'rxjs/operators';
-import { LayoutUtilsService } from '../../../../../core/_base/crud';
-import { Circle } from '../../../../../../app/core/auth/_models/circle.model';
-import { Zone } from '../../../../../core/auth/_models/zone.model';
-import { Branch } from '../../../../../core/auth/_models/branch.model';
+import {CircleService} from '../../../../core/auth/_services/circle.service';
+import {LayoutUtilsService} from '../../../../core/_base/crud';
+import {Circle} from '../../../../core/auth/_models/circle.model';
 declare const google: any;
 
 

@@ -1,6 +1,5 @@
 // Angular
 import {Component, OnInit, Inject, ChangeDetectionStrategy, OnDestroy} from '@angular/core';
-import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 // RxJS
 import {Observable, of, Subscription} from 'rxjs';
@@ -9,25 +8,15 @@ import {finalize} from 'rxjs/operators';
 // Lodash
 import {each, find, some} from 'lodash';
 // NGRX
-import {Update} from '@ngrx/entity';
 import {Store, select} from '@ngrx/store';
+import {Permission, Role } from 'app/core/auth';
+import {Profile} from '../../../../core/auth/_models/profile.model';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { AppState } from 'app/core/reducers';
+import { ProfileService } from 'app/core/auth/_services/profile.service';
+import { LayoutUtilsService } from 'app/core/_base/crud';
 // State
-import {AppState} from '../../../../../core/reducers';
 // Services and Models
-import {
-  Role,
-  Permission,
-  selectRoleById,
-  RoleUpdated,
-  selectAllPermissions,
-  selectAllRoles,
-  selectLastCreatedRoleId,
-  RoleOnServerCreated
-} from '../../../../../core/auth';
-import {delay} from 'rxjs/operators';
-import {Profile} from '../../../../../core/auth/_models/profile.model';
-import {ProfileService} from '../../../../../core/auth/_services/profile.service';
-import {LayoutUtilsService} from '../../../../../core/_base/crud';
 
 @Component({
   selector: 'kt-role-edit-dialog',

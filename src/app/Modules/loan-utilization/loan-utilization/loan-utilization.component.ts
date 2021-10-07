@@ -1,26 +1,22 @@
 import { Component, OnInit, ViewChild, ChangeDetectorRef, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DateAdapter, MatSort, MatTableDataSource, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UserUtilsService } from '../../../../core/_base/crud/utils/user-utils.service';
-import { LayoutUtilsService } from '../../../../core/_base/crud';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { finalize } from 'rxjs/operators';
-import { DeceasedCustomerService } from '../../../../core/auth/_services/deceased-customer.service';
-import { BaseResponseModel } from '../../../../core/_base/crud/models/_base.response.model';
-import { MatDialog, MatDialogModule, MatDialogConfig } from '@angular/material';
 import { ViewFileComponent } from '../../tour-diary/view-file/view-file.component';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Customer, Documents, MarkDeceasedCustomer } from '../../../../core/auth/_models/deceased-customer.model';
+import {MatDialogRef, MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
 import { DatePipe } from '@angular/common';
-
-import { CommonService } from '../../../../core/auth/_services/common.service';
-
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
-import { MaskEnum, Lov, errorMessages, regExps, LovConfigurationKey, DateFormats } from '../../../../core/auth/_models/lov.class';
-import { LoanUtilizationService } from '../../../../core/auth/_services/loan-utilization.service';
-import { LoanUtilizationModel, UtilizationFiles, } from '../../../../core/auth/_models/loan-utilization.model';
-import { E, T } from '@angular/cdk/keycodes';
+import {DateAdapter} from 'angular-calendar';
+import {MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+import {DateFormats} from '../../../core/auth/_models/lov.class';
+import {LoanUtilizationModel, UtilizationFiles} from 'app/core/auth/_models/loan-utilization.model';
+import {Documents} from '../../../core/auth/_models/set-target.model';
+import {MatTableDataSource} from '@angular/material/table';
+import {BaseResponseModel} from '../../../core/_base/crud/models/_base.response.model';
+import {UserUtilsService} from '../../../core/_base/crud/utils/user-utils.service';
+import {LayoutUtilsService} from '../../../core/_base/crud';
+import {LoanUtilizationService} from '../../../core/auth/_services/loan-utilization.service';
 
 @Component({
   selector: 'kt-loan-utilization',
@@ -90,7 +86,6 @@ export class LoanUtilizationComponent implements OnInit {
   viewerOpen = false;
   txtValue: string = null;
   len: string = null;
-  public markDeceasedCustomer = new MarkDeceasedCustomer();
   imageUrl: any[] = [];
   videoUrl: any[] = [];
   // file:File[]=[];
@@ -110,7 +105,6 @@ export class LoanUtilizationComponent implements OnInit {
   DeceasedCustomerDisbursementRecoveries = [];
   DeceasedCustomerAttachedFile = [];
   url: string;
-  public deceasedInfo = new Customer();
   DisbursementsRecoveries = [];
   LoanApplicants = [];
   Loanpurpose = [];
@@ -633,22 +627,6 @@ export class LoanUtilizationComponent implements OnInit {
     });
   }
 
-  OnChangeDisable(value) {
-    if (value == '0') {
-      this.customerForm.controls['DetailSourceIncome'].reset();
-      this.customerForm.controls['DetailSourceIncome'].disable();
-      this.markDeceasedCustomer.OtherSourceOfIncome = null;
-    } else if (value == '1') {
-      this.customerForm.controls['DetailSourceIncome'].reset();
-      this.customerForm.controls['DetailSourceIncome'].enable();
-      this.customerForm.controls['DetailSourceIncome'].setValidators(Validators.required);
-      this.customerForm.controls['DetailSourceIncome'].updateValueAndValidity();
-    } else {
-      this.customerForm.controls['DetailSourceIncome'].reset();
-      this.customerForm.controls['DetailSourceIncome'].disable();
-      this.markDeceasedCustomer.OtherSourceOfIncome = null;
-    }
-  }
 
   changed(value) {
     this.len = value.target.value;

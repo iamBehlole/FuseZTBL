@@ -2,27 +2,25 @@
 import {Component, OnInit, ElementRef, ViewChild, ChangeDetectionStrategy, OnDestroy, ChangeDetectorRef} from '@angular/core';
 // Material
 import {SelectionModel} from '@angular/cdk/collections';
-import {MatPaginator, MatSort, MatSnackBar, MatDialog, MatTableDataSource} from '@angular/material';
 // RXJS
 import {finalize} from 'rxjs/operators';
 // NGRX
 import {Store} from '@ngrx/store';
 // Services
-import {LayoutUtilsService, MessageType} from '../../../../../core/_base/crud';
 // Models
-import {RoleDeleted} from '../../../../../core/auth';
-import {AppState} from '../../../../../core/reducers';
-import {BaseResponseModel} from '../../../../../core/_base/crud/models/_base.response.model';
-import {QueryParamsModel} from '../../../../../core/_base/crud';
-import {ActivityDataSource} from '../../../../../core/auth/_data-sources/activity.datasource';
-import {BaseComponentPage} from '../../../base-component.component';
-import {Activity} from '../../../../../core/auth/_models/activity.model';
-import {ActivityService} from '../../../../../core/auth/_services/activity.service';
 import {RoleEditDialogComponent} from '../role-edit/role-edit.dialog.component';
-import {ProfileService} from '../../../../../core/auth/_services/profile.service';
-import {Profile} from '../../../../../core/auth/_models/profile.model';
-// import { ActivityFormDialogComponent } from '../activity-edit/activity-form.dialog.component';
-//import { BaseComponentPage } from '../../../base-component.component';
+import {MatTableDataSource} from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { Activity } from 'app/core/auth/_models/activity.model';
+import { ProfileService } from 'app/core/auth/_services/profile.service';
+import { LayoutUtilsService, MessageType } from 'app/core/_base/crud';
+import { ActivityService } from 'app/core/auth/_services/activity.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { AppState } from 'app/core/reducers';
+import { BaseResponseModel } from 'app/core/_base/crud/models/_base.response.model';
+import {Profile} from '../../../../core/auth/_models/profile.model';
 
 @Component({
   selector: 'kt-roles-list',

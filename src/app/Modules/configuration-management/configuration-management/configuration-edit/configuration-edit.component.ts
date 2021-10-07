@@ -1,26 +1,25 @@
 // Angular
 import {Component, OnInit, Inject, ChangeDetectionStrategy, OnDestroy} from '@angular/core';
-import {MatDialogRef, MAT_DIALOG_DATA, MatSnackBar} from '@angular/material';
 // RxJS
 import {Observable, of, Subscription, from} from 'rxjs';
 // Lodash
 import {each, find, some} from 'lodash';
 // NGRX
-import {Update} from '@ngrx/entity';
 import {Store, select} from '@ngrx/store';
 // State
-import {AppState} from '../../../../../core/reducers';
 // Services and Models
 
 import {delay, finalize} from 'rxjs/operators';
 
 import {FormGroup, Validators, FormBuilder, FormControl} from '@angular/forms';
-import {LayoutUtilsService, MessageType} from '../../../../../core/_base/crud';
-import {KtDialogService} from '../../../../../core/_base/layout';
-import {BaseResponseModel} from '../../../../../core/_base/crud/models/_base.response.model';
-import {ConfigurationService} from '../../../../../core/auth/_services/configuration.service';
-import {Configuration} from '../../../../../core/auth/_models/configuration.model';
-import {any} from 'codelyzer/util/function';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {ConfigurationService} from '../../../../core/auth/_services/configuration.service';
+import {AppState} from '../../../../core/reducers';
+import {LayoutUtilsService} from '../../../../core/_base/crud';
+import {KtDialogService} from '../../../../core/_base/layout';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {Configuration} from '../../../../core/auth/_models/configuration.model';
+import {BaseResponseModel} from '../../../../core/_base/crud/models/_base.response.model';
 
 @Component({
   selector: 'kt-configuration-edit',

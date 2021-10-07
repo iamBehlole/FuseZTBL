@@ -1,20 +1,22 @@
-import { MatTableDataSource,MatSort ,MatPaginator} from '@angular/material';
 import { Component, OnInit, ViewChild,ChangeDetectorRef,ElementRef ,Input} from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UserUtilsService } from "../../../../core/_base/crud/utils/user-utils.service";
-import { LayoutUtilsService } from "../../../../core/_base/crud";
 import { NgxSpinnerService } from "ngx-spinner";
 import { finalize } from "rxjs/operators";
-import { DeceasedCustomerService } from "../../../../core/auth/_services/deceased-customer.service";
-import { LovService } from '../../../../core/auth/_services/lov.service';
-import { MaskEnum, errorMessages, regExps, LovConfigurationKey, Lov } from '../../../../core/auth/_models/lov.class';
-import { Zone } from '../../../../core/auth/_models/zone.model';
-import { Branch } from '../../../../core/auth/_models/branch.model';
-import { CreateCustomer } from '../../../../core/auth/_models/customer.model';
-import { CircleService } from '../../../../core/auth/_services/circle.service';
-import { Customer } from '../../../../core/auth/_models/deceased-customer.model';
-import { ReportFilters } from '../../../../core/auth/_models/report-filters.model';
 import {delay} from 'rxjs/operators'
+import {ReportFilters} from '../../../core/auth/_models/report-filters.model';
+import {MatPaginator} from '@angular/material/paginator';
+import { MatSort } from "@angular/material/sort";
+import {CreateCustomer} from '../../../core/auth/_models/customer.model';
+import {errorMessages, Lov, LovConfigurationKey, MaskEnum} from '../../../core/auth/_models/lov.class';
+import { Branch } from "app/core/auth/_models/branch.model";
+import { Zone } from "app/core/auth/_models/zone.model";
+import { Customer } from "app/core/auth/_models/deceased-customer.model";
+import {UserUtilsService} from '../../../core/_base/crud/utils/user-utils.service';
+import {LayoutUtilsService} from '../../../core/_base/crud';
+import {DeceasedCustomerService} from '../../../core/auth/_services/deceased-customer.service';
+import {LovService} from '../../../core/auth/_services/lov.service';
+import {MatTableDataSource} from '@angular/material/table';
+import {CircleService} from '../../../core/auth/_services/circle.service';
 
 @Component({
   selector: 'kt-search-deceased',

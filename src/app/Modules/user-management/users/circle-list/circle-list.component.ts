@@ -1,24 +1,26 @@
 
 // Angular
-import { Component, OnInit, ElementRef, ViewChild, ChangeDetectionStrategy, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, ChangeDetectorRef } from '@angular/core';
 // Material
-import { SelectionModel } from '@angular/cdk/collections';
-import { MatPaginator, MatSort, MatSnackBar, MatDialog, MatTableDataSource } from '@angular/material';
 // RXJS
 import { finalize } from 'rxjs/operators';
 // NGRX
-import { Store } from '@ngrx/store';
 // Services
-import { LayoutUtilsService, MessageType } from '../../../../../core/_base/crud';
-import { CircleService } from '../../../../../core/auth/_services/circle.service';
 import { GeofencingEditComponent } from '../geofencing-edit/geofencing-edit.component';
-import { Circle } from '../../../../../../app/core/auth/_models/circle.model';
-import { Zone } from '../../../../../core/auth/_models/zone.model';
-import { Branch } from '../../../../../core/auth/_models/branch.model';
 import { Router, ActivatedRoute } from '@angular/router';
-import { DataService } from '../../../../../core/auth/_models/data-service.model';
-import { UserUtilsService } from '../../../../../core/_base/crud/utils/user-utils.service';
-import { Activity } from '../../../../../core/auth/_models/activity.model';
+import {LayoutUtilsService} from '../../../../core/_base/crud';
+import {Branch} from '../../../../core/auth/_models/branch.model';
+import {Zone} from '../../../../core/auth/_models/zone.model';
+import {UserUtilsService} from '../../../../core/_base/crud/utils/user-utils.service';
+import {Activity} from '../../../../core/auth/_models/activity.model';
+import {DataService} from '../../../../core/auth/_models/data-service.model';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
+import {MatTableDataSource} from '@angular/material/table';
+import { Circle } from 'app/core/auth/_models/circle.model';
+import {MatDialog} from '@angular/material/dialog';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {CircleService} from '../../../../core/auth/_services/circle.service';
 
 @Component({
   selector: 'kt-circle-list',

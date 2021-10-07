@@ -1,5 +1,4 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 
 
 // RxJS
@@ -7,24 +6,23 @@ import { Observable, of, Subscription, from } from 'rxjs';
 // Lodash
 import { each, find, some } from 'lodash';
 // NGRX
-import { Update } from '@ngrx/entity';
 import { Store, select } from '@ngrx/store';
 // State
-import { AppState } from '../../../../../core/reducers';
 // Services and Models
 
 import { delay, finalize } from 'rxjs/operators';
 
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { LayoutUtilsService, MessageType } from '../../../../../core/_base/crud';
-import { KtDialogService } from '../../../../../core/_base/layout';
-import { DocumentTypeService } from '../../../../../core/auth/_services/document-type.service';
-import { DocumentTypeModel } from '../../../../../core/auth/_models/document-type.model';
-import { BaseResponseModel } from '../../../../../core/_base/crud/models/_base.response.model';
-import { ProfileService } from '../../../../../core/auth/_services/profile.service';
-import { Profile } from '../../../../../core/auth/_models/profile.model';
-import { Activity } from '../../../../../core/auth/_models/activity.model';
-import { UserUtilsService } from '../../../../../core/_base/crud/utils/user-utils.service';
+import {Profile} from '../../../../core/auth/_models/profile.model';
+import {Activity} from '../../../../core/auth/_models/activity.model';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { AppState } from 'app/core/reducers';
+import { KtDialogService } from 'app/core/_base/layout';
+import { ProfileService } from 'app/core/auth/_services/profile.service';
+import { DocumentTypeService } from 'app/core/auth/_services/document-type.service';
+import { LayoutUtilsService } from 'app/core/_base/crud';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { BaseResponseModel } from 'app/core/_base/crud/models/_base.response.model';
 
 @Component({
   selector: 'kt-role-edit',

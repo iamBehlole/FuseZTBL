@@ -2,20 +2,24 @@
 import { Component, OnInit, ElementRef, ViewChild, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 // Material
 import { SelectionModel } from '@angular/cdk/collections';
-import { MatPaginator, MatSort, MatSnackBar, MatDialog, MatTableDataSource } from '@angular/material';
 // RXJS
 import { finalize } from 'rxjs/operators';
 // NGRX
 import { Store } from '@ngrx/store';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AppState } from '../../../../core/reducers';
-import { LayoutUtilsService } from '../../../../core/_base/crud';
-import { CreateCustomer } from '../../../../core/auth/_models/customer.model';
-import { CustomerService } from '../../../../core/auth/_services/customer.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { MaskEnum, errorMessages, regExps, LovConfigurationKey, Lov } from '../../../../core/auth/_models/lov.class';
-import { LovService } from '../../../../core/auth/_services/lov.service';
-import { UserUtilsService } from '../../../../core/_base/crud/utils/user-utils.service';
+import { CreateCustomer } from 'app/core/auth/_models/customer.model';
+import {errorMessages, Lov, LovConfigurationKey, MaskEnum, regExps} from '../../../core/auth/_models/lov.class';
+import { AppState } from 'app/core/reducers';
+import {CustomerService} from '../../../core/auth/_services/customer.service';
+import {LovService} from '../../../core/auth/_services/lov.service';
+import {LayoutUtilsService} from '../../../core/_base/crud';
+import {UserUtilsService} from '../../../core/_base/crud/utils/user-utils.service';
+import {MatTableDataSource} from '@angular/material/table';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
+import {MatDialog} from '@angular/material/dialog';
+import {MatSnackBar} from '@angular/material/snack-bar';
 //src/app/core/_base/crud/utils/user-utils.service
 
 @Component({
@@ -46,16 +50,23 @@ export class PendingCustomersComponent implements OnInit {
   public CustomerStatusLov: any;
   _customer: CreateCustomer = new CreateCustomer();
 
-  constructor(private store: Store<AppState>,
-    public dialog: MatDialog,
-    private activatedRoute: ActivatedRoute,
-    public snackBar: MatSnackBar,
-    private filterFB: FormBuilder,
-    private router: Router,
-    private _customerService: CustomerService,
-    private _lovService: LovService,
-    private layoutUtilsService: LayoutUtilsService,
-    private userUtilsService: UserUtilsService) { }
+  private store: Store<AppState>;
+
+    private _customerService: CustomerService;
+
+    constructor(store: Store<AppState>,
+                public dialog: MatDialog,
+                private activatedRoute: ActivatedRoute,
+                public snackBar: MatSnackBar,
+                private filterFB: FormBuilder,
+                private router: Router,
+                _customerService: CustomerService,
+                private _lovService: LovService,
+                private layoutUtilsService: LayoutUtilsService,
+                private userUtilsService: UserUtilsService) {
+        this._customerService = _customerService;
+        this.store = store;
+    }
 
   ngOnInit() {
 

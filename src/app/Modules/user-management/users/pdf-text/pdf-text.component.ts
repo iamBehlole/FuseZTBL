@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { finalize } from 'rxjs/operators';
-import { UserService } from '../../../../../core/auth/_services/user.service';
+import {UserService} from '../../../../core/auth/_services/user.service';
 
 
 @Component({

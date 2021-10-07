@@ -2,55 +2,34 @@
 import {
   Component,
   OnInit,
-  Inject,
-  ChangeDetectionStrategy,
-  OnDestroy,
   ViewChild,
   ElementRef,
   ChangeDetectorRef,
-  Renderer
 } from '@angular/core';
-import {
-  MatDialogRef,
-  MAT_DIALOG_DATA,
-  MatSnackBar,
-  MatTableDataSource,
-  MatPaginator,
-  MatRadioChange,
-  MatSort,
-  MatDialog
-} from '@angular/material';
 // RxJS
-import {Observable, of, Subscription} from 'rxjs';
+import {Subscription} from 'rxjs';
 // Lodash
-import {each, find, some} from 'lodash';
 // NGRX
-import {Store, select} from '@ngrx/store';
+import {Store} from '@ngrx/store';
 // State
-import {AppState} from '../../../../../core/reducers';
 // Services and Models
-
-import {
-  Role,
-  Permission,
-  selectRoleById,
-  RoleUpdated,
-  selectAllPermissions,
-  selectAllRoles,
-  selectLastCreatedRoleId,
-  RoleOnServerCreated
-} from '../../../../../core/auth';
 import {delay, finalize} from 'rxjs/operators';
 import {FormGroup, Validators, FormBuilder, FormArray, FormControl} from '@angular/forms';
-import {BaseResponseModel} from '../../../../../core/_base/crud/models/_base.response.model';
-import {LayoutUtilsService, MessageType} from '../../../../../core/_base/crud';
-import {KtDialogService} from '../../../../../core/_base/layout';
-import {ProfileService} from '../../../../../core/auth/_services/profile.service';
-import {Profile} from '../../../../../core/auth/_models/profile.model';
-import {ActivityService} from '../../../../../core/auth/_services/activity.service';
-import {Activity} from '../../../../../core/auth/_models/activity.model';
 import {RoleEditComponent} from '../role-edit/role-edit.component';
-import {UserUtilsService} from '../../../../../core/_base/crud/utils/user-utils.service';
+import {MatTableDataSource} from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
+import {Profile} from '../../../../core/auth/_models/profile.model';
+import { Activity } from 'app/core/auth/_models/activity.model';
+import {AppState } from 'app/core/reducers';
+import { KtDialogService } from 'app/core/_base/layout';
+import { ActivityService } from 'app/core/auth/_services/activity.service';
+import { LayoutUtilsService } from 'app/core/_base/crud';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { ProfileService } from 'app/core/auth/_services/profile.service';
+import {UserUtilsService} from '../../../../core/_base/crud/utils/user-utils.service';
+import { BaseResponseModel } from 'app/core/_base/crud/models/_base.response.model';
 
 
 @Component({
@@ -110,8 +89,7 @@ export class ProfileFormDialogComponent implements OnInit {
     private _activityService: ActivityService,
     private _cdf: ChangeDetectorRef,
     public dialog: MatDialog,
-    private _snackBar: MatSnackBar,
-    private renderer: Renderer) {
+    private _snackBar: MatSnackBar,) {
   }
 
   /**
