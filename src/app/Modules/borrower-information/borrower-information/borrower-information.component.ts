@@ -1,19 +1,18 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { MatTableDataSource } from '@angular/material';
-import { LayoutUtilsService } from "../../../../core/_base/crud";
-import { NgxSpinnerService } from "ngx-spinner";
-import { BorrowerInformationService } from "../../../../core/auth/_services/borrower-information.service";
-import { BaseResponseModel } from '../../../../core/_base/crud/models/_base.response.model';
+import { LayoutUtilsService } from '../../../core/_base/crud';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { BorrowerInformationService } from '../../../core/auth/_services/borrower-information.service';
+import { BaseResponseModel } from '../../../core/_base/crud/models/_base.response.model';
 import { finalize } from "rxjs/operators";
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { CircleService } from "../../../../core/auth/_services/circle.service";
-import { Branch } from "../../../../core/auth/_models/branch.model";
-import { Circle } from "../../../../core/auth/_models/circle.model";
-import { Zone } from "../../../../core/auth/_models/zone.model";
-import { UserUtilsService } from "../../../../core/_base/crud/utils/user-utils.service";
+import { CircleService } from "../../../core/auth/_services/circle.service";
+import { Branch } from '../../../core/auth/_models/branch.model';
+import { Zone } from "../../../core/auth/_models/zone.model";
+import { UserUtilsService } from "../../../core/_base/crud/utils/user-utils.service";
 import { indexOf } from 'lodash';
 import { E } from '@angular/cdk/keycodes';
+import {MatTableDataSource} from "@angular/material/table";
 
 @Component({
   selector: 'kt-borrower-information',
