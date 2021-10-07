@@ -12,13 +12,10 @@ import {
   OnInit,
   Output,
 } from "@angular/core";
-import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
-import { String } from "lodash";
 import { BehaviorSubject, merge, Observable } from "rxjs";
 import { finalize, map } from "rxjs/operators";
-import { StringDecoder } from "string_decoder";
-import { JournalVoucherService } from "../../../../../core/auth/_services/journal-voucher.service";
-import { BaseResponseModel } from "../../../../../core/_base/crud/models/_base.response.model";
+import { JournalVoucherService } from "../../../../core/auth/_services/journal-voucher.service";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 /** Flat node with expandable and level information */
 export class DynamicFlatNode {
   constructor(

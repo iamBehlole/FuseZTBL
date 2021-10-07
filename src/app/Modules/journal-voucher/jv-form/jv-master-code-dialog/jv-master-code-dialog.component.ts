@@ -1,19 +1,20 @@
 import { DatePipe } from '@angular/common';
 import { ChangeDetectorRef, Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { MatDialog, DateAdapter, MAT_DATE_LOCALE, MAT_DATE_FORMATS, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { finalize } from 'rxjs/operators';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
-import { LayoutUtilsService } from '../../../../../core/_base/crud';
-import { LovService } from '../../../../../core/auth/_services/lov.service';
-import { CommonService } from '../../../../../core/auth/_services/common.service';
-import { CircleService } from '../../../../../core/auth/_services/circle.service';
-import { LovConfigurationKey, DateFormats, Lov } from '../../../../../core/auth/_models/lov.class';
-import { BaseResponseModel } from '../../../../../core/_base/crud/models/_base.response.model';
-import { RecoveryService } from '../../../../../core/auth/_services/recovery.service';
-import { JournalVoucherService } from '../../../../../core/auth/_services/journal-voucher.service';
+import { LayoutUtilsService } from '../../../../core/_base/crud';
+import { LovService } from '../../../../core/auth/_services/lov.service';
+import { CommonService } from '../../../../core/auth/_services/common.service';
+import { CircleService } from '../../../../core/auth/_services/circle.service';
+import { LovConfigurationKey, DateFormats, Lov } from '../../../../core/auth/_models/lov.class';
+import { BaseResponseModel } from '../../../../core/_base/crud/models/_base.response.model';
+import { RecoveryService } from '../../../../core/auth/_services/recovery.service';
+import { JournalVoucherService } from '../../../../core/auth/_services/journal-voucher.service';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from "@angular/material/core";
+import {MatDialogRef, MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
 
 
 @Component({
@@ -302,14 +303,6 @@ export class JvMasterCodeDialogComponent implements OnInit {
     //this.router.navigate(['/loan-recovery/fa-branch'], { queryParams: { transactionID: LnTransactionID, lcno: Lcno } });    
   }
 
-  isShowEditIcon(status: string, maker: string) {
-    debugger;
-    //var userInfo = this.userUtilsService.getUserDetails();
-    //if (userInfo.User.UserId == maker && (status == "P"))
-    //  return true;
-
-    //return false;
-  }
 
 
   hasError(controlName: string, errorName: string): boolean {
