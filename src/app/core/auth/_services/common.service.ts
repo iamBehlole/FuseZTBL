@@ -29,7 +29,6 @@ export class CommonService {
 
 
   stringToDateOld(date) {
-    debugger;
     if (date != undefined && date != null && date != '') {
       const day = date.substr(0, 2);
       const month = date.substr(2, 2);

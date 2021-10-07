@@ -13,7 +13,6 @@ import { HttpUtilsService } from '../../_base/crud';
 
 import { Router } from '@angular/router';
 import { UserUtilsService } from '../../_base/crud/utils/user-utils.service';
-import { NgbDateNativeUTCAdapter } from '@ng-bootstrap/ng-bootstrap';
 
 const API_USERS_URL = 'api/users';
 const API_PERMISSION_URL = 'api/permissions';
@@ -30,8 +29,8 @@ export class AuthService {
 
 
   constructor(private http: HttpClient, private httpUtils: HttpUtilsService, private router:Router) {
-    var userUtilService = new UserUtilsService();
-    var data = userUtilService.getUserDetails();
+    const userUtilService = new UserUtilsService();
+    const data = userUtilService.getUserDetails();
 
     if (data != undefined) {
       this.currentUserSubject = new BehaviorSubject<BaseResponseModel>(data);
@@ -46,7 +45,7 @@ export class AuthService {
     this.request = new BaseRequestModel();
     this.request.User = user;
     this.request.UserPasswordDetails = user;
-    var req = JSON.stringify(this.request);
+    const req = JSON.stringify(this.request);
 
     return this.http.post(`${environment.apiUrl}/Account/Login`, req,
       { headers: this.httpUtils.getHTTPHeaders() }).pipe(
@@ -54,26 +53,26 @@ export class AuthService {
       );
   }
 
-  SendOTPResuest(user:any, text):Observable<BaseResponseModel>{
+  SendOTPResuest(user: any, text):Observable<BaseResponseModel>{
 
     this.request.User =user;
-    this.request.OTP=new OTP();
+    this.request.OTP = new OTP();
     this.request.OTP.Id ="1";
     this.request.OTP.Text =text;
-    var req = JSON.stringify(this.request);
+    const req = JSON.stringify(this.request);
     return this.http.post(`${environment.apiUrl}/Account/VerifyOTP`, req,
       { headers: this.httpUtils.getHTTPHeaders() }).pipe(
         map((res: BaseResponseModel) => res)
       );
   }
 
-refreshToken(token: string) {
+refreshToken (token: string) {
   this.request = new BaseRequestModel();
   const refreshToken = JSON.parse(localStorage.getItem('ZTBLUserRefreshToke'));
   const expiredToken = JSON.parse(localStorage.getItem('ZTBLUserToken'));
-  this.request.Token=expiredToken;
-  this.request.RefreshToken=refreshToken;
-  var req = JSON.stringify(this.request);
+  this.request.Token = expiredToken;
+  this.request.RefreshToken = refreshToken;
+  const req = JSON.stringify(this.request);
 
   return this.http.post(`${environment.apiUrl}/Account/RefreshToken`, req);
 }
@@ -119,6 +118,7 @@ refreshToken(token: string) {
     }
 
     getUserById(userId: number): Observable<User> {
+
 		return this.http.get<User>(API_USERS_URL + `/${userId}`);
 	}
 
@@ -130,6 +130,7 @@ refreshToken(token: string) {
     }
 
     // UPDATE => PUT: update the user on the server
+
 	updateUser(_user: User): Observable<any> {
         const httpHeaders = new HttpHeaders();
         httpHeaders.set('Content-Type', 'application/json');

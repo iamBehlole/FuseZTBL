@@ -24,17 +24,17 @@ export class BorrowerInformationService {
   userDetail = this.userUtilsService.getUserDetails();
 
   getBorrowerInformation(limit, offset, cnic, circle){
-    var userInfo = this.userDetail;
-    var circle = userInfo.UserCircleMappings;
-    var circleIds = [];
+    const userInfo = this.userDetail;
+    const circle = userInfo.UserCircleMappings;
+    const circleIds = [];
     
     circle.forEach(element => {
       circleIds.push(element.CircleId);
     });
-    var _circles = JSON.stringify(circleIds)
+    const _circles = JSON.stringify(circleIds);
 
-    var request = {
-      Circle:{
+    const request = {
+      Circle: {
         CircleIds: _circles 
       },
       BorrowerInfo: {
@@ -48,7 +48,6 @@ export class BorrowerInformationService {
       User: userInfo.User,
       Zone: userInfo.Zone
   };
-  debugger;
     return this.http.post(`${environment.apiUrl}/Customer/Gettotalnumberofborrowersdetails`, request,
       { headers: this.httpUtils.getHTTPHeaders() }).pipe(
         map((res: BaseResponseModel) => res)

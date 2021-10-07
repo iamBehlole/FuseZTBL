@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { DatePipe } from '@angular/common';
-import { MatDialog, DateAdapter, MAT_DATE_LOCALE, MAT_DATE_FORMATS } from '@angular/material';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
-import { Lov, LovConfigurationKey, DateFormats } from '../../../../core/auth/_models/lov.class';
-import { UserUtilsService } from '../../../../core/_base/crud/utils/user-utils.service';
+import {UserUtilsService} from '../../../core/_base/crud/utils/user-utils.service';
 import { SignatureDialogDiaryComponent } from '../signature-dialog-diary/signature-dialog-diary.component';
-import { LayoutUtilsService } from "../../../../core/_base/crud";
-import { NgxSpinnerService } from "ngx-spinner";
+import {LayoutUtilsService} from '../../../core/_base/crud';
+import {NgxSpinnerService} from 'ngx-spinner';
 import { Router } from '@angular/router';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+import {MatDialog} from '@angular/material/dialog';
+import {DateFormats} from '../../../core/auth/_models/lov.class';
 
 
 @Component({
@@ -41,11 +42,10 @@ export class TourDiaryZmComponent implements OnInit {
       this.loggedInUser = userUtilsService.getUserDetails();
      }
   ngOnInit() {
-    this.createForm()
+    this.createForm();
   }
 
   isEnableReceipt(isTrCodeChange: boolean) {
-    debugger
     var Date = this.gridForm.controls.Date.value;
     if (Date._isAMomentObject == undefined) {
       try {

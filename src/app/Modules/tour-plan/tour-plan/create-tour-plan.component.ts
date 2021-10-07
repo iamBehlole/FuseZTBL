@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, SelectControlValueAccessor } from '@angular/forms';
 import { DatePipe } from '@angular/common';
-import { MatDialog, DateAdapter, MAT_DATE_LOCALE, MAT_DATE_FORMATS,MatTableDataSource } from '@angular/material';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
-import { LayoutUtilsService } from "../../../../core/_base/crud";
-import { NgxSpinnerService } from "ngx-spinner";
+import {LayoutUtilsService} from '../../../core/_base/crud';
+import {NgxSpinnerService} from 'ngx-spinner';
 import { Router } from '@angular/router';
-import {SlashDateFormats} from '../../../../core/auth/_models/slash-format.class';
-import { Lov, LovConfigurationKey, DateFormats } from '../../../../core/auth/_models/lov.class';
-import { finalize } from "rxjs/operators";
-import { CircleService } from '../../../../core/auth/_services/circle.service';
-import { UserUtilsService } from '../../../../core/_base/crud/utils/user-utils.service';
-import { TourPlan } from '../../../../core/auth/_models/tour-plan.model';
-import { TourPlanService } from '../../../../core/auth/_services/tour-plan.service';
+import {SlashDateFormats} from '../../../core/auth/_models/slash-format.class';
+import {finalize} from 'rxjs/operators';
+import {CircleService} from '../../../core/auth/_services/circle.service';
+import {UserUtilsService} from '../../../core/_base/crud/utils/user-utils.service';
+import {TourPlan} from '../../../core/auth/_models/tour-plan.model';
+import {TourPlanService} from '../../../core/auth/_services/tour-plan.service';
+import {MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+import {DateAdapter} from 'angular-calendar';
 @Component({
   selector: 'kt-create-tour-plan',
   templateUrl: './create-tour-plan.component.html',
@@ -211,9 +211,7 @@ this.TourPlan.Status="P";
            baseResponse.Message,
            baseResponse.Code = null
          );
-         debugger
        } else {
-         debugger;
          this.layoutUtilsService.alertElement(
            "",
            baseResponse.Message,
@@ -224,7 +222,7 @@ this.TourPlan.Status="P";
  }
 
  hasError(controlName: string, errorName: string): boolean {
-  //debugger;
+
   return this.TourForm.controls[controlName].hasError(errorName);
 }
   submit(){

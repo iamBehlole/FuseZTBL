@@ -1,12 +1,10 @@
 import { Component, OnInit, Inject, ViewChild } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
-import { RecoveryService } from '../../../../core/auth/_services/recovery.service';
-import { finalize } from 'rxjs/operators';
+import {RecoveryService} from '../../../core/auth/_services/recovery.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { BaseResponseModel } from '../../../../core/_base/crud/models/_base.response.model';
-import { LayoutUtilsService } from '../../../../core/_base/crud';
+import {LayoutUtilsService} from '../../../core/_base/crud';
 import { SignaturePad } from 'angular2-signaturepad';
 import { Router } from '@angular/router';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 
 @Component({
   selector: 'kt-signature-dialog-diary',
@@ -33,7 +31,6 @@ export class SignatureDialogDiaryComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<SignatureDialogDiaryComponent>,
-    //@Inject(MAT_DIALOG_DATA) public data: any,
     private _recoveryService: RecoveryService,
     private spinner: NgxSpinnerService,
     private layoutUtilsService: LayoutUtilsService,
