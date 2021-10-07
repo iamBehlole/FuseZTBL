@@ -1,7 +1,6 @@
 // Angular
 import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { HtmlClassService } from '../../../../theme/html-class.service';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 
 @Component({
   selector: 'kt-alert-dialog',
@@ -19,7 +18,6 @@ export class AlertDialogComponent implements OnInit {
 	 * @param data: any
 	 */
 	constructor(
-		public htmlClassService: HtmlClassService,
 		public dialogRef: MatDialogRef<AlertDialogComponent>,
 		@Inject(MAT_DIALOG_DATA) public data: any
 	) { }

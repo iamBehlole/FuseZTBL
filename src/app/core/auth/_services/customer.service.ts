@@ -18,20 +18,13 @@ export class CustomerService {
 
   createCustomerSave(customer: CreateCustomer): Observable<BaseResponseModel> {
 
-    debugger;
-
-    this.request = new BaseRequestModel();
     var userInfo = this.userUtilsService.getUserDetails();
     this.request.User = userInfo.User;
     this.request.Customer = customer;
     this.request.Zone = userInfo.Zone;
     this.request.Branch = userInfo.Branch;
 
-
-
     var req = JSON.stringify(this.request);
-
-    debugger;
     return this.http.post(`${environment.apiUrl}/Customer/CreateCustomer`, req,
       { headers: this.httpUtils.getHTTPHeaders() }).pipe(
         map((res: BaseResponseModel) => res)
@@ -39,11 +32,7 @@ export class CustomerService {
   }
 
   getCustomerInfo(request: BaseRequestModel): Observable<BaseResponseModel> {
-
-
     var req = JSON.stringify(request);
-
-    debugger;
     return this.http.post(`${environment.apiUrl}/Customer/GetCustomerInfo`, req,
       { headers: this.httpUtils.getHTTPHeaders() }).pipe(
         map((res: BaseResponseModel) => res)
@@ -52,15 +41,11 @@ export class CustomerService {
 
   submitNdc(customer: CreateCustomer): Observable<BaseResponseModel> {
     this.request = new BaseRequestModel();
-
     var userInfo = this.userUtilsService.getUserDetails();
     this.request.User = userInfo.User;
     this.request.Customer = customer;
     this.request.Branch = userInfo.Branch;
-
     var req = JSON.stringify(this.request);
-
-    debugger;
     return this.http.post(`${environment.apiUrl}/Customer/SubmitNDC`, req,
       { headers: this.httpUtils.getHTTPHeaders() }).pipe(
         map((res: BaseResponseModel) => res)
@@ -69,16 +54,12 @@ export class CustomerService {
 
   addCustomerInfo(customer: CreateCustomer): Observable<BaseResponseModel> {
     this.request = new BaseRequestModel();
-
     var userInfo = this.userUtilsService.getUserDetails();
     this.request.User = userInfo.User;
     this.request.Customer = customer;
     this.request.Branch = userInfo.Branch;
     this.request.Zone = userInfo.Zone;
-
     var req = JSON.stringify(this.request);
-
-    debugger;
     return this.http.post(`${environment.apiUrl}/Customer/AddCustomerInfo`, req,
       { headers: this.httpUtils.getHTTPHeaders() }).pipe(
         map((res: BaseResponseModel) => res)
@@ -87,14 +68,10 @@ export class CustomerService {
 
   refreshEcib(customer: CreateCustomer): Observable<BaseResponseModel> {
     this.request = new BaseRequestModel();
-
     var userInfo = this.userUtilsService.getUserDetails();
     this.request.User = userInfo.User;
     this.request.Customer = customer;
-
     var req = JSON.stringify(this.request);
-
-    debugger;
     return this.http.post(`${environment.apiUrl}/Customer/RefreshECIB`, req,
       { headers: this.httpUtils.getHTTPHeaders() }).pipe(
         map((res: BaseResponseModel) => res)
@@ -104,13 +81,9 @@ export class CustomerService {
 
   submitDocument(formData: any): Observable<BaseResponseModel> {
     this.request = new BaseRequestModel();
-
     var userInfo = this.userUtilsService.getUserDetails();
     this.request.User = userInfo.User;
-
     var req = JSON.stringify(this.request);
-
-    debugger;
     return this.http.post(`${environment.apiUrl}/Document/SubmitDocument`, req,
       { headers: this.httpUtils.getHTTPHeaders() }).pipe(
         map((res: BaseResponseModel) => res)
@@ -120,26 +93,18 @@ export class CustomerService {
 
   searchCustomer_bkp(customer: CreateCustomer): Observable<BaseResponseModel> {
     this.request = new BaseRequestModel();
-
     if (customer.CustomerName == null)
       customer.CustomerName = "";
-
     if (customer.FatherName == null)
       customer.FatherName = "";
-
     if (customer.Cnic == null)
       customer.Cnic = "";
-
-    debugger;
     var userInfo = this.userUtilsService.getUserDetails();
     this.request.User = userInfo.User;
     this.request.Customer = customer;
     this.request.Zone = userInfo.Zone;
     this.request.Branch = userInfo.Branch;
-
     var req = JSON.stringify(this.request);
-
-    debugger;
     return this.http.post(`${environment.apiUrl}/Customer/SearchCustomer`, req,
       { headers: this.httpUtils.getHTTPHeaders() }).pipe(
         map((res: BaseResponseModel) => res)
@@ -147,17 +112,12 @@ export class CustomerService {
   }
   searchCustomer(customer: CreateCustomer, userDetail: BaseResponseModel=null): Observable<BaseResponseModel> {
     this.request = new BaseRequestModel();
-
     if (customer.CustomerName == null)
       customer.CustomerName = "";
-
     if (customer.FatherName == null)
       customer.FatherName = "";
-
     if (customer.Cnic == null)
       customer.Cnic = "";
-
-    debugger;
     var userInfo = this.userUtilsService.getUserDetails();
     if (userDetail && userDetail.Zone) {
       userInfo.Zone = userDetail.Zone;
@@ -167,17 +127,13 @@ export class CustomerService {
     this.request.Customer = customer;
     this.request.Zone = userInfo.Zone;
     this.request.Branch = userInfo.Branch;
-
     var req = JSON.stringify(this.request);
-
-    debugger;
     return this.http.post(`${environment.apiUrl}/Customer/SearchCustomer`, req,
       { headers: this.httpUtils.getHTTPHeaders() }).pipe(
         map((res: BaseResponseModel) => res)
       );
   }
   GetCustomer(customer: CreateCustomer): Observable<BaseResponseModel> {
-
     this.request = new BaseRequestModel();
     var userInfo = this.userUtilsService.getUserDetails();
     this.request.User = userInfo.User;
@@ -185,7 +141,6 @@ export class CustomerService {
     this.request.Zone = userInfo.Zone;
     this.request.Branch = userInfo.Branch;
     var req = JSON.stringify(this.request);
-
     return this.http.post(`${environment.apiUrl}/Customer/GetCustomerDetail`, req,
       { headers: this.httpUtils.getHTTPHeaders() }).pipe(
         map((res: BaseResponseModel) => res)
@@ -195,10 +150,8 @@ export class CustomerService {
   //Find PassBook
   findPassbookCorrection(cnic){
     var userInfo = this.userUtilsService.getUserDetails();
-
     var circle = userInfo.UserCircleMappings;
     var circleIds = [];
-    
     circle.forEach(element => {
       circleIds.push(element.CircleId);
     });
@@ -216,7 +169,7 @@ export class CustomerService {
       User: userInfo.User,
       Zone: userInfo.Zone
   };
-  debugger;
+  
     return this.http.post(`${environment.apiUrl}/Land/FindPassbookCorrectionDetail`, request,
       { headers: this.httpUtils.getHTTPHeaders() }).pipe(
         map((res: BaseResponseModel) => res)
@@ -227,7 +180,6 @@ export class CustomerService {
 
 changePassbook(cnic, passbook){
   var userInfo = this.userUtilsService.getUserDetails();
-
   var request = {
     Customer: {
         Cnic: cnic 
@@ -241,7 +193,6 @@ changePassbook(cnic, passbook){
 
 var v = JSON.stringify(request);
 console.log(v)
-debugger;
   return this.http.post(`${environment.apiUrl}/Land/PassbookCorrection`, request,
     { headers: this.httpUtils.getHTTPHeaders() }).pipe(
       map((res: BaseResponseModel) => res)
@@ -273,7 +224,7 @@ getCustomerByCnic(cnic){
     User: userInfo.User,
     Zone: userInfo.Zone
 };
-debugger;
+
   return this.http.post(`${environment.apiUrl}/Customer/GetCustomerByCnicForCorrection`, request,
     { headers: this.httpUtils.getHTTPHeaders() }).pipe(
       map((res: BaseResponseModel) => res)
@@ -293,7 +244,7 @@ updateCustomerPhoneCell(cnic, phoneNumber, cusNumber){
     User: userInfo.User,
     Zone: userInfo.Zone
 };
-debugger;
+
   return this.http.post(`${environment.apiUrl}/Customer/UpdateCustomerPhoneCell`, request,
     { headers: this.httpUtils.getHTTPHeaders() }).pipe(
       map((res: BaseResponseModel) => res)
@@ -304,13 +255,13 @@ debugger;
   UploadImagesSetData(Image: any) {
 
     //var respone = this.UploadImagesCallAPI(Image);
-    debugger;
+    
   }
 
 
   public  UploadImagesCallAPI(Image,CustomerNumber) {
 
-    debugger;
+    
     const formData = new FormData();
     formData.append('file', Image);
     formData.append('Description', 'Profile Picture customer#create');
@@ -321,12 +272,5 @@ debugger;
     ).pipe(
       map((res: BaseResponseModel) => res)
     );
-
-   
-    
-
   }
-
-  
-
 }

@@ -2,31 +2,27 @@
 import { SelectionModel } from '@angular/cdk/collections';
 // Angular
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatSort, MatDialog, MatTableDataSource } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 // NGRX
 import { Store } from '@ngrx/store';
 // RXJS
 import { finalize } from 'rxjs/operators';
 // Models
-import { User, UserDeleted } from '../../../../../core/auth';
-//import { ExportUserModel } from '../../../../../core/auth/_models/export.user';
-//import { UserType } from '../../../../../core/auth/_models/user-type.model';
-//import { UserService } from '../../../../../core/auth/_services/user.service';
-import { AppState } from '../../../../../core/reducers';
 // Services
-import { LayoutUtilsService, MessageType, QueryParamsModel } from '../../../../../core/_base/crud';
-import { UserService } from '../../../../../core/auth/_services/user.service';
-//import { DefaultDatatableColumnModel } from '../../../../../core/_base/crud/models/_table-column.model';
-//import { ExcelUtilsService } from '../../../../../core/_base/crud/utils/excel-utils.service';
-//import { AE } from '../../../../../core/_base/enums/audit.enum';
-//import { PagesEnum } from '../../../../../core/_base/enums/pages.enum';
-import { BaseComponentPage } from '../../../base-component.component';
-import { GeofencingEditComponent } from '../geofencing-edit/geofencing-edit.component';
 import { UserEditComponent } from '../user-edit/user-edit.component';
-import { UserUtilsService } from '../../../../../core/_base/crud/utils/user-utils.service';
-import { Activity } from '../../../../../core/auth/_models/activity.model';
 import {CreateUserComponent} from '../create-user/create-user.component';
+import {BaseComponentPage} from '../../../base-component.component';
+import {MatTableDataSource} from '@angular/material/table';
+import {LayoutUtilsService, QueryParamsModel} from '../../../../core/_base/crud';
+import {MatPaginator} from '@angular/material/paginator';
+import {UserService} from '../../../../core/auth/_services/user.service';
+import {UserUtilsService} from '../../../../core/_base/crud/utils/user-utils.service';
+import {Activity} from '../../../../core/auth/_models/activity.model';
+import {AppState} from '../../../../core/reducers';
+import {User} from '../../../../core/auth';
+import {MatSort} from '@angular/material/sort';
+import {MatDialog} from '@angular/material/dialog';
+
 
 
 @Component({

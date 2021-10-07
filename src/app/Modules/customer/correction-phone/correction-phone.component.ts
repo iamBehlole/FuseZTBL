@@ -1,16 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { DatePipe } from '@angular/common';
-import { MatDialog, DateAdapter, MAT_DATE_LOCALE, MAT_DATE_FORMATS } from '@angular/material';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
-import { LayoutUtilsService } from "../../../../core/_base/crud";
 import { NgxSpinnerService } from "ngx-spinner";
 import { Router } from '@angular/router';
-import { Lov, LovConfigurationKey, DateFormats } from '../../../../core/auth/_models/lov.class';
 import { finalize } from "rxjs/operators";
-import { UserUtilsService } from '../../../../core/_base/crud/utils/user-utils.service';
-import { CustomerService } from '../../../../core/auth/_services/customer.service';
-import { BaseResponseModel } from '../../../../core/_base/crud/models/_base.response.model';
+import {LayoutUtilsService} from '../../../core/_base/crud';
+import {UserUtilsService} from '../../../core/_base/crud/utils/user-utils.service';
+import {CustomerService} from '../../../core/auth/_services/customer.service';
+import {MatDialog} from '@angular/material/dialog';
+import {BaseResponseModel} from '../../../core/_base/crud/models/_base.response.model';
 
 @Component({
   selector: 'kt-correction-phone',

@@ -2,12 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { LayoutUtilsService } from "../../../../../core/_base/crud";
-import { MatDialog, MatTableDataSource } from '@angular/material';
-import { GeoFencingService } from '../../../../../core/auth/_services/geo-fencing.service';
+import { GeoFencingService } from '../../../../core/auth/_services/geo-fencing.service';
 import { ViewGetFancingModalComponent } from '../view-get-fancing-modal/view-get-fancing-modal.component';
 import { finalize } from 'rxjs/operators';
-import {BaseResponseModel} from '../../../../../core/_base/crud/models/_base.response.model'
+import { BaseResponseModel } from 'app/core/_base/crud/models/_base.response.model';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatDialog } from '@angular/material/dialog';
+import { LayoutUtilsService } from 'app/core/_base/crud';
+
 @Component({
   selector: 'kt-geo-fencing-list',
   templateUrl: './geo-fencing-list.component.html',

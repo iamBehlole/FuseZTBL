@@ -1,27 +1,23 @@
 // Angular
 import { Component, OnInit, Inject, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 // RxJS
 import { Observable, of, Subscription} from 'rxjs';
 // Lodash
 import { each, find, some } from 'lodash';
 // NGRX
-import { Update } from '@ngrx/entity';
 import { Store, select } from '@ngrx/store';
 // State
-import { AppState } from '../../../../../core/reducers';
 // Services and Models
-import {
-	Role,
-	Permission,
-	selectRoleById,
-	RoleUpdated,
-	selectAllPermissions,
-	selectAllRoles,
-	selectLastCreatedRoleId,
-	RoleOnServerCreated
-} from '../../../../../core/auth';
 import { delay } from 'rxjs/operators';
+import {
+    Role,
+    selectLastCreatedRoleId,
+    selectRoleById,
+    Permission,
+    selectAllPermissions, RoleUpdated, RoleOnServerCreated
+} from 'app/core/auth';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { AppState } from 'app/core/reducers';
 
 @Component({
 	selector: 'kt-assign-pages-edit-dialog',
@@ -80,7 +76,8 @@ export class AssignPageEditDialogComponent implements OnInit, OnDestroy {
 			this.role.permissions = res.permissions;
 			this.role.isCoreRole = res.isCoreRole;
 
-			this.allPermissions$ = this.store.pipe(select(selectAllPermissions));
+			// @ts-ignore
+            this.allPermissions$ = this.store.pipe(select(selectAllPermissions));
 			this.loadPermissions();
 		});
 	}
@@ -193,7 +190,8 @@ export class AssignPageEditDialogComponent implements OnInit, OnDestroy {
 		this.loadingAfterSubmit = true;
 		this.viewLoading = true;
 		/* Server loading imitation. Remove this on real code */
-		const updateRole: Update<Role> = {
+		// @ts-ignore
+        const updateRole: Update<Role> = {
 			id: this.role.id,
 			changes: _role
 		  };

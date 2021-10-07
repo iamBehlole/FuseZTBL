@@ -25,14 +25,7 @@ export class GeoFencingService {
     this.request = new BaseRequestModel();
 
     var userInfo = this.userUtilsService.getUserDetails();
-
-    // this.request.LandInfo = landInfo;
-    // this.request.Zone = userInfo.Zone;
-    // this.request.Branch = userInfo.Branch;
-    // this.request.User = userInfo.User;
     var req = JSON.stringify(this.request);
-
-    debugger;
     return this.http.post(`${environment.apiUrl}/Land/GetLandHistory`, req,
       { headers: this.httpUtils.getHTTPHeaders() }).pipe(
         map((res: BaseResponseModel) => res)

@@ -28,12 +28,9 @@ export class JournalVoucherService {
   constructor(private http: HttpClient, private httpUtils: HttpUtilsService, private userUtilsService: UserUtilsService) { }
 
   saveApplicationHeader(loanReq: LoanApplicationHeader): Observable<BaseResponseModel>{
-    debugger;
     this.request = new BaseRequestModel();
-
     var loanInfo = new Loan();
     loanInfo.ApplicationHeader = loanReq;
-
     this.request.Loan = loanInfo;
     this.request.TranId = 0;
     var userInfo = this.userUtilsService.getUserDetails();
@@ -50,10 +47,7 @@ export class JournalVoucherService {
       );
   }
 
-
-
   createJVTransaction(jv: JournalVocherData): Observable<BaseResponseModel> {
-    debugger
     var userInfo = this.userUtilsService.getUserDetails();
     this.request.User = userInfo.User;
     //jv.UserBranchID = userInfo.Branch;
@@ -83,10 +77,6 @@ export class JournalVoucherService {
     };
 
     var req = JSON.stringify(request)
-    console.log(req)
-
-
-    debugger;
     return this.http.post(`${environment.apiUrl}/JournalVoucher/CreateJVTransaction`, request,
       { headers: this.httpUtils.getHTTPHeaders() }).pipe(
         map((res: BaseResponseModel) => res)
@@ -94,7 +84,6 @@ export class JournalVoucherService {
   }
 
   getJVMasterCodes(category: number, code: string) {
-
     var request = {
       JournalVoucher: {
         JvMasterCodes: {
@@ -125,7 +114,7 @@ export class JournalVoucherService {
       Zone: userInfo.Zone
     };
     //var req = JSON.stringify(this.request);
-    debugger;
+    
     return this.http.post(`${environment.apiUrl}/JournalVoucher/GetJVCodeDetail`, request,
       { headers: this.httpUtils.getHTTPHeaders() }).pipe(
         map((res: BaseResponseModel) => res)
@@ -146,7 +135,7 @@ export class JournalVoucherService {
       User: userInfo.User,
       Zone: userInfo.Zone
   };
-  debugger;
+  
     return this.http.post(`${environment.apiUrl}/JournalVoucher/DeleteTransactionDetail`, request,
       { headers: this.httpUtils.getHTTPHeaders() }).pipe(
         map((res: BaseResponseModel) => res)
@@ -154,7 +143,6 @@ export class JournalVoucherService {
 }
 
   getGLForLC(code: string) {
-    debugger
     var userInfo = this.userUtilsService.getUserDetails();
     var circle = userInfo.UserCircleMappings;
     var circleIds = [];
@@ -177,7 +165,7 @@ export class JournalVoucherService {
       Branch: userInfo.Branch,
     };
     //var req = JSON.stringify(this.request);
-    debugger;
+    
     return this.http.post(`${environment.apiUrl}/JournalVoucher/GetGLForJv`, request,
       { headers: this.httpUtils.getHTTPHeaders() }).pipe(
         map((res: BaseResponseModel) => res)
@@ -199,17 +187,14 @@ export class JournalVoucherService {
       Zone: userInfo.Zone
     };
     
-    debugger;
+    
     var response =  await this.http.post(`${environment.apiUrl}/JournalVoucher/GetChildNodesWithCode`, request,
       { headers: this.httpUtils.getHTTPHeaders() }).toPromise();
       return response;
   }
 
   getSearchJvTransactions(category:string, nature: string, manualVoucher:string, trDate: string) {
-    debugger
     var userInfo = this.userUtilsService.getUserDetails();
-
-    //var userInfo = this.userUtilsService.getUserDetails();
     var request = {
       JournalVoucher: {
         JournalVoucherData: {
@@ -225,7 +210,7 @@ export class JournalVoucherService {
       Zone: userInfo.Zone
     };
     
-    debugger;
+    
     return this.http.post(`${environment.apiUrl}/JournalVoucher/SearchJvTransactions?page=${this.pageIndex}&size=${this.size}`, request,
       { headers: this.httpUtils.getHTTPHeaders() }).pipe(
         map((res: BaseResponseModel) => res)
@@ -233,8 +218,6 @@ export class JournalVoucherService {
   }
 
   getChangeTransactionStatusJV(trId:string, status: string, remarks: string) {
-    debugger
-    
     var userInfo = this.userUtilsService.getUserDetails();
     var request = {
       JournalVoucher: {
@@ -250,7 +233,7 @@ export class JournalVoucherService {
       Zone: userInfo.Zone
     };
     
-    debugger;
+    
     return this.http.post(`${environment.apiUrl}/JournalVoucher/ChangeTransactionStatusJV`, request,
       { headers: this.httpUtils.getHTTPHeaders() }).pipe(
         map((res: BaseResponseModel) => res)
@@ -258,8 +241,6 @@ export class JournalVoucherService {
   }
 
   bindGridWithTrDetail(trId:string) {
-    debugger
-    
     var userInfo = this.userUtilsService.getUserDetails();
     var request = {
       JournalVoucher: {
@@ -273,7 +254,7 @@ export class JournalVoucherService {
       Zone: userInfo.Zone
     };
     
-    debugger;
+    
     return this.http.post(`${environment.apiUrl}/JournalVoucher/BindGridWithTrDetail`, request,
       { headers: this.httpUtils.getHTTPHeaders() }).pipe(
         map((res: BaseResponseModel) => res)
@@ -281,8 +262,6 @@ export class JournalVoucherService {
   }
 
   getTransactionByID(trId:string) {
-    debugger
-    
     var userInfo = this.userUtilsService.getUserDetails();
     var request = {
       JournalVoucher: {
@@ -295,8 +274,6 @@ export class JournalVoucherService {
       User: userInfo.User,
       Zone: userInfo.Zone
     };
-    
-    debugger;
     return this.http.post(`${environment.apiUrl}/JournalVoucher/GetTransactionByID`, request,
       { headers: this.httpUtils.getHTTPHeaders() }).pipe(
         map((res: BaseResponseModel) => res)

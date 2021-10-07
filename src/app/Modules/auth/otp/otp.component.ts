@@ -8,10 +8,10 @@ import { Subject } from 'rxjs';
 // Translate
 import { TranslateService } from '@ngx-translate/core';
 // Auth
-import { AuthNoticeService, AuthService } from '../../../../core/auth';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { HttpClient } from '@angular/common/http';
 import { result } from 'lodash';
+import {AuthNoticeService, AuthService} from '../../../core/auth';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 
 @Component({
   selector: 'kt-otp',

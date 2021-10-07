@@ -12,7 +12,6 @@ import { AgmCoreModule } from '@agm/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { PartialsModule } from '../../partials/partials.module';
 // Services
-import { HttpUtilsService, TypesUtilsService, InterceptService, LayoutUtilsService} from '../../../core/_base/crud';
 // Shared
 import { ActionNotificationComponent, AlertDialogComponent } from '../../partials/content/crud';
 // Components
@@ -25,37 +24,6 @@ import { AddressComponent } from './users/_subs/address/address.component';
 import { SocialNetworksComponent } from './users/_subs/social-networks/social-networks.component';
 
 // Material
-import {
-	MatInputModule,
-	MatPaginatorModule,
-	MatProgressSpinnerModule,
-	MatSortModule,
-	MatTableModule,
-	MatSelectModule,
-	MatMenuModule,
-	MatProgressBarModule,
-	MatButtonModule,
-	MatCheckboxModule,
-	MatDialogModule,
-	MatTabsModule,
-	MatNativeDateModule,
-	MatCardModule,
-	MatRadioModule,
-	MatIconModule,
-	MatDatepickerModule,
-	MatExpansionModule,
-	MatAutocompleteModule,
-	MAT_DIALOG_DEFAULT_OPTIONS,
-	MatSnackBarModule,
-	MatTooltipModule,
-    MatListModule,
-  MatChipsModule,
-
-} from '@angular/material';
-import {
-	usersReducer,
-	UserEffects
-} from '../../../core/auth';
 import { ActivityListComponent } from './activity/activity-list/activity-list.component';
 import { ActivityFormDialogComponent } from './activity/activity-edit/activity-form.dialog.component';
 import { ProfileListComponent } from './profiles/profile-list/profile-list.component';
@@ -71,8 +39,32 @@ import { RoleEditDialogComponent } from './roles/role-edit/role-edit.dialog.comp
 import { AssignPageEditDialogComponent } from './assign-pages/assign-pages-edit/assign-pages-edit.dialog.component';
 import { AssignPageListComponent } from './assign-pages/assign-pages-list/assign-pages-list.component';
 import { RolesListComponent } from './roles/roles-list/roles-list.component';
-import {IconPickerModule} from 'ngx-icon-picker';
 import {CreateUserComponent} from './users/create-user/create-user.component';
+import {UserEffects, usersReducer} from '../../core/auth';
+import {MatButtonModule} from '@angular/material/button';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatTableModule} from '@angular/material/table';
+import {MatIconModule} from '@angular/material/icon';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatCardModule} from '@angular/material/card';
+import {MatSortModule} from '@angular/material/sort';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatRadioModule} from '@angular/material/radio';
+import { MatInputModule } from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule} from '@angular/material/dialog';
+import {MatListModule} from '@angular/material/list';
+import {MatChipsModule} from '@angular/material/chips';
+import {HttpUtilsService, InterceptService, LayoutUtilsService, TypesUtilsService} from '../../core/_base/crud';
 
 const routes: Routes = [
 	{
@@ -185,7 +177,6 @@ const routes: Routes = [
     MatListModule,
     MatCardModule,
     MatChipsModule,
-    IconPickerModule,
 
 	],
 	providers: [

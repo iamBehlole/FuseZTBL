@@ -1,30 +1,34 @@
 // Angular
 import { Component, OnInit, ElementRef, ViewChild, ChangeDetectionStrategy, OnDestroy, Input, ChangeDetectorRef } from '@angular/core';
 // Material
-import { SelectionModel } from '@angular/cdk/collections';
-import { MatPaginator, MatSort, MatSnackBar, MatDialog, MatTableDataSource, DateAdapter, MAT_DATE_LOCALE, MAT_DATE_FORMATS } from '@angular/material';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 // RXJS
 import { finalize } from 'rxjs/operators';
 // NGRX
 import { Store } from '@ngrx/store';
 import { FormGroup, FormBuilder, Validators, AbstractControl, ValidatorFn } from '@angular/forms';
-import { AppState } from '../../../../core/reducers';
-import { LayoutUtilsService } from '../../../../core/_base/crud';
 import { DatePipe } from '@angular/common';
-import { CreateCustomer } from '../../../../core/auth/_models/customer.model';
 import { NgxSpinnerService } from "ngx-spinner";
 import { Router, ActivatedRoute } from '@angular/router';
-import { MaskEnum, errorMessages, regExps, LovConfigurationKey, Lov, DateFormats } from '../../../../core/auth/_models/lov.class';
-import { LovService } from '../../../../core/auth/_services/lov.service';
-import { UserUtilsService } from '../../../../core/_base/crud/utils/user-utils.service';
-import { CircleService } from '../../../../core/auth/_services/circle.service';
-import { Zone } from '../../../../core/auth/_models/zone.model';
-import { Branch } from '../../../../core/auth/_models/branch.model';
-import { LoanUtilizationService } from '../../../../core/auth/_services/loan-utilization.service';
-import { LoanUtilizationSearch } from '../../../../core/auth/_models/loan-utilization.model';
-import { CommonService } from '../../../../core/auth/_services/common.service';
-import moment from 'moment';
+import {MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+import {DateFormats, errorMessages, Lov, LovConfigurationKey, MaskEnum} from '../../../core/auth/_models/lov.class';
+import {DateAdapter} from 'angular-calendar';
+import {MatTableDataSource} from '@angular/material/table';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
+import { LoanUtilizationSearch } from 'app/core/auth/_models/loan-utilization.model';
+import { CreateCustomer } from 'app/core/auth/_models/customer.model';
+import { Branch } from 'app/core/auth/_models/branch.model';
+import { Zone } from 'app/core/auth/_models/zone.model';
+import {AppState} from '../../../core/reducers';
+import {MatDialog} from '@angular/material/dialog';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {LoanUtilizationService} from '../../../core/auth/_services/loan-utilization.service';
+import {LovService} from '../../../core/auth/_services/lov.service';
+import {LayoutUtilsService} from '../../../core/_base/crud';
+import {UserUtilsService} from '../../../core/_base/crud/utils/user-utils.service';
+import {CommonService} from '../../../core/auth/_services/common.service';
+import {CircleService} from '../../../core/auth/_services/circle.service';
 
 // Services
 

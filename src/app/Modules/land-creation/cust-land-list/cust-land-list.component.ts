@@ -1,29 +1,30 @@
 // Angular
-import { Component, OnInit, ElementRef, ViewChild, ChangeDetectionStrategy, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, ChangeDetectorRef } from '@angular/core';
 // Material
-import { SelectionModel } from '@angular/cdk/collections';
-import { MatPaginator, MatSort, MatSnackBar, MatDialog, MatTableDataSource } from '@angular/material';
 // RXJS
 import { finalize } from 'rxjs/operators';
 // NGRX
 import { Store } from '@ngrx/store';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AppState } from '../../../../core/reducers';
-import { LayoutUtilsService } from '../../../../core/_base/crud';
-import { CreateCustomer } from '../../../../core/auth/_models/customer.model';
-import { CustomerService } from '../../../../core/auth/_services/customer.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { MaskEnum, errorMessages, regExps, LovConfigurationKey, Lov } from '../../../../core/auth/_models/lov.class';
-import { LovService } from '../../../../core/auth/_services/lov.service';
-import { CustomerLandRelation } from '../../../../core/auth/_models/customer-land-relation.model';
-import { LandService } from '../../../../core/auth/_services/land.service';
-import { CircleService } from '../../../../core/auth/_services/circle.service';
-import { Zone } from '../../../../core/auth/_models/zone.model';
-import { Branch } from '../../../../core/auth/_models/branch.model';
-import { UserUtilsService } from '../../../../core/_base/crud/utils/user-utils.service';
-import { forEach } from 'lodash';
 import { NgxSpinnerService } from 'ngx-spinner';
-
+import {MatTableDataSource} from '@angular/material/table';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
+import {errorMessages, Lov, LovConfigurationKey, MaskEnum, regExps} from '../../../core/auth/_models/lov.class';
+import { CustomerLandRelation } from 'app/core/auth/_models/customer-land-relation.model';
+import {CreateCustomer} from '../../../core/auth/_models/customer.model';
+import { Branch } from 'app/core/auth/_models/branch.model';
+import { Zone } from 'app/core/auth/_models/zone.model';
+import {AppState} from '../../../core/reducers';
+import {MatDialog} from '@angular/material/dialog';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {LandService} from '../../../core/auth/_services/land.service';
+import {CustomerService} from '../../../core/auth/_services/customer.service';
+import {LovService} from '../../../core/auth/_services/lov.service';
+import {LayoutUtilsService} from '../../../core/_base/crud';
+import {CircleService} from '../../../core/auth/_services/circle.service';
+import {UserUtilsService} from '../../../core/_base/crud/utils/user-utils.service';
 
 @Component({
   selector: 'kt-cust-land-list',

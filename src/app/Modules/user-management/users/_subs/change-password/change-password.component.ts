@@ -1,18 +1,17 @@
 // Angular
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { AbstractControl, Validators, FormBuilder } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
 // RxJS
 import { BehaviorSubject } from 'rxjs';
 // NGRX
 import { Store } from '@ngrx/store';
-import { Update } from '@ngrx/entity';
+import {AuthService, User} from '../../../../../core/auth';
+import {AppState} from '../../../../../core/reducers';
+import {LayoutUtilsService} from '../../../../../core/_base/crud';
 // Auth
-import { AuthService, UserUpdated, User } from '../../../../../../core/auth/';
 // State
-import { AppState } from '../../../../../../core/reducers';
 // Layout
-import { LayoutUtilsService, MessageType } from '../../../../../../core/_base/crud';
 
 export class PasswordValidation {
 	/**
@@ -117,22 +116,6 @@ export class ChangePasswordComponent implements OnInit {
 			return;
 		}
 
-		//this.user.password = controls.password.value;
-		//const updatedUser: Update<User> = {
-		//	id: this.user.id,
-		//	changes: this.user
-		//};
-
-		//this.store.dispatch(new UserUpdated({
-		//	partialUser: updatedUser,
-		//	user: this.user
-		//}));
-
-		//this.loadData();
-		//this.loadingSubject.next(false);
-		//const message = `User password successfully has been changed.`;
-		//this.layoutUtilsService.showActionNotification(message, MessageType.Update, 5000, true, false);
-		//this.reset();
 	}
 
 	/**

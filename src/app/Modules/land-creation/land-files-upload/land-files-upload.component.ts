@@ -1,31 +1,18 @@
 
-import { Component, OnInit, ChangeDetectorRef, Inject, ViewChild } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormControl, FormArray } from '@angular/forms';
-import { MatDialogRef, MatSnackBar, MAT_DATE_FORMATS, DateAdapter, MAT_DATE_LOCALE, MatTableDataSource, MAT_DIALOG_DATA } from '@angular/material';
-import { LayoutUtilsService } from '../../../../core/_base/crud';
-import { KtDialogService } from '../../../../core/_base/layout';
+import { Component, OnInit, ChangeDetectorRef, Inject } from '@angular/core';
+import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { Lov, LovConfigurationKey, LovData, MaskEnum, regExps, errorMessages, DateFormats } from '../../../../core/auth/_models/lov.class';
-import { LovService } from '../../../../core/auth/_services/lov.service';
-import { UserUtilsService } from '../../../../core/_base/crud/utils/user-utils.service';
-import { Subject, ReplaySubject } from 'rxjs';
-import { Router, ActivatedRoute } from '@angular/router';
-import { DatePipe, formatDate } from '@angular/common';
-import { MatPaginator } from "@angular/material/paginator"
-import { MomentDateAdapter } from '@angular/material-moment-adapter';
-import { CommonService } from '../../../../core/auth/_services/common.service';
-import { AppState } from '../../../../core/reducers';
-import { CreateCustomer } from '../../../../core/auth/_models/customer.model';
-import { LandService } from '../../../../core/auth/_services/land.service';
-import { LandChargeCreation } from '../../../../core/auth/_models/land-charge-creation.model';
-import { LandChargeCreationDetails } from '../../../../core/auth/_models/land-charge-creation-details.model';
 import { finalize } from 'rxjs/operators';
-import { BaseResponseModel } from '../../../../core/_base/crud/models/_base.response.model';
-import { BaseRequestModel } from '../../../../core/_base/crud/models/_base.request.model';
-import { Activity } from '../../../../core/auth/_models/activity.model';
-import { LandInfo } from '../../../../core/auth/_models/land-info.model';
-import { UploadDocuments } from '../../../../core/auth/_models/upload-documents.model';
 import { NgxSpinnerService } from 'ngx-spinner';
+import {UploadDocuments} from '../../../core/auth/_models/upload-documents.model';
+import {KtDialogService} from '../../../core/_base/layout';
+import {LayoutUtilsService} from '../../../core/_base/crud';
+import {LandInfo} from '../../../core/auth/_models/land-info.model';
+import {LandService} from '../../../core/auth/_services/land.service';
+import {UserUtilsService} from '../../../core/_base/crud/utils/user-utils.service';
+import {AppState} from '../../../core/reducers';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 
 @Component({
   selector: 'kt-land-files-upload',

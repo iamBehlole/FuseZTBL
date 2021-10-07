@@ -1,23 +1,24 @@
 // Angular
 import { SelectionModel } from '@angular/cdk/collections';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { MatDialog, MatPaginator, MatSnackBar, MatSort, MatTableDataSource } from '@angular/material';
 // RXJS
 import { finalize } from 'rxjs/operators';
 // NGRX
 import { Store } from '@ngrx/store';
 // Services
-import { LayoutUtilsService, MessageType } from '../../../../../core/_base/crud';
 //import { ExcelUtilsService } from '../../../../../core/_base/crud/utils/ec';
 // Models
-import { RoleDeleted } from '../../../../../core/auth';
-import { AppState } from '../../../../../core/reducers';
-import { QueryParamsModel } from '../../../../../core/_base/crud';
 import { ProfileFormDialogComponent } from '../profile-edit/profile-form.dialog.component';
-import { Profile } from '../../../../../core/auth/_models/profile.model';
-import { ProfileService } from '../../../../../core/auth/_services/profile.service';
-import { ProfileDataSource } from '../../../../../core/auth/_data-sources/profile.datasource';
-import { BaseResponseModel } from '../../../../../core/_base/crud/models/_base.response.model';
+import { MatPaginator } from '@angular/material/paginator';
+import {MatTableDataSource} from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
+import { Profile } from 'app/core/auth/_models/profile.model';
+import { LayoutUtilsService, MessageType } from 'app/core/_base/crud';
+import { ProfileService } from 'app/core/auth/_services/profile.service';
+import {MatDialog} from '@angular/material/dialog';
+import { AppState } from 'app/core/reducers';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { BaseResponseModel } from 'app/core/_base/crud/models/_base.response.model';
 //import { DefaultDatatableColumnModel } from '../../../../../core/_base/crud/models/_';
 
 @Component({

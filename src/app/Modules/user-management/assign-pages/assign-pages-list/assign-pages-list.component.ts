@@ -1,8 +1,7 @@
 // Angular
 import { Component, OnInit, ElementRef, ViewChild, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 // Material
-import { SelectionModel } from '@angular/cdk/collections';
-import { MatPaginator, MatSort, MatSnackBar, MatDialog } from '@angular/material';
+import {SelectionModel } from '@angular/cdk/collections';
 // RXJS
 import { debounceTime, distinctUntilChanged, tap, skip, take, delay } from 'rxjs/operators';
 import { fromEvent, merge, Observable, of, Subscription } from 'rxjs';
@@ -10,12 +9,15 @@ import { TranslateService } from '@ngx-translate/core';
 // NGRX
 import { Store } from '@ngrx/store';
 // Services
-import { LayoutUtilsService, MessageType } from '../../../../../core/_base/crud';
 // Models
-import { Role, RolesDataSource, RoleDeleted, RolesPageRequested  } from '../../../../../core/auth';
-import { AppState } from '../../../../../core/reducers';
-import { QueryParamsModel } from '../../../../../core/_base/crud';
 import { AssignPageEditDialogComponent } from '../assign-pages-edit/assign-pages-edit.dialog.component';
+import {Role, RoleDeleted, RolesDataSource, RolesPageRequested} from 'app/core/auth';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatDialog } from '@angular/material/dialog';
+import { AppState } from 'app/core/reducers';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import {LayoutUtilsService, MessageType, QueryParamsModel} from 'app/core/_base/crud';
 
 // Components
 

@@ -2,19 +2,23 @@
 import { Component, OnInit, ElementRef, ViewChild, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 // Material
 import { SelectionModel } from '@angular/cdk/collections';
-import { MatPaginator, MatSort, MatSnackBar, MatDialog, MatTableDataSource } from '@angular/material';
 // RXJS
 import { finalize } from 'rxjs/operators';
 // NGRX
 import { Store } from '@ngrx/store';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AppState } from '../../../../core/reducers';
-import { LayoutUtilsService } from '../../../../core/_base/crud';
-import { CreateCustomer } from '../../../../core/auth/_models/customer.model';
-import { CustomerService } from '../../../../core/auth/_services/customer.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { MaskEnum, errorMessages, regExps, LovConfigurationKey, Lov } from '../../../../core/auth/_models/lov.class';
-import { LovService } from '../../../../core/auth/_services/lov.service';
+import {MatTableDataSource} from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
+import {errorMessages, Lov, LovConfigurationKey, MaskEnum, regExps} from '../../../core/auth/_models/lov.class';
+import {CreateCustomer} from '../../../core/auth/_models/customer.model';
+import {AppState} from '../../../core/reducers';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {MatDialog} from '@angular/material/dialog';
+import {CustomerService} from '../../../core/auth/_services/customer.service';
+import {LayoutUtilsService} from '../../../core/_base/crud';
+import {LovService} from '../../../core/auth/_services/lov.service';
 
 @Component({
   selector: 'kt-submit-customers',

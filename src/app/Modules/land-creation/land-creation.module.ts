@@ -5,9 +5,7 @@ import { AreaConvertorComponent } from './area-convertor/area-convertor.componen
 import { LandChargeCreationComponent } from './land-charge-creation/land-charge-creation.component';
 import { RouterModule } from '@angular/router';
 import { PartialsModule } from '../../partials/partials.module';
-import { CoreModule } from '../../../core/core.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatMenuModule, MatTableModule, MatSelectModule, MatInputModule, MatAutocompleteModule, MatRadioModule, MatIconModule, MatNativeDateModule, MatProgressBarModule, MatDatepickerModule, MatCardModule, MatPaginatorModule, MatSortModule, MatCheckboxModule, MatProgressSpinnerModule, MatSnackBarModule, MatExpansionModule, MatTabsModule, MatTooltipModule, MatDialogModule, MatListModule, MatButtonModule, MatChipsModule } from '@angular/material';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { NgxMaskModule } from 'ngx-mask';
 import { CustLandListComponent } from './cust-land-list/cust-land-list.component';
@@ -17,6 +15,30 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { CustomerModule } from '../customer/customer.module';
 import { CustomerListDialogComponent } from './customer-list-dialog/customer-list-dialog.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
+import {MatTableModule} from '@angular/material/table';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatIconModule} from '@angular/material/icon';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatSortModule} from '@angular/material/sort';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatListModule} from '@angular/material/list';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatButtonModule} from '@angular/material/button';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatCardModule} from '@angular/material/card';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {CoreModule} from '@angular/flex-layout';
 
 
 

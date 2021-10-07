@@ -5,12 +5,12 @@ import { Store } from '@ngrx/store';
 // RxJS
 import { BehaviorSubject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
+import {AuthService, SocialNetworks} from '../../../../../core/auth';
+import {LayoutUtilsService} from '../../../../../core/_base/crud';
+import {AppState} from '../../../../../core/reducers';
 // State
-import { AppState } from '../../../../../../core/reducers';
 // Auth
-import { SocialNetworks, AuthService } from '../../../../../../core/auth';
 // CRUD
-import { LayoutUtilsService } from '../../../../../../core/_base/crud';
 
 
 @Component({

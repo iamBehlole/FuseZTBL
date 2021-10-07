@@ -24,7 +24,6 @@ export class KhaadSeedVendorService {
   userDetail = this.userUtilsService.getUserDetails();
 
   getTypeLov(userInfo){
-    //debugger
     var request = {
       DeviceLocation: {
         BtsId: "0",
@@ -44,7 +43,6 @@ export class KhaadSeedVendorService {
   }
 
   addNewVendor(vendor, file: File) {
-    debugger
     var formData = new FormData();
     var userInfo = this.userUtilsService.getUserDetails();
 
@@ -66,10 +64,7 @@ export class KhaadSeedVendorService {
     formData.append('Lng', vendor.Lng);
     formData.append('File', file);
 
-
-    debugger
     if(formData.append){
-
       return this.http.post<any>(`${environment.apiUrl}/SeedKhadVendor/AddUpdateVendor`, formData,)
       .pipe(
         map((res: BaseResponseModel) => res)
@@ -77,10 +72,7 @@ export class KhaadSeedVendorService {
       }
 
    }
-
   searchVendors(limit, offSet, vendor, user) {
-    debugger
-
     //var zone, circle, branch;
     //if (user.ZoneId != null) {
     //  zone = { ZoneId: user.ZoneId }
@@ -127,9 +119,6 @@ export class KhaadSeedVendorService {
       // Branch: branch       
      }
      var req = JSON.stringify(request);
-     console.log(req)
-
-     debugger;
      return this.http.post<any>(`${environment.apiUrl}/SeedKhadVendor/GetVendors`, req,)
        .pipe(
         map((res: BaseResponseModel) => res)
@@ -137,7 +126,6 @@ export class KhaadSeedVendorService {
    }
 
    searchRadius(vendor, user){
-    debugger
     vendor.Radius = Number(vendor.Radius)
     var request = {
      DeviceLocation: {
@@ -167,7 +155,6 @@ export class KhaadSeedVendorService {
     //var req = JSON.stringify(request);
     //console.log(req)
 
-    debugger;
     return this.http.post<any>(`${environment.apiUrl}/SeedKhadVendor/GetVendors`, request,)
       .pipe(
        map((res: BaseResponseModel) => res)
@@ -175,7 +162,6 @@ export class KhaadSeedVendorService {
   }
 
    getVendor(vendor, user){
-     debugger
      vendor.Id = Number(vendor.Id)
     var request = {
       DeviceLocation: {

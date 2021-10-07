@@ -1,7 +1,7 @@
 // Angular
 import {Component} from '@angular/core';
-// Layout
-import {LayoutConfigService, OffcanvasOptions} from '../../../../core/_base/layout';
+import {LayoutConfigService, OffcanvasOptions} from '../../../core/_base/layout';
+
 
 @Component({
 	selector: 'kt-sticky-toolbar',

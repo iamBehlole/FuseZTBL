@@ -1,7 +1,4 @@
-import {
-  KtDialogService,
-  StickyDirective,
-} from "../../../../../core/_base/layout";
+
 // Angular
 import {
   AfterViewInit,
@@ -18,6 +15,7 @@ import {
 } from "@angular/core";
 // RXJS
 import { Observable, Subscription } from "rxjs";
+import {KtDialogService, StickyDirective} from '../../../../core/_base/layout';
 
 @Component({
   selector: "kt-portlet-header",

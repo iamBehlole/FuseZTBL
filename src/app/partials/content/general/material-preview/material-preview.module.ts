@@ -1,37 +1,38 @@
 // Angular
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { MatTabsModule } from '@angular/material/tabs';
-import { MatExpansionModule } from '@angular/material/expansion';
-import { MatCardModule } from '@angular/material/card';
-import { MatIconModule } from '@angular/material/icon';
-import { ClipboardModule } from 'ngx-clipboard';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatCardModule} from '@angular/material/card';
+import {MatIconModule} from '@angular/material/icon';
+// import { ClipboardModule } from 'ngx-clipboard';
 // Perfect ScrollBar
-import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
-import { MaterialPreviewComponent } from './material-preview.component';
+import {PerfectScrollbarModule} from 'ngx-perfect-scrollbar';
+import {MaterialPreviewComponent} from './material-preview.component';
 // Core Module
-import { CoreModule } from '../../../../../core/core.module';
-import { PortletModule } from '../portlet/portlet.module';
+import {PortletModule} from '../portlet/portlet.module';
 // Highlight JS
-import { HighlightModule } from 'ngx-highlightjs';
+import {HighlightModule} from 'ngx-highlightjs';
+import {CoreModule} from '../../../../core/core.module';
+import {ClipboardModule} from '@angular/cdk/clipboard';
 
 @NgModule({
-	imports: [
-		CommonModule,
-		CoreModule,
-		HighlightModule,
-		PerfectScrollbarModule,
-		PortletModule,
-		ClipboardModule,
+    imports: [
+        CommonModule,
+        CoreModule,
+        HighlightModule,
+        PerfectScrollbarModule,
+        PortletModule,
+        ClipboardModule,
 
-		// angular material modules
-		MatTabsModule,
-		MatExpansionModule,
-		MatCardModule,
-		MatIconModule,
-	],
-	exports: [MaterialPreviewComponent],
-	declarations: [MaterialPreviewComponent]
+        // angular material modules
+        MatTabsModule,
+        MatExpansionModule,
+        MatCardModule,
+        MatIconModule,
+    ],
+    exports: [MaterialPreviewComponent],
+    declarations: [MaterialPreviewComponent]
 })
 export class MaterialPreviewModule {
 }

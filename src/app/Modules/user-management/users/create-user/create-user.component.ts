@@ -3,49 +3,30 @@ import {Component, OnInit, OnDestroy, Input, ChangeDetectorRef, ElementRef, View
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
 // RxJS
-import {BehaviorSubject, Observable, of, Subscription, from} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 // NGRX
-import {Store, select} from '@ngrx/store';
-import {Update} from '@ngrx/entity';
-import {AppState} from '../../../../../core/reducers';
+import {Store} from '@ngrx/store';
 // Layout
-import {SubheaderService, LayoutConfigService, KtDialogService} from '../../../../../core/_base/layout';
-import {LayoutUtilsService, MessageType} from '../../../../../core/_base/crud';
 
 // Services and Models
-import {
-  User,
-  UserUpdated,
-  Address,
-  SocialNetworks,
-  selectHasUsersInStore,
-  selectUserById,
-  UserOnServerCreated,
-  selectLastCreatedUserId,
-  selectUsersActionLoading
-} from '../../../../../core/auth';
-import {UserService} from '../../../../../core/auth/_services/user.service';
-import {CircleService} from '../../../../../core/auth/_services/circle.service';
 import {finalize} from 'rxjs/operators';
-import {ProfileService} from '../../../../../core/auth/_services/profile.service';
-import {Profile} from '../../../../../core/auth/_models/profile.model';
-//import { UserUtilsService } from '../../../../../core/_base/crud/utils/user.utils.service';
-import {CircleModel} from '../../../../../core/configuration-management/_models/circle.model';
-import {RegionModel} from '../../../../../core/configuration-management/_models/region.model';
-
-import {Circle} from '../../../../../core/auth/_models/circle.model';
-import {Branch} from '../../../../../core/auth/_models/branch.model';
-//import { BeltModel } from '../../../../../core/configuration-management/_models/belt.model';
-//import { FranchiseModel } from '../../../../../core/configuration-management/_models/franchise.model';
-//import { AuditTrailService } from '../../../../../core/audit-trail-management/_services/audit-trail.service';
-//import { PagesEnum } from '../../../../../core/_base/enums/pages.enum';
-//import { AE } from '../../../../../core/_base/enums/audit.enum';
-import {MatSort, MatTableDataSource, MatPaginator, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
-import {Userpassworddetails} from '../../../../../core/auth/_models/userpassworddetails.model';
-import {UserCircleMapping} from '../../../../../core/auth/_models/user-circle-mapping.model';
-import {ActivityFormDialogComponent} from '../../activity/activity-edit/activity-form.dialog.component';
-import {BaseRequestModel} from '../../../../../core/_base/crud/models/_base.request.model';
-
+import {MatTableDataSource} from '@angular/material/table';
+import {BaseRequestModel} from '../../../../core/_base/crud/models/_base.request.model';
+import {KtDialogService, LayoutConfigService, SubheaderService} from '../../../../core/_base/layout';
+import {UserService} from '../../../../core/auth/_services/user.service';
+import {Userpassworddetails} from '../../../../core/auth/_models/userpassworddetails.model';
+import {UserCircleMapping} from '../../../../core/auth/_models/user-circle-mapping.model';
+import {ProfileService} from '../../../../core/auth/_services/profile.service';
+import {LayoutUtilsService} from '../../../../core/_base/crud';
+import {Branch} from '../../../../core/auth/_models/branch.model';
+import {AppState} from '../../../../core/reducers';
+import {MatPaginator} from '@angular/material/paginator';
+import {Circle} from '../../../../core/auth/_models/circle.model';
+import {User} from '../../../../core/auth';
+import {MatSort} from '@angular/material/sort';
+import {Profile} from '../../../../core/auth/_models/profile.model';
+import {MatDialogRef} from '@angular/material/dialog';
+import {CircleService} from '../../../../core/auth/_services/circle.service';
 interface Permission {
   id: number;
   name: string;
@@ -73,7 +54,6 @@ export class CreateUserComponent implements OnInit {
   userPasswordDetails: Userpassworddetails = new Userpassworddetails();
   loading: boolean;
   userStatus: boolean;
-  oldUser: User;
   submitted = false;
   viewLoading = false;
   selectedTab = 0;
@@ -88,13 +68,9 @@ export class CreateUserComponent implements OnInit {
   branches: any[];
   circleId: string[] = [];
   circles: any[];
-  employees: any[];
   profiles: Profile[];
   selection: number;
-  isProfileSelected: boolean;
   userId: string;
-  currentChannel: number = 0;
-  profilesSuccess: Profile[];
   gridHeight: string;
 
   permissions: Permission[] = [

@@ -6,12 +6,12 @@ import { BehaviorSubject, fromEvent } from 'rxjs';
 // NGRX
 import { Store } from '@ngrx/store';
 import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
+import {Address, AuthService} from '../../../../../core/auth';
+import {LayoutUtilsService} from '../../../../../core/_base/crud';
+import {AppState} from '../../../../../core/reducers';
 // Auth
-import { Address, AuthService } from '../../../../../../core/auth';
 // State
-import { AppState } from '../../../../../../core/reducers';
 // Layout
-import { LayoutUtilsService } from '../../../../../../core/_base/crud';
 
 @Component({
 	selector: 'kt-address',

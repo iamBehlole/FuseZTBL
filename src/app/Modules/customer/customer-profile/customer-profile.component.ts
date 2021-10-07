@@ -1,26 +1,35 @@
 import {Component, OnInit, ChangeDetectorRef} from '@angular/core';
 import {FormGroup, FormBuilder, Validators, FormControl} from '@angular/forms';
-import {Activity} from '../../../../core/auth/_models/activity.model';
-import {MatDialogRef, MatSnackBar, MAT_DATE_FORMATS, DateAdapter, MAT_DATE_LOCALE} from '@angular/material';
-import {AppState} from '../../../../core/reducers';
-import {LayoutUtilsService} from '../../../../core/_base/crud';
-import {KtDialogService} from '../../../../core/_base/layout';
 import {Store} from '@ngrx/store';
-import {CreateCustomer} from '../../../../core/auth/_models/customer.model';
-import {CustomerService} from '../../../../core/auth/_services/customer.service';
 import {finalize, takeUntil, retry} from 'rxjs/operators';
-import {Lov, LovConfigurationKey, LovData, MaskEnum, regExps, errorMessages, DateFormats} from '../../../../core/auth/_models/lov.class';
-import {LovService} from '../../../../core/auth/_services/lov.service';
-import {UserUtilsService} from '../../../../core/_base/crud/utils/user-utils.service';
 import {Subject, ReplaySubject} from 'rxjs';
 import {Router, ActivatedRoute} from '@angular/router';
 import {DatePipe, formatDate} from '@angular/common';
 import {MomentDateAdapter} from '@angular/material-moment-adapter';
-import {CommonService} from '../../../../core/auth/_services/common.service';
 import {FullscreenOverlayContainer} from '@angular/cdk/overlay';
 import {parse} from 'path';
 import {NgxSpinnerService} from 'ngx-spinner';
 import * as moment from 'moment';
+import {MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+import {
+    DateFormats,
+    errorMessages,
+    Lov,
+    LovConfigurationKey,
+    MaskEnum,
+    regExps
+} from '../../../core/auth/_models/lov.class';
+import {DateAdapter} from 'angular-calendar';
+import {Activity} from '../../../core/auth/_models/activity.model';
+import {CreateCustomer} from '../../../core/auth/_models/customer.model';
+import {AppState} from '../../../core/reducers';
+import {LayoutUtilsService} from '../../../core/_base/crud';
+import {KtDialogService} from '../../../core/_base/layout';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {CustomerService} from '../../../core/auth/_services/customer.service';
+import {LovService} from '../../../core/auth/_services/lov.service';
+import {UserUtilsService} from '../../../core/_base/crud/utils/user-utils.service';
+import {CommonService} from '../../../core/auth/_services/common.service';
 
 @Component({
   selector: 'kt-customer-profile',

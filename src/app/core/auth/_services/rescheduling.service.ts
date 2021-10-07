@@ -65,7 +65,6 @@ export class ReschedulingService {
   }
 
   GetRescheduling(res) : Observable<BaseResponseModel>  {
-    debugger
     this.request = new BaseRequestModel();
     var loanInfo = new Loan();
     this.generalFunction()
@@ -95,7 +94,6 @@ export class ReschedulingService {
   }
 
   SubmitRescheduleData(rescheduling : MakeReschedule): Observable<BaseResponseModel> {
-    debugger
     this.request = new BaseRequestModel();
     var loanInfo = new Loan();
     this.generalFunction()
@@ -115,7 +113,6 @@ export class ReschedulingService {
 		time: "0"
     }
     var req = JSON.stringify(this.request); 
-    console.log(req)    
     return this.http.post(`${environment.apiUrl}/Loan/SubmitRescheduleData`, req,
       { headers: this.httpUtils.getHTTPHeaders() }).pipe(
         map((res: BaseResponseModel) => res)
@@ -158,7 +155,6 @@ export class ReschedulingService {
     loanInfo.MakeReschedule = this.MakeReschedule
     this.request.Loan = loanInfo
     var req = JSON.stringify(this.request);    
-     
     return this.http.post(`${environment.apiUrl}/Loan/GetDisbursementByGl`, req,
       { headers: this.httpUtils.getHTTPHeaders() }).pipe(
         map((res: BaseResponseModel) => res)
@@ -166,7 +162,6 @@ export class ReschedulingService {
   }
 
   AddReschedulLoanInstallment(res) : Observable<BaseResponseModel>  {
-    debugger
     this.request = new BaseRequestModel();
     var loanInfo = new Loan();
     this.generalFun();
@@ -182,7 +177,6 @@ export class ReschedulingService {
   }
 
   RescheduleSearch(search) : Observable<BaseResponseModel>  {
-    debugger
     this.request = new BaseRequestModel();
     var loanInfo = new Loan();
     this.generalFun()
@@ -218,7 +212,6 @@ export class ReschedulingService {
     loanInfo.MakeReschedule =this.MakeReschedule;
     this.request.Loan = loanInfo
     var req = JSON.stringify(this.request);
-     
     return this.http.post(`${environment.apiUrl}/Loan/GetReshTransactionByID`, req,
       { headers: this.httpUtils.getHTTPHeaders() }).pipe(
         map((res: BaseResponseModel) => res)

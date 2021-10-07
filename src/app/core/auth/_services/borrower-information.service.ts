@@ -8,8 +8,6 @@ import { Activity } from '../_models/activity.model';
 import { BaseResponseModel } from '../../_base/crud/models/_base.response.model';
 import { BaseRequestModel } from '../../_base/crud/models/_base.request.model'; 
 import { UserUtilsService } from '../../_base/crud/utils/user-utils.service';
-import { Branch } from '../_models/branch.model';
-import { FormBuilder } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'

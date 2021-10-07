@@ -1,13 +1,12 @@
 import { Component, OnInit, ChangeDetectorRef } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UserUtilsService } from "../../../../core/_base/crud/utils/user-utils.service";
-import { LayoutUtilsService } from "../../../../core/_base/crud";
 import { NgxSpinnerService } from "ngx-spinner";
 import { finalize } from "rxjs/operators";
-import { DeceasedCustomerService } from "../../../../core/auth/_services/deceased-customer.service";
-import { MatTableDataSource } from '@angular/material';
-import { JvOrganizationalStructureComponent } from "../../journal-voucher/jv-form/jv-organizational-structure/jv-organizational-structure.component";
 import { ActivatedRoute, Router } from "@angular/router";
+import {MatTableDataSource} from '@angular/material/table';
+import {UserUtilsService} from '../../../core/_base/crud/utils/user-utils.service';
+import {LayoutUtilsService} from '../../../core/_base/crud';
+import {DeceasedCustomerService} from '../../../core/auth/_services/deceased-customer.service';
 
 @Component({
   selector: 'kt-referback-deceased',
