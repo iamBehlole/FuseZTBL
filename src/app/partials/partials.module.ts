@@ -91,8 +91,6 @@ import {InlineSVGModule} from 'ng-inline-svg';
 import { TimeAgoPipe } from 'time-ago-pipe';
 import {NgbDropdownModule, NgbNavModule, NgbTooltipModule} from '@ng-bootstrap/ng-bootstrap';
 
-
-// @ts-ignore
 @NgModule({
     declarations: [
         ScrollTopComponent,
@@ -148,6 +146,7 @@ import {NgbDropdownModule, NgbNavModule, NgbTooltipModule} from '@ng-bootstrap/n
     exports: [
         WidgetModule,
         PortletModule,
+        // TimeAgoPipe,
 
         ScrollTopComponent,
         NoticeComponent,

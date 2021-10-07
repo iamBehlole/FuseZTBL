@@ -34,7 +34,7 @@ export class AddressLocationComponent implements OnInit {
     };
 
 
-    @ViewChild('search', null)
+    @ViewChild('search')
     public searchElementRef: ElementRef;
 
     constructor(
