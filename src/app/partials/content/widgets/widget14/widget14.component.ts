@@ -1,9 +1,9 @@
 // Angular
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 // Layout
-import { LayoutConfigService } from '../../../../../core/_base/layout';
 // Charts
 import { Chart } from 'chart.js/dist/Chart.min.js';
+import {LayoutConfigService} from '../../../../core/_base/layout';
 
 @Component({
 	selector: 'kt-widget14',
