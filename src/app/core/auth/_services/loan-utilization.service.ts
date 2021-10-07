@@ -34,9 +34,6 @@ export class LoanUtilizationService {
     private _common: CommonService) { }
 
   GetLoanDetail(value){
-
-    console.log(value);
-    debugger
     this.request = new BaseRequestModel();
     this.request.LoanUtilization={"UtilizationDetail":{"LoanCaseNo":value}}
     this.request.TranId = 2830;
@@ -51,19 +48,14 @@ export class LoanUtilizationService {
     this.request.Circle={
       CircleIds: "53444,53443,53442,53441"
     },
-
     this.request.doPerformOTP = false;
-
     var userInfo = this.userUtilsService.getUserDetails();
-    debugger
     this.request.User = userInfo.User;
     this.request.Zone = userInfo.Zone;
     this.request.Branch = userInfo.Branch;
     this.activity.ActivityID = 1;
     this.request.Activity = this.activity;
     var req = JSON.stringify(this.request);
-    console.log(req)
-    debugger
     return this.http.post(`${environment.apiUrl}/LoanUtilization/GetLoanDetail`, req,
       { headers: this.httpUtils.getHTTPHeaders() }).pipe(
         map((res: BaseResponseModel) => res)
@@ -71,16 +63,6 @@ export class LoanUtilizationService {
   }
   searchUtilization(loanUtilization, userDetail: BaseResponseModel=null): Observable<BaseResponseModel> {
     this.request = new BaseRequestModel();
-    // if (loanUtilization.CustomerName == null)
-    // loanUtilization.CustomerName = "";
-
-    // if (loanUtilization.FatherName == null)
-    // loanUtilization.FatherName = "";
-
-    // if (loanUtilization.Cnic == null)
-    // loanUtilization.Cnic = "";
-
-    debugger;
     var userInfo = this.userUtilsService.getUserDetails();
     if (userDetail && userDetail.Zone) {
       userInfo.Zone = userDetail.Zone;
@@ -92,8 +74,6 @@ export class LoanUtilizationService {
     this.request.Branch = userInfo.Branch;
 
     var req = JSON.stringify(this.request);
-console.log(req);
-    debugger;
     return this.http.post(`${environment.apiUrl}/LoanUtilization/SearchUtilizations`, req,
       { headers: this.httpUtils.getHTTPHeaders() }).pipe(
         map((res: BaseResponseModel) => res)
@@ -102,26 +82,12 @@ console.log(req);
 
   searchLoanUtilization(loanUtilization, userDetail: BaseResponseModel=null,fromdate:string,todate:string,Limit,Offset): Observable<BaseResponseModel> {
     this.request = new BaseRequestModel();
-    // if (loanUtilization.CustomerName == null)
-    // loanUtilization.CustomerName = "";
-
-    // if (loanUtilization.FatherName == null)
-    // loanUtilization.FatherName = "";
-
-    // if (loanUtilization.Cnic == null)
-    // loanUtilization.Cnic = "";
-
-    debugger;
     var userInfo = this.userUtilsService.getUserDetails();
     if (userDetail && userDetail.Zone) {
       userInfo.Zone = userDetail.Zone;
       userInfo.Branch = userDetail.Branch;
     }
     this.request.User = userInfo.User;
-    // this.request.LoanUtilization.FromeDate=this._common.dateToString(loanUtilization.from)
-    // this.request.LoanUtilization.ToDate=this._common.dateToString(loanUtilization.to)
-    console.log(loanUtilization);
-
     if(loanUtilization){
       this.request.LoanUtilization={"UtilizationDetail":{"LoanCaseNo":loanUtilization}}
     }else{
@@ -137,8 +103,6 @@ console.log(req);
         this.request.Branch = userInfo.Branch;
 
     var req = JSON.stringify(this.request);
-console.log(req);
-    debugger;
     return this.http.post(`${environment.apiUrl}/LoanUtilization/SearchLoanForUtilization`, req,
       { headers: this.httpUtils.getHTTPHeaders() }).pipe(
         map((res: BaseResponseModel) => res)
@@ -148,7 +112,6 @@ console.log(req);
   save(value){
     value.Status="P";
     console.log("value"+value);
-    debugger;
     this.request = new BaseRequestModel();
     var userInfo = this.userUtilsService.getUserDetails();
     this.request.Circle={
@@ -170,8 +133,6 @@ console.log(req);
     console.log(this.request.User)
     var req = JSON.stringify(this.request);
     console.log(req);
-    debugger
-
       return this.http.post<any>(`${environment.apiUrl}/LoanUtilization/SaveUpdateUtilization`, this.request,
     ).pipe(
       map((res: BaseResponseModel) => res)
@@ -179,7 +140,6 @@ console.log(req);
     }
 
     statusChange(value){
-      debugger;
       this.request = new BaseRequestModel();
       var userInfo = this.userUtilsService.getUserDetails();
       this.request.Circle={
@@ -200,8 +160,6 @@ console.log(req);
       this.request.User = userInfo.User;
       console.log(this.request.User)
       var req = JSON.stringify(this.request);
-      console.log(req);
-      debugger
         return this.http.post<any>(`${environment.apiUrl}/LoanUtilization/ChangeUtilizationStatus`, this.request,
       ).pipe(
         map((res: BaseResponseModel) => res)
@@ -209,10 +167,7 @@ console.log(req);
       }
 
     SaveMedia(file,loanutilization:any,val:string){
-      //append work
-
       var formData = new FormData();
-      debugger;
       this.request = new BaseRequestModel();
       var userInfo = this.userUtilsService.getUserDetails();
       this.request.Circle={
@@ -234,23 +189,12 @@ console.log(req);
       this.request.User = userInfo.User;
       console.log(this.request.User)
       var req = JSON.stringify(this.request);
-      console.log(req);
-      debugger
-
     formData.append('UtilizationID', loanutilization.ID);
     formData.append('Lat', loanutilization.Lat);
     formData.append('Lng', loanutilization.Lng);
     formData.append('UserID', userInfo.User.UserId);
     formData.append('IsVideo', val);
     formData.append('File',file);
-
-    console.log("UtilizationID",formData.get('UtilizationID'));
-    console.log("Lat",formData.get('Lat'));
-    console.log("Lng",formData.get('Lng'));
-    console.log("UserID",formData.get('UserID'));
-    console.log("IsVideo",formData.get('IsVideo'));
-    console.log("File Data",formData.get('File'));
-
     return this.http.post<any>(`${environment.apiUrl}/LoanUtilization/UploadUtlization`, formData,
         ).pipe(
         map((res: BaseResponseModel) => res)
@@ -258,7 +202,6 @@ console.log(req);
     }
 
     GetMedia(data){
-      debugger
       this.request = new BaseRequestModel();
       this.request.LoanUtilization={"UtilizationDetail":{"LoanCaseNo": data.LoanCaseNo, "LoanDisbID":data.LoanDisbID}}
       this.request.TranId = 2830;
@@ -275,16 +218,12 @@ console.log(req);
       },
       this.request.doPerformOTP = false;
       var userInfo = this.userUtilsService.getUserDetails();
-      debugger
       this.request.User = userInfo.User;
       this.request.Zone = userInfo.Zone;
       this.request.Branch = userInfo.Branch;
       this.activity.ActivityID = 1;
       this.request.Activity = this.activity;
       var req = JSON.stringify(this.request);
-      console.log(req)
-      debugger
-
       return this.http.post(
         `${environment.apiUrl}/LoanUtilization/GetUploadedUtilizations`, req,
         { headers: this.httpUtils.getHTTPHeaders() }
@@ -293,7 +232,6 @@ console.log(req);
         );
     }
     DeleteMedia(id:string){
-      debugger
       this.request = new BaseRequestModel();
       this.request.LoanUtilization={"UtilizationDetail":{"ID": id}}
       this.request.TranId = 2830;
@@ -316,8 +254,6 @@ console.log(req);
       this.activity.ActivityID = 1;
       this.request.Activity = this.activity;
       var req = JSON.stringify(this.request);
-      console.log(req)
-      debugger
       return this.http.post(`${environment.apiUrl}/LoanUtilization/DeleteUtilizationFile`, req,
         { headers: this.httpUtils.getHTTPHeaders() }).pipe(
           map((res: BaseResponseModel) => res)
@@ -325,7 +261,6 @@ console.log(req);
     }
     
   GetLoanGL(value){
-    debugger
     this.request = new BaseRequestModel();
     this.request.LoanUtilization={"UtilizationDetail":{"LoanCaseNo":value}}
     this.request.TranId = 2830;
@@ -344,7 +279,6 @@ console.log(req);
     this.request.doPerformOTP = false;
 
     var userInfo = this.userUtilsService.getUserDetails();
-    debugger
     this.request.User = userInfo.User;
     this.request.Zone = userInfo.Zone;
     this.request.Branch =   {
@@ -357,8 +291,6 @@ console.log(req);
     this.activity.ActivityID = 1;
     this.request.Activity = this.activity;
     var req = JSON.stringify(this.request);
-    console.log(req)
-    debugger
     return this.http.post(`${environment.apiUrl}/LoanUtilization/GetGLForLoan`, req,
       { headers: this.httpUtils.getHTTPHeaders() }).pipe(
         map((res: BaseResponseModel) => res)
@@ -400,7 +332,6 @@ console.log(req);
 //   }
 
   SearchDeceasedCustomer(customer: Customer, isUserAdmin: boolean, isZoneUser: boolean): Observable<BaseResponseModel>{
-    debugger
     this.request = new BaseRequestModel();
     var deceasedInfo = new Customer();
     deceasedInfo = {
@@ -424,11 +355,6 @@ console.log(req);
     this.activity.ActivityID = 1;
     this.request.Activity = this.activity;
     var req = JSON.stringify(this.request);
-
-    console.log(req);
-    console.log(`${environment.apiUrl}/Customer/SearchDeceasedCustomer`);
-    
-    debugger
     return this.http.post(`${environment.apiUrl}/Customer/SearchDeceasedCustomer`, req,
     { headers: this.httpUtils.getHTTPHeaders() }).pipe(
       map((res: BaseResponseModel) => res)
@@ -456,7 +382,6 @@ console.log(req);
     this.activity.ActivityID = 1;
     this.request.Activity = this.activity;
     var req = JSON.stringify(this.request);
-    debugger
     return this.http.post(`${environment.apiUrl}/Customer/GetPendingDeceasedCustomerByCnic`, req,
     { headers: this.httpUtils.getHTTPHeaders() }).pipe(
       map((res: BaseResponseModel) => res)
@@ -465,19 +390,12 @@ console.log(req);
 
   MarkAsDeceasedCustomer(form,file:File){
 
-    console.log(file)
 
     var deceasedInfo = new Customer();
-    
     this.request = new BaseRequestModel();
     var formData = new FormData();
     var userInfo = this.userUtilsService.getUserDetails();
     var a =userInfo.User.BranchId
-
-    console.log(userInfo);
-
-    debugger
-
     formData.append('CustomerCnic', form.Cnic);
 
     formData.append('PPNo', userInfo.User.UserName);
@@ -506,42 +424,15 @@ console.log(req);
     formData.append('File',file);
 
     formData.append('DeceasedID', form.DeceasedID);
-
-    debugger
-    console.log("CustomerCnic", formData.get('CustomerCnic'));
-    console.log("PPNo",formData.get('PPNo'));
-    console.log("UserID",formData.get('UserID'));
-    console.log("BranchID",formData.get('BranchID'));
-    console.log("NadraNo",formData.get('NadraNo'));
-    console.log("IsNadraCertificateVerified ",formData.get('IsNadraCertificateVerified'));
-    console.log("DateOfDeath",formData.get('DateOfDeath'));
-    console.log("Remarks",formData.get('Remarks'));
-    console.log("OtherSourceOfIncome",formData.get('OtherSourceOfIncome'));
-    console.log("LegalHeirPay",formData.get('LegalHeirPay'));
-    console.log("File Data",formData.get('File'));
-    console.log("DeceasedID",formData.get('DeceasedID'));
-    // console.log("DeceasedId",formData.get('DeceasedId'));
-
-
-
-    debugger
     if(formData.append){
-
       return this.http.post<any>(`${environment.apiUrl}/Customer/MarkAsDeceasedCustomer`, formData,
     ).pipe(
       map((res: BaseResponseModel) => res)
-    );
-  // return this.http.post(`${environment.apiUrl}/Customer/MarkAsDeceasedCustomer`, formData,
-  //   { headers: this.httpUtils.getHTTPHeaders() }).pipe(
-  //     map((res: BaseResponseModel) => res)
-  //   );
-
-    }
+    );   }
     }
 
 
   GetListOfRejectedDeceasedPerson(){
-    
     var deceasedInfo = new Customer();
     this.request = new BaseRequestModel();
     deceasedInfo.Cnic = ''
@@ -554,7 +445,6 @@ console.log(req);
     this.activity.ActivityID = 1;
     this.request.Activity = this.activity;
     var req = JSON.stringify(this.request);
-    debugger
     return this.http.post(`${environment.apiUrl}/Customer/GetListOfRejectedDeceasedPerson`, req,
     { headers: this.httpUtils.getHTTPHeaders() }).pipe(
       map((res: BaseResponseModel) => res)
@@ -562,9 +452,6 @@ console.log(req);
   }
 
   SubmitCustomerNADRA(){
-
-
-    
     this.request = new BaseRequestModel();
     this.request.TranId = 0;
     var userInfo = this.userUtilsService.getUserDetails();
@@ -574,7 +461,6 @@ console.log(req);
     this.activity.ActivityID = 1;
     this.request.Activity = this.activity;
     var req = JSON.stringify(this.request);
-
     return this.http.post(`${environment.apiUrl}/Customer/SubmitCustomerNADRA`, req,
     { headers: this.httpUtils.getHTTPHeaders() }).pipe(
       map((res: BaseResponseModel) => res)

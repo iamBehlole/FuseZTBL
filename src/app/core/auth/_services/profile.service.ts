@@ -29,7 +29,6 @@ export class ProfileService {
     };
     this.request.User = this.userUtilsService.getUserDetails().User;
     var req = JSON.stringify(this.request);
-    debugger;
     return this.http.post(`${environment.apiUrl}/Activity/AddPagesWithRoleMapping`, req,
       {headers: this.httpUtils.getHTTPHeaders()}).pipe(
       map((res: BaseResponseModel) => res)
@@ -38,9 +37,7 @@ export class ProfileService {
 
   getRoleGroups() {
     this.request = new BaseRequestModel();
-
     this.request.TranId = 2830;
-
     this.request.DEVICELOCATION = {
       BTSID: '0',
       BTSLOC: '',
@@ -56,7 +53,6 @@ export class ProfileService {
       this.request.doPerformOTP = false;
 
     var userInfo = this.userUtilsService.getUserDetails();
-    debugger
     this.request.User = userInfo.User;
     this.request.Zone = userInfo.Zone;
     this.request.Branch = userInfo.Branch;
@@ -70,7 +66,6 @@ export class ProfileService {
   }
 
   createProfile(profile: Profile): Observable<BaseResponseModel> {
-
     this.request = new BaseRequestModel();
     this.request.Profile = profile;
 
@@ -84,7 +79,6 @@ export class ProfileService {
   deleteProfile(profile: Profile): Observable<BaseResponseModel> {
     this.request = new BaseRequestModel();
     this.request.Profile = profile;
-
     var req = JSON.stringify(this.request);
 
     return this.http.post(`${environment.apiUrl}/Profile/DeleteProfile`, req,
@@ -141,30 +135,11 @@ export class ProfileService {
 
     this.request = new BaseRequestModel();
     this.request.Profile = profile;
-
-    // this.request.Profile = {
-    //   IsActive: "1",
-    //   ActivityList: "2",
-    // }
     this.request.Profile['IsActive'] = 1;
     this.request.Profile['AccessToData'] = 1;
     this.request.Profile['Status'] = 0;
 
     var req = JSON.stringify(this.request);
-
-    // "ProfileID": "3",
-    // "ProfileName": "ZDPM",
-    // "ProfileDesc": "ZDPM-ZCC",
-    // "IsActive": "1",
-    // "ActivityList": "2",
-    // "Created": "2021-06-10T17:56:59.350761",
-    // "CreatedBy": "SYS_DEV_TEAM",
-    // "ChannelID": "1",    // "Status": "1",
-    // "LastAction": "CREATE",
-    // "AccessToData": "1",
-    // "GroupName": "ZDPM"
-
-    console.log(req);
     return this.http.post(`${environment.apiUrl}/Profile/AddRole`, req,
       {headers: this.httpUtils.getHTTPHeaders()}).pipe(
       map((res: BaseResponseModel) => res)
@@ -172,11 +147,9 @@ export class ProfileService {
   }
 
   UpdateRole(profile: Profile): Observable<BaseResponseModel> {
-
     this.request = new BaseRequestModel();
     this.request.Profile = profile;
     var req = JSON.stringify(this.request);
-
     return this.http.post(`${environment.apiUrl}/Profile/UpdateRole`, req,
       {headers: this.httpUtils.getHTTPHeaders()}).pipe(
       map((res: BaseResponseModel) => res)
@@ -185,16 +158,12 @@ export class ProfileService {
 
 
   DeleteRole(profile: Profile): Observable<BaseResponseModel> {
-
     this.request = new BaseRequestModel();
     this.request.Profile = profile;
     var req = JSON.stringify(this.request);
-
     return this.http.post(`${environment.apiUrl}/Profile/DeleteRole`, req,
       {headers: this.httpUtils.getHTTPHeaders()}).pipe(
       map((res: BaseResponseModel) => res)
     );
   }
-
-
 }

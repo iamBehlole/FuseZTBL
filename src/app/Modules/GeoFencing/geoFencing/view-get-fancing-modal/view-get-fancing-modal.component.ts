@@ -1,6 +1,7 @@
 import { MapsAPILoader } from '@agm/core';
 import { Component, ElementRef, Inject, NgZone, OnInit, ViewChild } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog/dialog-ref';
 
 @Component({
   selector: 'kt-view-get-fancing-modal',
@@ -75,9 +76,8 @@ export class ViewGetFancingModalComponent implements OnInit {
   }
 
 
-  @ViewChild('search', null)
+  @ViewChild('search')
   public searchElementRef: ElementRef;
-
   constructor(
     public dialogRef: MatDialogRef<ViewGetFancingModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -87,7 +87,6 @@ export class ViewGetFancingModalComponent implements OnInit {
 
   ) {
 
-     // this i write because to display a marks on first place and last place
      this.start_end_mark.push(this.latlng[0]);
      this.start_end_mark.push(this.latlng[this.latlng.length - 1]);
    }
@@ -122,9 +121,6 @@ export class ViewGetFancingModalComponent implements OnInit {
         this.PreviousLocation.push(this.data);
     }
   }
-
-
-
   ///////////////////Os Change Set Map
   onMapReady(map) {
     this.googleMap = map;
@@ -132,12 +128,6 @@ export class ViewGetFancingModalComponent implements OnInit {
   close(result: any): void {
     this.dialogRef.close(result);
   }
-
-
-
-
-
-
 }
 
 interface Loc{
