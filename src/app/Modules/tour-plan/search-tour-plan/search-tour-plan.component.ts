@@ -57,7 +57,7 @@ export class SearchTourPlanComponent implements OnInit {
     public LovCall = new Lov();
     public CustomerStatusLov: any;
     _customer: CreateCustomer = new CreateCustomer();
-    _TourPlan =  new TourPlan;
+    _TourPlan = new TourPlan();
     public Zone = new Zone();
     public Branch = new Branch();
     Zones: any = [];
@@ -72,7 +72,7 @@ export class SearchTourPlanComponent implements OnInit {
     minDate: Date;
     fromdate: string;
     todate: string;
-    Today = new Date;
+    Today = new Date();
 
     constructor(private store: Store<AppState>,
                 public dialog: MatDialog,
