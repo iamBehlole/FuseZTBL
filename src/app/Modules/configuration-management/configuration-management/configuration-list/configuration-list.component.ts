@@ -2,20 +2,23 @@
 import {Component, OnInit, ElementRef, ViewChild, ChangeDetectionStrategy, OnDestroy} from '@angular/core';
 // Material
 import {SelectionModel} from '@angular/cdk/collections';
-import {MatPaginator, MatSort, MatSnackBar, MatDialog, MatTableDataSource} from '@angular/material';
 // RXJS
 import {finalize} from 'rxjs/operators';
 // NGRX
 import {Store} from '@ngrx/store';
-import {AppState} from '../../../../../core/reducers';
-import {LayoutUtilsService, MessageType} from '../../../../../core/_base/crud';
-import {DocumentTypeModel} from '../../../../../core/auth/_models/document-type.model';
-import {DocumentTypeService} from '../../../../../core/auth/_services/document-type.service';
 import {ConfigurationEditComponent} from '../configuration-edit/configuration-edit.component';
-import {ConfigurationService} from '../../../../../core/auth/_services/configuration.service';
-import {Configuration} from '../../../../../core/auth/_models/configuration.model';
 import {ConfigurationHistoryComponent} from '../configuration-history/configuration-history.component';
+import {MatTableDataSource} from '@angular/material/table';
+import {AppState} from '../../../../core/reducers';
+import {MatDialog} from '@angular/material/dialog';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {LayoutUtilsService, MessageType} from '../../../../core/_base/crud';
+import {DocumentTypeModel} from '../../../../core/auth/_models/document-type.model';
+import {ConfigurationService} from '../../../../core/auth/_services/configuration.service';
+import { Configuration } from 'app/core/auth/_models/configuration.model';
 
+// @ts-ignore
+// import {Configuration} from '../../../../core/auth/_models/configuration.model';
 // Services
 
 @Component({
@@ -99,7 +102,7 @@ export class ConfigurationListComponent implements OnInit {
 
   addNewConfiguration() {
     const newConfiguration = new Configuration();
-    newConfiguration.clear(); // Set all defaults fields
+      newConfiguration.clear(); // Set all defaults fields
     this.editConfiguration(newConfiguration);
   }
 

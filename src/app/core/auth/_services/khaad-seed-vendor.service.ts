@@ -81,6 +81,24 @@ export class KhaadSeedVendorService {
   searchVendors(limit, offSet, vendor, user) {
     debugger
 
+    //var zone, circle, branch;
+    //if (user.ZoneId != null) {
+    //  zone = { ZoneId: user.ZoneId }
+    //}else {
+    //    zone = {}
+    //  }
+    //if (user.BranchCode != null) {
+    //  branch = {BranchCode: user.BranchCode}
+    //}
+    //else {
+    //  branch = {}
+    //}
+    //if (user.CircleId != null) {
+    //  circle = { Id: user.CircleId }
+    //} else {
+    //  circle = {}
+    //}
+
      var request = {
       DeviceLocation: {
         BtsId: "0",
@@ -103,7 +121,10 @@ export class KhaadSeedVendorService {
        },
        Branch: {
          BranchCode: user.BranchCode
-       }       
+       }
+      //Circle: circle,
+      //Zone: zone,
+      // Branch: branch       
      }
      var req = JSON.stringify(request);
      console.log(req)

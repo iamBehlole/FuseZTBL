@@ -81,8 +81,6 @@ export class SetRolesService {
     this.request = new BaseRequestModel();
     var userInfo = this.userUtilsService.getUserDetails();
     //var circle = userInfo.UserCircleMappings;
-    
-    
     this.request.doPerformOTP = false;
     debugger
     this.request.User = userInfo.User;

@@ -11,48 +11,42 @@ import { EffectsModule } from '@ngrx/effects';
 import { TranslateModule } from '@ngx-translate/core';
 import { PartialsModule } from '../../partials/partials.module';
 // Services
-import { HttpUtilsService, TypesUtilsService, InterceptService, LayoutUtilsService } from '../../../core/_base/crud';
 // Shared
 import { ActionNotificationComponent } from '../../partials/content/crud';
 import { ConfigurationManagementComponent } from './configuration-management.component';
 
 // Components
-import {
-	usersReducer,
-	UserEffects
-} from '../../../core/auth';
 
 // Material
-import {
-	MatInputModule,
-	MatPaginatorModule,
-	MatProgressSpinnerModule,
-	MatSortModule,
-	MatTableModule,
-	MatSelectModule,
-	MatMenuModule,
-	MatProgressBarModule,
-	MatButtonModule,
-	MatCheckboxModule,
-	MatDialogModule,
-	MatTabsModule,
-	MatNativeDateModule,
-	MatCardModule,
-	MatRadioModule,
-	MatIconModule,
-	MatDatepickerModule,
-	MatExpansionModule,
-	MatAutocompleteModule,
-	MAT_DIALOG_DEFAULT_OPTIONS,
-	MatSnackBarModule,
-	MatTooltipModule
-} from '@angular/material';
 import { DocumentTypeEditComponent } from './document-type-edit/document-type-edit.component';
 import { DocumentTypeListComponent } from './document-type-list/document-type-list.component';
 import { ConfigurationListComponent } from './configuration-management/configuration-list/configuration-list.component';
 import { ConfigurationEditComponent } from './configuration-management/configuration-edit/configuration-edit.component';
 import { ConfigurationHistoryComponent } from './configuration-management/configuration-history/configuration-history.component';
 import { RefreshLovComponent } from './refresh-lov/refresh-lov.component';
+import {UserEffects, usersReducer} from '../../core/auth';
+import { MatButtonModule } from '@angular/material/button';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatSelectModule} from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatNativeDateModule } from '@angular/material/core';
+import {MatDatepickerModule } from '@angular/material/datepicker';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import {MatTableModule} from '@angular/material/table';
+import {MatRadioModule} from '@angular/material/radio';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import {MatIconModule} from '@angular/material/icon';
+import {MatCardModule} from '@angular/material/card';
+import {MatSortModule} from '@angular/material/sort';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule} from '@angular/material/dialog';
+import {HttpUtilsService, InterceptService, LayoutUtilsService, TypesUtilsService} from '../../core/_base/crud';
 
 const routes: Routes = [
 	{

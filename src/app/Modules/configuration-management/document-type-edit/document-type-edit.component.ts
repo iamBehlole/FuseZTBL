@@ -1,26 +1,26 @@
 
 // Angular
 import { Component, OnInit, Inject, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 // RxJS
 import { Observable, of, Subscription, from } from 'rxjs';
 // Lodash
 import { each, find, some } from 'lodash';
 // NGRX
-import { Update } from '@ngrx/entity';
 import { Store, select } from '@ngrx/store';
 // State
-import { AppState } from '../../../../core/reducers';
 // Services and Models
 
 import { delay, finalize } from 'rxjs/operators';
 
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { LayoutUtilsService, MessageType } from '../../../../core/_base/crud';
-import { KtDialogService } from '../../../../core/_base/layout';
-import { DocumentTypeService } from '../../../../core/auth/_services/document-type.service';
-import { DocumentTypeModel } from '../../../../core/auth/_models/document-type.model';
-import { BaseResponseModel } from '../../../../core/_base/crud/models/_base.response.model';
+import {DocumentTypeModel} from '../../../core/auth/_models/document-type.model';
+import {AppState} from '../../../core/reducers';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {DocumentTypeService} from '../../../core/auth/_services/document-type.service';
+import {LayoutUtilsService} from '../../../core/_base/crud';
+import {KtDialogService} from '../../../core/_base/layout';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {BaseResponseModel} from '../../../core/_base/crud/models/_base.response.model';
 
 
 @Component({

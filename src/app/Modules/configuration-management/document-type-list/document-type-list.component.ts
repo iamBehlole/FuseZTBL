@@ -3,16 +3,20 @@
 import { Component, OnInit, ElementRef, ViewChild, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 // Material
 import { SelectionModel } from '@angular/cdk/collections';
-import { MatPaginator, MatSort, MatSnackBar, MatDialog, MatTableDataSource } from '@angular/material';
 // RXJS
 import { finalize } from 'rxjs/operators';
 // NGRX
 import { Store } from '@ngrx/store';
-import { AppState } from '../../../../core/reducers';
-import { LayoutUtilsService, MessageType } from '../../../../core/_base/crud';
-import { DocumentTypeModel } from '../../../../core/auth/_models/document-type.model';
-import { DocumentTypeService } from '../../../../core/auth/_services/document-type.service';
 import { DocumentTypeEditComponent } from '../document-type-edit/document-type-edit.component';
+import {DocumentTypeModel} from '../../../core/auth/_models/document-type.model';
+import { MatPaginator } from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
+import {MatTableDataSource} from '@angular/material/table';
+import {AppState} from '../../../core/reducers';
+import {LayoutUtilsService, MessageType} from '../../../core/_base/crud';
+import {MatDialog} from '@angular/material/dialog';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {DocumentTypeService} from '../../../core/auth/_services/document-type.service';
 // Services
 
 @Component({
