@@ -1,14 +1,14 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { MatTableDataSource } from '@angular/material';
-import { LayoutUtilsService } from "../../../../core/_base/crud";
-import { NgxSpinnerService } from "ngx-spinner";
-import { VillageWiseBenchMarkingService } from "../../../../core/auth/_services/village-wise-bench-marking.service";
-import { BaseResponseModel } from '../../../../core/_base/crud/models/_base.response.model';
-import { finalize } from "rxjs/operators";
+import { MatTableDataSource } from '@angular/material/table';
+import { LayoutUtilsService } from '../../../core/_base/crud';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { VillageWiseBenchMarkingService } from '../../../core/auth/_services/village-wise-bench-marking.service';
+import { BaseResponseModel } from '../../../core/_base/crud/models/_base.response.model';
+import { finalize } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { VillageBenchMark} from '../../../../core/auth/_models/village-benchmark.model';
-import { UserUtilsService } from "../../../../core/_base/crud/utils/user-utils.service";
+import { VillageBenchMark} from '../../../core/auth/_models/village-benchmark.model';
+import { UserUtilsService } from '../../../core/_base/crud/utils/user-utils.service';
 
 @Component({
   selector: 'kt-get-village-bench-marking',
@@ -17,37 +17,37 @@ import { UserUtilsService } from "../../../../core/_base/crud/utils/user-utils.s
 })
 export class GetVillageBenchMarkingComponent implements OnInit {
 
-  displayedColumns = ['VillageName', 'NoOfFormaer', 'FarmSize', 'GenderCount', 'GenderType','AverageLoanSize', 'AgriBusinessPotential'];
+  displayedColumns = ['VillageName', 'NoOfFormaer', 'FarmSize', 'GenderCount', 'GenderType', 'AverageLoanSize', 'AgriBusinessPotential'];
 
-  getVillageBenchmarkForm : FormGroup;
+  getVillageBenchmarkForm: FormGroup;
 
   dv;
   itemsPerPage = 10;
   totalItems;
   pageIndex = 1;
 
-  getVillage : any = {};
+  getVillage: any = {};
 
-  matTableLenght : boolean = false;
+  matTableLenght = false;
   LoggedInUserInfo: BaseResponseModel;
 
-  selected_b;
-  selected_z;
+  selectedB;
+  selectedZ;
 
-  //Zone Inventory
+  // Zone Inventory
   Zone: any = [];
   SelectedZones: any = [];
 
-  //Branch inventory
+  // Branch inventory
   Branches: any = [];
   SelectedBranches: any = [];
 
-  //Circle Inventory
+  // Circle Inventory
   Circles: any = [];
   SelectedCircles: any = [];
 
-  //dataSource = new MatTableDataSource();
-  dataSource : MatTableDataSource<VillageBenchMark>
+  // dataSource = new MatTableDataSource();
+  dataSource: MatTableDataSource<VillageBenchMark>;
 
   constructor(
     private layoutUtilsService: LayoutUtilsService,
@@ -60,13 +60,14 @@ export class GetVillageBenchMarkingComponent implements OnInit {
     private userUtilsService: UserUtilsService,
   ) { }
 
-  ngOnInit() {
+  ngOnInit(): void{
     
     this.createForm();
     this.LoggedInUserInfo = this.userUtilsService.getUserDetails();
 
-    if (this.LoggedInUserInfo.Branch.BranchCode != "All") {
-      debugger;
+      // tslint:disable-next-line:triple-equals
+    if (this.LoggedInUserInfo.Branch.BranchCode != 'All') {
+
       this.Circles = this.LoggedInUserInfo.UserCircleMappings;
       this.SelectedCircles = this.Circles;
 
@@ -76,28 +77,26 @@ export class GetVillageBenchMarkingComponent implements OnInit {
       this.Zone = this.LoggedInUserInfo.Zone;
       this.SelectedZones = this.Zone;
 
-      this.selected_z = this.SelectedZones.ZoneId
-      this.selected_b = this.SelectedBranches.BranchId
-      console.log(this.SelectedZones)
-      this.getVillageBenchmarkForm.controls["Zone"].setValue(this.SelectedZones.ZoneName);
-      this.getVillageBenchmarkForm.controls["Branch"].setValue(this.SelectedBranches.Name);
+      this.selectedZ = this.SelectedZones.ZoneId;
+      this.selectedB = this.SelectedBranches.BranchId;
+      console.log(this.SelectedZones);
+      this.getVillageBenchmarkForm.controls['Zone'].setValue(this.SelectedZones.ZoneName);
+      this.getVillageBenchmarkForm.controls['Branch'].setValue(this.SelectedBranches.Name);
     }
 
   }
 
+    // tslint:disable-next-line:typedef
   createForm(){
     this.getVillageBenchmarkForm = this.fb.group({
-      Zone:[''],
-      Branch:[''],
-      Circle:[''],
-      VillageName:['']
-    })
+      Zone: [''],
+      Branch: [''],
+      Circle: [''],
+      VillageName: ['']
+    });
   }
 
-  viewBenchMark(VillageBenchMark : any){
-
-  }
-
+    // tslint:disable-next-line:typedef
   search(){
     this.getVillage.Branch = this.getVillageBenchmarkForm.controls.Branch.value;
     this.getVillage.Circle = this.getVillageBenchmarkForm.controls.Circle.value;
@@ -109,12 +108,11 @@ export class GetVillageBenchMarkingComponent implements OnInit {
       this.spinner.hide();
     })
     )
-    .subscribe((baseResponse: BaseResponseModel) =>{
-      if(baseResponse.Success === true){
-        debugger
-        this.dataSource = baseResponse.VillageBenchMarking.VillageBenchMarkingList
-        this.matTableLenght = true
-        this.dv = this.dataSource
+    .subscribe((baseResponse: BaseResponseModel) => {
+      if (baseResponse.Success === true){
+        this.dataSource = baseResponse.VillageBenchMarking.VillageBenchMarkingList;
+        this.matTableLenght = true;
+        this.dv = this.dataSource;
         this.totalItems = this.dv.length;
         this.dataSource = this.dv.slice(0, this.itemsPerPage);
       }
@@ -124,16 +122,17 @@ export class GetVillageBenchMarkingComponent implements OnInit {
           // this.dataSource = this.dv.slice(1, 0);//this.dv.slice(2 * this.itemsPerPage - this.itemsPerPage, 2 * this.itemsPerPage);
           // this.pageIndex = 1;
           // this.dv = this.dv.slice(1,0);
-          this.layoutUtilsService.alertElement("", baseResponse.Message);
+        this.layoutUtilsService.alertElement('', baseResponse.Message);
       }
-    })
+    });
   }
 
+    // tslint:disable-next-line:typedef
   paginate(pageIndex: any, pageSize: any = this.itemsPerPage) {
     this.itemsPerPage = pageSize;
     this.pageIndex = pageIndex;
-    //this.OffSet = pageIndex;
-    this.dataSource = this.dv.slice(pageIndex * this.itemsPerPage - this.itemsPerPage, pageIndex * this.itemsPerPage); //slice is used to get limited amount of data from APi
+    // this.OffSet = pageIndex;
+    this.dataSource = this.dv.slice(pageIndex * this.itemsPerPage - this.itemsPerPage, pageIndex * this.itemsPerPage); // slice is used to get limited amount of data from APi
   }
 
 }

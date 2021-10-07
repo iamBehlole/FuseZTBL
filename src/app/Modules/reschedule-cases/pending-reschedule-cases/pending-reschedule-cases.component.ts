@@ -1,16 +1,16 @@
-import { Loan } from "../../../../core/auth/_models/loan-application-header.model";
+import { Loan } from '../../../core/auth/_models/loan-application-header.model';
 import {
   Lov,
   LovConfigurationKey,
-} from "../../../../core/auth/_models/lov.class";
-import { ChangeDetectorRef, Component, OnInit, Input } from "@angular/core";
-import { MatTableDataSource } from "@angular/material";
-import { NgxSpinnerService } from "ngx-spinner";
-import { ReschedulingService } from "../../../../core/auth/_services/rescheduling.service";
-import { BaseResponseModel } from "../../../../core/_base/crud/models/_base.response.model";
-import { finalize } from "rxjs/operators";
-import { LayoutUtilsService } from "../../../../core/_base/crud";
-import { ActivatedRoute, Router } from "@angular/router";
+} from '../../../core/auth/_models/lov.class';
+import { ChangeDetectorRef, Component, OnInit, Input } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { ReschedulingService } from '../../../core/auth/_services/rescheduling.service';
+import { BaseResponseModel } from '../../../core/_base/crud/models/_base.response.model';
+import { finalize } from 'rxjs/operators';
+import { LayoutUtilsService } from '../../../core/_base/crud';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MatTableDataSource } from '@angular/material/table/table-data-source';
 
 @Component({
   selector: 'kt-pending-reschedule-cases',
@@ -18,18 +18,18 @@ import { ActivatedRoute, Router } from "@angular/router";
   styleUrls: ['./pending-reschedule-cases.component.scss']
 })
 export class PendingRescheduleCasesComponent implements OnInit {
-  displayedColumns = ['Branch', 'TransactionDate', 'LoanApp', 'GlDescription', 'Status', 'Scheme', 'OldDate','AcStatus', 'View', 'Submit'];
+  displayedColumns = ['Branch', 'TransactionDate', 'LoanApp', 'GlDescription', 'Status', 'Scheme', 'OldDate', 'AcStatus', 'View', 'Submit'];
 
-  dataSource : MatTableDataSource<Pending>;
+  dataSource: MatTableDataSource<Pending>;
   ELEMENT_DATA: Pending[] = [];
   Mydata: any;
-  //Loan Status inventory
+  // Loan Status inventory
   loanResch: any;
-  //pagination
-  itemsPerPage = 10; //you could use your specified
+  // pagination
+  itemsPerPage = 10; // you could use your specified
   totalItems: number | any;
   pageIndex = 1;
-  dv: number | any; //use later
+  dv: number | any; // use later
 
   OffSet: any;
 
@@ -50,17 +50,18 @@ export class PendingRescheduleCasesComponent implements OnInit {
     private activatedRoute: ActivatedRoute
   ) { }
 
-  ngOnInit() {
+  ngOnInit(): void{
     this.spinner.show();
     this.spinner.hide();
     this.loadData();
   }
 
 
+    // tslint:disable-next-line:typedef
   loadData(){
-    this.search.LcNo = "";
-    this.search.Appdt = "";
-    this.search.Status = "1";
+    this.search.LcNo = '';
+    this.search.Appdt = '';
+    this.search.Status = '1';
     this._reschedulingService
       .RescheduleSearch(this.search)
       .pipe(
@@ -71,12 +72,11 @@ export class PendingRescheduleCasesComponent implements OnInit {
         })
       )
       .subscribe((baseResponse: BaseResponseModel) => {
-        debugger;
         if (baseResponse.Success === true) {
           this.Mydata = baseResponse.Loan.ReschedulingSearch;
-          console.log(this.Mydata)
-          debugger;
-          for (let data in this.Mydata) {
+          console.log(this.Mydata);
+            // tslint:disable-next-line:forin
+          for (const data in this.Mydata) {
             this.ELEMENT_DATA.push({
               branch: this.Mydata[data].OrgUnitName,
               transactionDate: this.Mydata[data].WorkingDate,
@@ -92,41 +92,41 @@ export class PendingRescheduleCasesComponent implements OnInit {
             });
           }
 
-          debugger;
           this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
-          console.log(this.dataSource)
+          console.log(this.dataSource);
           
-          if (this.dataSource.data.length > 0)
+          if (this.dataSource.data.length > 0) {
             this.matTableLenght = true;
-          else
+          }
+          else {
             this.matTableLenght = false;
+          }
           
           this.dv = this.dataSource.filteredData;
-          debugger;
           this.totalItems = this.dataSource.filteredData.length;
           this.OffSet = this.pageIndex;
           this.dataSource = this.dv.slice(0, this.itemsPerPage);
 
         } else {
           this.layoutUtilsService.alertElement(
-            "",
+            '',
             baseResponse.Message,
-            baseResponse.Code
           );
         }
       });
   }
 
+    // tslint:disable-next-line:typedef
   getRow(rob){
-    //console.log(rob);
+    // console.log(rob);
     this.loanResch = rob;
-    console.log(this.loanResch)
+    console.log(this.loanResch);
   }
 
+    // tslint:disable-next-line:typedef
   SubmitData(){
     this.spinner.show();
     
-    debugger;
     this._reschedulingService
       .SubmitRescheduleData(this.loanResch)
       .pipe(
@@ -137,36 +137,35 @@ export class PendingRescheduleCasesComponent implements OnInit {
         })
       )
       .subscribe((baseResponse: BaseResponseModel) => {
-        debugger;
         if (baseResponse.Success === true) {
-          this.layoutUtilsService.alertElementSuccess("", baseResponse.Message);
-          this.router.navigateByUrl("/journal-voucher/form");
+          this.layoutUtilsService.alertElementSuccess('', baseResponse.Message);
+          this.router.navigateByUrl('/journal-voucher/form');
         } else {
           this.layoutUtilsService.alertElement(
-            "",
-            baseResponse.Message,
-            baseResponse.Code
+            '',
+            baseResponse.Message
           );
         }
       });
   }
 
 
+    // tslint:disable-next-line:typedef
   paginate(pageIndex: any, pageSize: any = this.itemsPerPage) {
     this.itemsPerPage = pageSize;
     this.pageIndex = pageIndex;
     this.OffSet = pageIndex;
-    //this.SearchJvData();
-    //this.dv.slice(event * this.itemsPerPage - this.itemsPerPage, event * this.itemsPerPage);
-    this.dataSource = this.dv.slice(pageIndex * this.itemsPerPage - this.itemsPerPage, pageIndex * this.itemsPerPage); //slice is used to get limited amount of data from APi
+    // this.SearchJvData();
+    // this.dv.slice(event * this.itemsPerPage - this.itemsPerPage, event * this.itemsPerPage);
+    this.dataSource = this.dv.slice(pageIndex * this.itemsPerPage - this.itemsPerPage, pageIndex * this.itemsPerPage); // slice is used to get limited amount of data from APi
   }
 
+    // tslint:disable-next-line:typedef
   editPen(updateLoan){
-    debugger;
     console.log(updateLoan);
     this.router.navigate(
       [
-        "../make-reschedule",
+        '../make-reschedule',
         {
           LnTransactionID: updateLoan.loanApp,
           loanReschID: updateLoan.LoanReschID,

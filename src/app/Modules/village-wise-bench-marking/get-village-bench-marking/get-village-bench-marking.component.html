@@ -24,7 +24,7 @@
                   <div class="col-lg-2 kt-margin-bottom-20-mobile">
                             <mat-form-field class="mat-form-field-fluid" appearance="outline">
                               <mat-label class="customMatLabel">Zone</mat-label>
-                              <mat-select [(ngModel)]="selected_z" formControlName="Zone" disabled="true">
+                              <mat-select [(ngModel)]="selectedZ" formControlName="Zone" disabled="true">
                                 <mat-option [value]="SelectedZones.ZoneId">
                                   {{SelectedZones.ZoneName}}
                                 </mat-option>
@@ -35,7 +35,7 @@
                     <div class="col-lg-2 kt-margin-bottom-20-mobile">
                         <mat-form-field class="mat-form-field-fluid" appearance="outline">
                           <mat-label class="customMatLabel">Branch <strong class="matMandatory">*</strong></mat-label>
-                          <mat-select [(ngModel)]="selected_b" formControlName="Branch" disabled="true">
+                          <mat-select [(ngModel)]="selectedB" formControlName="Branch" disabled="true">
                             <mat-option [value]="SelectedBranches.BranchId">
                               {{SelectedBranches.Name}}
                             </mat-option>                                
