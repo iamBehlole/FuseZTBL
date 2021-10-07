@@ -1,27 +1,27 @@
 // Angular
-import { Component, OnInit, ElementRef, ViewChild, ChangeDetectionStrategy, OnDestroy, Input, ChangeDetectorRef } from '@angular/core';
+import {ChangeDetectorRef, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 // Material
-import { SelectionModel } from '@angular/cdk/collections';
-import { MatPaginator, MatSort, MatSnackBar, MatDialog, MatTableDataSource } from '@angular/material';
+import {MatDialog, MatPaginator, MatSnackBar, MatSort, MatTableDataSource} from '@angular/material';
 // RXJS
-import { finalize } from 'rxjs/operators';
+import {finalize} from 'rxjs/operators';
 // NGRX
-import { Store } from '@ngrx/store';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AppState } from '../../../../core/reducers';
-import { LayoutUtilsService } from '../../../../core/_base/crud';
-import { CreateCustomer } from '../../../../core/auth/_models/customer.model';
-import { Router, ActivatedRoute } from '@angular/router';
-import { NgxSpinnerService } from "ngx-spinner";
-import { MaskEnum, errorMessages, regExps, LovConfigurationKey, Lov } from '../../../../core/auth/_models/lov.class';
-import { LovService } from '../../../../core/auth/_services/lov.service';
-import { UserUtilsService } from '../../../../core/_base/crud/utils/user-utils.service';
-import { CircleService } from '../../../../core/auth/_services/circle.service';
-import { Zone } from '../../../../core/auth/_models/zone.model';
-import { Branch } from '../../../../core/auth/_models/branch.model';
-import { LoanUtilizationService } from '../../../../core/auth/_services/loan-utilization.service';
-import { TourPlanService } from '../../../../core/auth/_services/tour-plan.service';
-import { TourPlan } from '../../../../core/auth/_models/tour-plan.model';
+import {Store} from '@ngrx/store';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AppState} from '../../../../core/reducers';
+import {LayoutUtilsService} from '../../../../core/_base/crud';
+import {CreateCustomer} from '../../../../core/auth/_models/customer.model';
+import {ActivatedRoute, Router} from '@angular/router';
+import {NgxSpinnerService} from 'ngx-spinner';
+import {errorMessages, Lov, LovConfigurationKey, MaskEnum} from '../../../../core/auth/_models/lov.class';
+import {LovService} from '../../../../core/auth/_services/lov.service';
+import {UserUtilsService} from '../../../../core/_base/crud/utils/user-utils.service';
+import {CircleService} from '../../../../core/auth/_services/circle.service';
+import {Zone} from '../../../../core/auth/_models/zone.model';
+import {Branch} from '../../../../core/auth/_models/branch.model';
+import {LoanUtilizationService} from '../../../../core/auth/_services/loan-utilization.service';
+import {TourPlanService} from '../../../../core/auth/_services/tour-plan.service';
+import {TourPlan} from '../../../../core/auth/_models/tour-plan.model';
+
 // Services
 
 

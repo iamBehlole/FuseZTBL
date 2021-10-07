@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup} from '@angular/forms';
 
 @Component({
-  selector: 'kt-tour-diary',
-  templateUrl: './tour-diary.component.html',
-  styleUrls: ['./tour-diary.component.scss']
+    selector: 'kt-tour-diary',
+    templateUrl: './tour-diary.component.html',
+    styleUrls: ['./tour-diary.component.scss']
 })
 export class TourDiaryComponent implements OnInit {
 
-  gridForm : FormGroup;
+    gridForm: FormGroup;
 
 
   constructor(
@@ -16,15 +16,15 @@ export class TourDiaryComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.createForm()
+    this.createForm();
   }
 
   createForm(){
-    this.gridForm = this.fb.group({
-      McoName : [''],
-      PPNO : [''],
-      Month: ['']
-    })
+      this.gridForm = this.fb.group({
+          McoName: [''],
+          PPNO: [''],
+          Month: ['']
+      });
   }
 
 }
