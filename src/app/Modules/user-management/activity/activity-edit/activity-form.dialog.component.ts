@@ -1,34 +1,23 @@
 // Angular
 import {Component, OnInit, Inject, ChangeDetectionStrategy, OnDestroy} from '@angular/core';
-import {MatDialogRef, MAT_DIALOG_DATA, MatSnackBar} from '@angular/material';
 // RxJS
 import {Observable, of, Subscription, from} from 'rxjs';
 // Lodash
 import {each, find, some} from 'lodash';
 // NGRX
-import {Update} from '@ngrx/entity';
 import {Store, select} from '@ngrx/store';
 // State
-import {AppState} from '../../../../../core/reducers';
+import {AppState} from '../../../../core/reducers';
 // Services and Models
-import {
-  Role,
-  Permission,
-  selectRoleById,
-  RoleUpdated,
-  selectAllPermissions,
-  selectAllRoles,
-  selectLastCreatedRoleId,
-  RoleOnServerCreated
-} from '../../../../../core/auth';
-import {delay, finalize} from 'rxjs/operators';
-import {Activity} from '../../../../../core/auth/_models/activity.model';
-import {ActivityService} from '../../../../../core/auth/_services/activity.service';
+import {Activity} from '../../../../core/auth/_models/activity.model';
+import {ActivityService} from '../../../../core/auth/_services/activity.service';
 import {FormGroup, Validators, FormBuilder} from '@angular/forms';
-import {BaseResponseModel} from '../../../../../core/_base/crud/models/_base.response.model';
-import {LayoutUtilsService, MessageType} from '../../../../../core/_base/crud';
-import {KtDialogService} from '../../../../../core/_base/layout';
-import {Moment} from 'moment';
+import {BaseResponseModel} from '../../../../core/_base/crud/models/_base.response.model';
+import {LayoutUtilsService, MessageType} from '../../../../core/_base/crud';
+import {KtDialogService} from '../../../../core/_base/layout';
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {finalize} from "rxjs/operators";
 
 @Component({
   selector: 'kt-activity-edit',
