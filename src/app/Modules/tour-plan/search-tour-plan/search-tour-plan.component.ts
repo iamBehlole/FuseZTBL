@@ -24,7 +24,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
-import {errorMessages, Lov, MaskEnum} from '../../../core/auth/_models/lov.class';
+import {errorMessages, Lov, LovConfigurationKey, MaskEnum} from '../../../core/auth/_models/lov.class';
 
 // Services
 
