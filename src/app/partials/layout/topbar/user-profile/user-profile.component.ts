@@ -1,104 +1,102 @@
 // Angular
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 // RxJS
-import { Observable } from 'rxjs';
+import {Observable} from 'rxjs';
 // NGRX
-import { select, Store } from '@ngrx/store';
+import {select, Store} from '@ngrx/store';
+import {User} from 'app/core/auth/_models/user.model';
+import {AppState} from '../../../../core/reducers';
+import {UserUtilsService} from '../../../../core/_base/crud/utils/user-utils.service';
+
 // State
-import { AppState } from '../../../../../core/reducers';
-import { currentUser, Logout, User } from '../../../../../core/auth';
-import { UserUtilsService } from '../../../../../core/_base/crud/utils/user-utils.service';
 
 @Component({
-	selector: 'kt-user-profile',
-	templateUrl: './user-profile.component.html',
+    selector: 'kt-user-profile',
+    templateUrl: './user-profile.component.html',
 })
 export class UserProfileComponent implements OnInit {
-	// Public properties
-	user$: Observable<User>;
+    // Public properties
+    user$: Observable<User>;
 
-  userName: string;
-  BranchName: string;
-  DisplayName: string;
-	@Input() avatar = true;
-	@Input() greeting = true;
-	@Input() badge: boolean;
-  @Input() icon: boolean;
-  displayNameShow: boolean;
-  userNameShow: boolean;
+    userName: string;
+    BranchName: string;
+    DisplayName: string;
+    @Input() avatar = true;
+    @Input() greeting = true;
+    @Input() badge: boolean;
+    @Input() icon: boolean;
+    displayNameShow: boolean;
+    userNameShow: boolean;
 
-	/**
-	 * Component constructor
-	 *
-	 * @param store: Store<AppState>
-	 */
-  constructor(private store: Store<AppState>
-  ) {
-	}
-  /**
+    /**
+     * Component constructor
+     *
+     * @param store: Store<AppState>
+     */
+    constructor(private store: Store<AppState>
+    ) {
+    }
+
+    /**
      * @ Lifecycle sequences => https://angular.io/guide/lifecycle-hooks
      */
 
-	/**
-	 * On init
-	 */
-  ngOnInit(): void {
+    /**
+     * On init
+     */
+    ngOnInit(): void {
 
-    this.displayNameShow = false;
-    this.userNameShow = false;
-    var userUtilsService = new UserUtilsService();
+        this.displayNameShow = false;
+        this.userNameShow = false;
+        var userUtilsService = new UserUtilsService();
 
-    var userInfo = userUtilsService.getUserDetails();
+        var userInfo = userUtilsService.getUserDetails();
 
-    this.userName = userInfo.User.UserName;
-    this.DisplayName = userInfo.User.DisplayName;
-    if (userInfo.Branch)
-    {
-      this.BranchName = userInfo.Branch.Name;
-    }
-    else
-    {
-      this.BranchName = '';
+        this.userName = userInfo.User.UserName;
+        this.DisplayName = userInfo.User.DisplayName;
+        if (userInfo.Branch) {
+            this.BranchName = userInfo.Branch.Name;
+        } else {
+            this.BranchName = '';
 
-    }
+        }
 
-    if (this.DisplayName == "Admin") {
-      this.displayNameShow = true;
-    }
-    else {
+        if (this.DisplayName == 'Admin') {
+            this.displayNameShow = true;
+        } else {
 
-      this.userNameShow = true;
+            this.userNameShow = true;
+        }
+
     }
 
-  }
 
+    changePassword() {
+        //this.router.navigateByUrl('/auth/change-password');
+    }
 
+    /**
+     * Log out
+     */
+    logout() {
 
-	changePassword() {
-		//this.router.navigateByUrl('/auth/change-password');
-	}
-	/**
-	 * Log out
-	 */
-  logout() {
+        var userUtilsService = new UserUtilsService();
+        userUtilsService.removeUserDetails();
+        localStorage.clear();
+        window.location.reload(true);
 
-    var userUtilsService = new UserUtilsService();
-    userUtilsService.removeUserDetails();
-    localStorage.clear();
-    window.location.reload(true);
-
-    //this.userService
-    //  .logout()
-    //  .pipe(
-    //    finalize(() => {
-    //      var userUtilsService = new UserUtilsService();
-    //      userUtilsService.removeUserDetails();
-    //      window.location.reload(true);
-    //    })
-    //  )
-    //  .subscribe((baseResponse: BaseResponseModel) => {
-    //    console.log(baseResponse);
-    //  });
-    //this.store.dispatch(new Logout());
-  }
+        //this.userService
+        //  .logout()
+        //  .pipe(
+        //    finalize(() => {
+        //      var userUtilsService = new UserUtilsService();
+        //      userUtilsService.removeUserDetails();
+        //      window.location.reload(true);
+        //    })
+        //  )
+        //  .subscribe((baseResponse: BaseResponseModel) => {
+        //    console.log(baseResponse);
+        //  });
+        //this.store.dispatch(new Logout());
+    }
 }

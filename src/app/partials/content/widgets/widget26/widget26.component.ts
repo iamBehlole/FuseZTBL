@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { SparklineChartOptions } from '../../../../../core/_base/layout';
+import {SparklineChartOptions} from '../../../../core/_base/layout';
 
 @Component({
 	selector: 'kt-widget26',

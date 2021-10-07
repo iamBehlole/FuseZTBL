@@ -16,17 +16,9 @@ import {MatDialog} from '@angular/material/dialog';
 import {UserUtilsService} from '../../../core/_base/crud/utils/user-utils.service';
 import {KtDialogService} from '../../../core/_base/layout';
 import {OtpComponent} from '../otp/otp.component';
-import {BaseResponseModel} from '../../../core/_base/crud/models/_base.response.model';
-
-//import { DataShareService } from 'src/app/core/auth/_services/data-share.service';
-
 /**
  * ! Just example => Should be removed in development
  */
-const DEMO_PARAMS = {
-    //EMAIL: 'admin@demo.com',
-    //PASSWORD: 'demo'
-};
 
 @Component({
     selector: 'kt-login',
@@ -160,7 +152,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.user.UserPasswordDetails = Object.assign(this.userpassworddetails);
         this.user = Object.assign(this.user, this.loginForm.getRawValue());
         this.user.App = 1;
-        this.auth.login(this.loginForm.value.DisplayName,this.loginForm.value.Password)
+        this.auth.login(this.loginForm.value.DisplayName, this.loginForm.value.Password)
             .pipe(
                 tap((baseResponse: any) => {
                     if (baseResponse.Success) {

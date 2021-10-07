@@ -8,11 +8,12 @@ import { finalize, takeUntil, tap } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
 // NGRX
 import { Store } from '@ngrx/store';
-import { AppState } from '../../../../core/reducers';
 // Auth
-import { AuthNoticeService, AuthService, Register, User } from '../../../../core/auth/';
 import { Subject } from 'rxjs';
 import { ConfirmPasswordValidator } from './confirm-password.validator';
+import {AuthNoticeService} from '../../../core/auth';
+import {AppState} from '../../../core/reducers';
+import { User } from 'app/core/_base/crud/models/_common-models/user';
 
 @Component({
   selector: 'kt-register',

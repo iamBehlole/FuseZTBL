@@ -85,11 +85,11 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatListModule} from '@angular/material/list';
 import {MatChipsModule} from '@angular/material/chips';
-import {TimeAgoPipe} from 'time-ago-pipe/time-ago.pipe';
 import {PerfectScrollbarModule} from 'ngx-perfect-scrollbar';
 import {InlineSVGModule} from 'ng-inline-svg';
-import {NgbDropdownModule, NgbTooltipModule, NgbNavModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbDropdownModule, NgbNavModule, NgbTooltipModule} from '@ng-bootstrap/ng-bootstrap';
 
+import {TimeAgoPipe} from 'time-ago-pipe';
 
 @NgModule({
     declarations: [

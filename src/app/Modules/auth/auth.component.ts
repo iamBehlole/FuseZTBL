@@ -1,9 +1,8 @@
 // Angular
 import { Component, ElementRef, OnInit, Renderer2, ViewEncapsulation } from '@angular/core';
-// Layout
-import { LayoutConfigService, SplashScreenService, TranslationService } from '../../../core/_base/layout';
-// Auth
-import { AuthNoticeService } from '../../../core/auth';
+import {LayoutConfigService, SplashScreenService, TranslationService} from '../../core/_base/layout';
+import {AuthNoticeService} from '../../core/auth';
+
 
 @Component({
 	selector: 'kt-auth',

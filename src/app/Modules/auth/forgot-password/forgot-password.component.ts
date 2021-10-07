@@ -7,8 +7,8 @@ import { finalize, takeUntil, tap } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 // Translate
 import { TranslateService } from '@ngx-translate/core';
+import {AuthNoticeService} from '../../../core/auth';
 // Auth
-import { AuthNoticeService, AuthService } from '../../../../core/auth';
 
 @Component({
   selector: 'kt-forgot-password',
